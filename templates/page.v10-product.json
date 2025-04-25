@@ -1,0 +1,107 @@
+{
+  "name": "V10 Product Page",
+  "layout": "theme",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "urgency": {
+          "type": "urgency",
+          "settings": {
+            "urgency": "MÁS VENDIDO | ÚLTIMAS UNIDADES CON ENVIO GRATIS",
+            "color_scheme": "accent-2",
+            "margin_top": 0,
+            "margin_bottom": 15
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "hide_sale_badge": false,
+            "margin_top": 9,
+            "margin_bottom": 15
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_types": "pills, pills, pills",
+            "breaks_style": "normal",
+            "breaks_headline": "BUNDLE & SAVE",
+            "breaks_color_scheme": "accent-1",
+            "breaks_labels": "1 V10, 2 V10, 3 V10",
+            "breaks_captions": "1 unidad, 2 unidades, 3 unidades",
+            "breaks_price_texts": "$59.000, $95.000, $125.000",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "skip_cart": false,
+            "uppercase_text": true,
+            "enable_custom_color": true,
+            "custom_color": "#FF6B00"
+          }
+        }
+      },
+      "block_order": ["urgency", "title", "price", "variant_picker", "buy_buttons"],
+      "settings": {
+        "enable_sticky_info": true,
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left"
+      }
+    },
+    "benefits": {
+      "type": "icons-with-content",
+      "blocks": {
+        "benefit_1": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_circle",
+            "title": "Mejora el apetito",
+            "text": "<p>Efectivo para niños entre 1 año y 16 años</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_circle",
+            "title": "Fortalece el sistema inmunológico",
+            "text": "<p>Gracias a su contenido de vitamina C</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_circle",
+            "title": "Protección respiratoria",
+            "text": "<p>Efectivo para evitar la gripa recurrente</p>"
+          }
+        }
+      },
+      "block_order": ["benefit_1", "benefit_2", "benefit_3"],
+      "settings": {
+        "icon_position": "next-to-title",
+        "icon_color": "accent-1",
+        "icons_desktop_layout": "3-column"
+      }
+    }
+  },
+  "order": ["main", "benefits"]
+} 
