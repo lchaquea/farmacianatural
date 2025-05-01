@@ -1,56 +1,61 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 <!-- Updated: May 1, 2024 -->
 
-<div class="hyperlab-v10-hero">
-  <div class="hero-header">
-    <div class="logo-container">
-      {%- if section.settings.logo != blank -%}
-        <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
-      {%- endif -%}
-    </div>
-    
-    <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
-  </div>
-
-  <div class="product-gallery">
-    <div class="main-image">
-      {%- if section.settings.main_image != blank -%}
-        <img src="{{ section.settings.main_image | img_url: 'large' }}" 
-             alt="{{ section.settings.main_image.alt | escape }}"
-             class="featured-image"
-             id="ProductPhotoImg">
-      {%- endif -%}
-    </div>
-
-    <div class="thumbnail-list">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'gallery_image' and block.settings.image != blank -%}
-          <button class="thumbnail-item" data-image-id="{{ block.settings.image.id }}">
-            <img src="{{ block.settings.image | img_url: '100x100', crop: 'center' }}" 
-                 alt="{{ block.settings.image.alt | escape }}"
-                 data-full-url="{{ block.settings.image | img_url: 'large' }}"
-                 class="thumbnail">
-          </button>
+<div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
+  <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
+    <div class="hero-header">
+      <div class="logo-container">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
         {%- endif -%}
-      {%- endfor -%}
+      </div>
+      
+      <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
     </div>
-  </div>
 
-  <div class="hero-cta">
-    <div class="subheadline-container">
-      <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
-      {%- if section.settings.certification_badge != blank -%}
-        <div class="certification-badge">
-          <img src="{{ section.settings.certification_badge | img_url: '100x' }}" 
-               alt="Certificación INVIMA" 
-               class="certification-image">
+    <div class="product-gallery">
+      <div class="main-image">
+        {%- if section.settings.main_image != blank -%}
+          <img src="{{ section.settings.main_image | img_url: 'large' }}" 
+               alt="{{ section.settings.main_image.alt | escape }}"
+               class="featured-image"
+               id="ProductPhotoImg">
+        {%- endif -%}
+      </div>
+
+      {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
+      {%- if gallery_images.size > 0 -%}
+        <div class="thumbnail-list">
+          {%- for block in gallery_images -%}
+            {%- if block.settings.image != blank -%}
+              <button class="thumbnail-item" data-image-id="{{ block.settings.image.id }}">
+                <img src="{{ block.settings.image | img_url: '100x100', crop: 'center' }}" 
+                     alt="{{ block.settings.image.alt | escape }}"
+                     data-full-url="{{ block.settings.image | img_url: 'large' }}"
+                     class="thumbnail">
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       {%- endif -%}
     </div>
-    <button class="primary-button shake">
-      {{ section.settings.button_text | default: "CLICK AQUÍ Y PAGA AL RECIBIR" }}
-      <span class="button-subtext">{{ section.settings.button_subtext | default: "paga en casa contraentrega" }}</span>
-    </button>
+
+    <div class="hero-cta">
+      <div class="subheadline-container">
+        <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
+        {%- if section.settings.certification_badge != blank -%}
+          <div class="certification-badge">
+            <img src="{{ section.settings.certification_badge | img_url: '100x' }}" 
+                 alt="Certificación INVIMA" 
+                 class="certification-image">
+          </div>
+        {%- endif -%}
+      </div>
+      <a href="{{ section.settings.button_link | default: '#' }}" class="primary-button {{ section.settings.button_animation }}">
+        {{ section.settings.button_text | default: "CLICK AQUÍ Y PAGA AL RECIBIR" }}
+        <span class="button-subtext">{{ section.settings.button_subtext | default: "paga en casa contraentrega" }}</span>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -58,6 +63,20 @@
 {
   "name": "V10 Hero Section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width Section",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
     {
       "type": "image_picker",
       "id": "logo",
@@ -81,6 +100,10 @@
       "label": "Certification Badge"
     },
     {
+      "type": "header",
+      "content": "Product Gallery"
+    },
+    {
       "type": "product",
       "id": "product_handle",
       "label": "Product"
@@ -89,6 +112,10 @@
       "type": "image_picker",
       "id": "main_image",
       "label": "Main Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
     },
     {
       "type": "text",
@@ -101,6 +128,35 @@
       "id": "button_subtext",
       "label": "Button Subtext",
       "default": "paga en casa contraentrega"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_animation",
+      "label": "Button Animation",
+      "options": [
+        {
+          "value": "shake",
+          "label": "Shake"
+        },
+        {
+          "value": "pulse",
+          "label": "Pulse"
+        },
+        {
+          "value": "bounce",
+          "label": "Bounce"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "shake"
     }
   ],
   "blocks": [
@@ -122,7 +178,25 @@
 
 {% stylesheet %}
 .hyperlab-v10-hero {
-  padding: 20px 0;
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.hyperlab-v10-hero.full-width {
+  width: 100%;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero-content {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-width {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .hero-header {
@@ -158,6 +232,9 @@
 .featured-image {
   width: 100%;
   height: auto;
+  max-width: 500px;
+  margin: 0 auto;
+  display: block;
 }
 
 .thumbnail-list {
@@ -166,20 +243,28 @@
   overflow-x: auto;
   padding: 10px 0;
   justify-content: center;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.thumbnail-list::-webkit-scrollbar {
+  display: none;
 }
 
 .thumbnail-item {
-  border: none;
-  padding: 0;
+  border: 2px solid transparent;
+  padding: 2px;
   background: none;
   cursor: pointer;
   opacity: 0.6;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
+  flex: 0 0 auto;
 }
 
 .thumbnail-item.active {
   opacity: 1;
-  border: 2px solid #ff6b00;
+  border-color: #ff6b00;
 }
 
 .thumbnail {
@@ -187,6 +272,7 @@
   height: 60px;
   object-fit: cover;
   border-radius: 4px;
+  display: block;
 }
 
 .hero-cta {
@@ -226,11 +312,8 @@
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  text-decoration: none;
   transition: transform 0.3s ease;
-}
-
-.primary-button:hover {
-  transform: scale(1.05);
 }
 
 .button-subtext {
@@ -238,20 +321,34 @@
   opacity: 0.8;
 }
 
-/* Shaking animation */
+/* Button Animations */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
   20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
-.shake {
-  animation: shake 1.5s ease-in-out infinite;
-  animation-play-state: paused;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.shake:hover {
-  animation-play-state: running;
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.shake {
+  animation: shake 1.5s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.bounce {
+  animation: bounce 1.5s ease-in-out infinite;
 }
 
 @media screen and (min-width: 768px) {
@@ -261,6 +358,15 @@
 
   .primary-button {
     font-size: 18px;
+  }
+
+  .featured-image {
+    max-width: 600px;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
   }
 }
 {% endstylesheet %}
