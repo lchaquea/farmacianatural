@@ -1,0 +1,204 @@
+{%- style -%}
+  .hyperlab-faq {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .hyperlab-faq__heading {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hyperlab-faq__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hyperlab-faq__item {
+    margin-bottom: 1rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .hyperlab-faq__question {
+    padding: 1.5rem;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hyperlab-faq__question-text {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  .hyperlab-faq__toggle {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .hyperlab-faq__item[open] .hyperlab-faq__toggle {
+    transform: rotate(45deg);
+  }
+
+  .hyperlab-faq__answer {
+    padding: 1.5rem;
+    background-color: #F8F8F8;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hyperlab-faq {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    .hyperlab-faq__question {
+      padding: 1rem;
+    }
+
+    .hyperlab-faq__answer {
+      padding: 1rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="hyperlab-faq">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hyperlab-faq__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hyperlab-faq__container">
+      {%- for block in section.blocks -%}
+        <details class="hyperlab-faq__item" {{ block.shopify_attributes }}>
+          <summary class="hyperlab-faq__question">
+            <span class="hyperlab-faq__question-text">{{ block.settings.question }}</span>
+            <span class="hyperlab-faq__toggle">+</span>
+          </summary>
+          <div class="hyperlab-faq__answer">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hyperlab FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Preguntas frecuentes"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "¿Para qué edades está recomendado V10?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>V10 está recomendado para niños desde los 12 meses hasta los 16 años de edad.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hyperlab FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "¿Para qué edades está recomendado V10?",
+            "answer": "<p>V10 está recomendado para niños desde los 12 meses hasta los 16 años de edad.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto tiempo tarda en hacer efecto?",
+            "answer": "<p>Los efectos pueden variar según cada niño, pero generalmente se observan mejoras en el apetito después de 2-3 semanas de uso continuo.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "¿Tiene efectos secundarios?",
+            "answer": "<p>V10 está elaborado con ingredientes naturales y no tiene efectos secundarios conocidos. Sin embargo, siempre recomendamos consultar con su pediatra antes de iniciar cualquier suplemento.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "¿Cómo debo almacenar el producto?",
+            "answer": "<p>Guarde el producto en un lugar fresco y seco, lejos de la luz solar directa. Una vez abierto, consérvelo en el refrigerador.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

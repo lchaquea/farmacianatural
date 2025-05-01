@@ -1,0 +1,450 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "urgency": {
+          "type": "urgency",
+          "settings": {
+            "urgency": "MÁS VENDIDO | ÚLTIMAS UNIDADES CON ENVIO GRATIS",
+            "color_scheme": "accent-2",
+            "margin_top": 0,
+            "margin_bottom": 15
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "hide_sale_badge": false,
+            "margin_top": 9,
+            "margin_bottom": 15
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_types": "pills, pills, pills",
+            "custom_labels": "",
+            "swatches_size": "medium",
+            "swatches_custom_colors": "disabled",
+            "swatches_custom_colors_list": "#000000, #FFFFFF",
+            "full_width_dropdowns": false,
+            "breaks_style": "normal",
+            "breaks_headline": "BUNDLE & SAVE",
+            "breaks_color_scheme": "accent-1",
+            "breaks_badges": "[empty], Most popular, [empty]",
+            "breaks_displayed_images": "variant_images",
+            "breaks_custom_images": "",
+            "breaks_image_width": 70,
+            "breaks_space_images": true,
+            "breaks_labels": "1 V10, 2 V10, 3 V10",
+            "breaks_benefits": "[empty], Free Shipping, Free Shipping",
+            "breaks_captions": "1 unidad, 2 unidades, 3 unidades",
+            "breaks_price_texts": "$59.000, $95.000, $125.000",
+            "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "benefits": {
+          "type": "emoji_benefits",
+          "settings": {
+            "benefits": "<p>🍽️ Mejora el apetito de los niños entre 1 año y 16 años</p><p>🛡️ Mejora el sistema inmunológico y respiratorio</p><p>🍊 Efectivo para evitar la gripa recurrente</p><p>💪 Contiene vitamina C, B3, E, B6, B2, B1, D</p>",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "skip_cart": false,
+            "uppercase_text": true,
+            "display_price": false,
+            "enable_custom_color": true,
+            "custom_color": "#FF6B00",
+            "margin_top": 24,
+            "margin_bottom": 24
+          }
+        },
+        "shipping_info": {
+          "type": "shipping_checkpoints",
+          "settings": {
+            "icon_1": "add_shopping_cart",
+            "filled_icon_1": false,
+            "top_text_1": "<strong>Hoy</strong>",
+            "bottom_text_1": "Haz tu compra",
+            "min_days_1": 0,
+            "max_days_1": 0,
+            "icon_2": "local_shipping",
+            "filled_icon_2": false,
+            "top_text_2": "<strong>1-3 días</strong>",
+            "bottom_text_2": "Entrega en Colombia",
+            "min_days_2": 1,
+            "max_days_2": 3,
+            "icon_3": "redeem",
+            "filled_icon_3": false,
+            "top_text_3": "<strong>Recibe</strong>",
+            "bottom_text_3": "Tu producto",
+            "min_days_3": 1,
+            "max_days_3": 3,
+            "color_scheme": "inverse",
+            "margin_top": 24,
+            "margin_bottom": 24
+          }
+        }
+      },
+      "block_order": ["urgency", "title", "price", "variant_picker", "benefits", "buy_buttons", "shipping_info"],
+      "settings": {
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "desktop_thumbnails_count": 5,
+        "mobile_thumbnails": "hide",
+        "mobile_media_corner_radius": 0,
+        "mobile_spacing": false,
+        "mobile_preview_media": false,
+        "mobile_thumbnails_count": 5,
+        "mobile_pagination": "dots_overlay",
+        "hide_arrows": true,
+        "dots_color_scheme": "inverse",
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "product_gallery": {
+      "type": "image-banner",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "image": "shopify://shop_images/v10-product-gallery.jpg",
+        "image_1_visibility": "always-display",
+        "image_2_visibility": "always-display",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "transparent_container_color": "white",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "benefits_section": {
+      "type": "multirow",
+      "blocks": {
+        "benefits_row": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/v10-benefits.jpg",
+            "caption": "",
+            "heading": "Beneficios del V10",
+            "text": "<p>🍽️ Mejora el apetito de manera natural</p><p>🛡️ Fortalece el sistema inmunológico</p><p>💪 Ayuda al desarrollo físico y mental</p><p>🍊 Sabor a naranja miel, ¡delicioso!</p>",
+            "button_label": "",
+            "button_link": "",
+            "atc_button_label": "",
+            "atc_product": ""
+          }
+        }
+      },
+      "block_order": ["benefits_row"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ingredients": {
+      "type": "multirow",
+      "blocks": {
+        "ingredients_row": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/v10-ingredients.jpg",
+            "caption": "",
+            "heading": "Ingredientes Naturales",
+            "text": "<p>🌿 Agua Purificada</p><p>🍯 Miel de abejas</p><p>🌰 Jugo de Chontaduro</p><p>🍇 Jugo de Borojo</p><p>💊 Vitaminas C, B3, E, B6, B2, B1, D</p>",
+            "button_label": "",
+            "button_link": "",
+            "atc_button_label": "",
+            "atc_product": ""
+          }
+        }
+      },
+      "block_order": ["ingredients_row"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-right",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "usage_instructions": {
+      "type": "multirow",
+      "blocks": {
+        "instructions_row": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/v10-usage.jpg",
+            "caption": "",
+            "heading": "Cómo usar V10",
+            "text": "<p>👶 12-24 meses: 1 cucharadita pequeña al día</p><p>🧒 24-48 meses: 2 cucharaditas pequeñas al día</p><p>👦 4+ años: 2 cucharadas grandes al día</p>",
+            "button_label": "",
+            "button_link": "",
+            "atc_button_label": "",
+            "atc_product": ""
+          }
+        }
+      },
+      "block_order": ["instructions_row"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "certifications": {
+      "type": "multirow",
+      "blocks": {
+        "certifications_row": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/v10-certifications.jpg",
+            "caption": "",
+            "heading": "Certificaciones y Calidad",
+            "text": "<p>📋 Registro INVIMA RSA-0021962-2022</p><p>✅ Más de 10 años en el mercado</p><p>🌟 Más de 1 millón de unidades vendidas</p><p>💯 98% de efectividad comprobada</p>",
+            "button_label": "",
+            "button_link": "",
+            "atc_button_label": "",
+            "atc_product": ""
+          }
+        }
+      },
+      "block_order": ["certifications_row"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-right",
+        "section_color_scheme": "background-1",
+        "row_color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_1": {
+          "type": "column",
+          "settings": {
+            "title": "¡Funciona de verdad!",
+            "text": "<p>\"Mi hijo tenía muy poco apetito y siempre estaba cansado. Desde que empezó a tomar V10, come mejor y tiene más energía para jugar.\"</p>",
+            "author": "<em><strong>Ana R.</strong></em>"
+          }
+        },
+        "testimonial_2": {
+          "type": "column",
+          "settings": {
+            "title": "La mejor decisión",
+            "text": "<p>\"Soy mamá de dos niños y siempre buscaba un multivitamínico natural. V10 es perfecto, les encanta su sabor y los resultados son increíbles.\"</p>",
+            "author": "<em><strong>Carla M.</strong></em>"
+          }
+        },
+        "testimonial_3": {
+          "type": "column",
+          "settings": {
+            "title": "¡Estoy feliz con los resultados!",
+            "text": "<p>\"Noté una gran diferencia en el crecimiento de mi hijo después de unos meses con V10. Su apetito mejoró y está creciendo sano.\"</p>",
+            "author": "<em><strong>Tatiana J.</strong></em>"
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "title": "Lo que dicen los padres sobre V10",
+        "heading_size": "h1",
+        "text": "",
+        "color_scheme": "background-1",
+        "style": "cards",
+        "image_width": "full",
+        "image_ratio": "square",
+        "column_alignment": "center",
+        "show_stars": true,
+        "stars_color": "#ffd700",
+        "show_quotes": true,
+        "quotes_color_scheme": "accent-2",
+        "cards_color_scheme": "bg-overlay",
+        "type": "slide",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": true,
+        "dots_color_scheme": "inverse",
+        "desktop_full_page": false,
+        "columns_desktop": 3,
+        "slider_desktop": false,
+        "per_move_desktop": 1,
+        "desktop_spacing": 40,
+        "desktop_side_padding": 0,
+        "desktop_padding_calc": true,
+        "desktop_adaptive_height": false,
+        "desktop_dots_position": "under",
+        "desktop_arrows_position": "sides",
+        "slider_mobile": true,
+        "enable_mobile_preview": false,
+        "mobile_adaptive_height": false,
+        "mobile_dots_position": "hidden",
+        "mobile_arrows_position": "sides",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Qué sabor tiene V10?",
+            "icon": "favorite",
+            "filled_icon": false,
+            "row_content": "<p>Tiene un delicioso <strong>sabor a naranja miel</strong>, lo que hace que los niños lo tomen con facilidad.</p>",
+            "page": ""
+          }
+        },
+        "faq_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Cuál es su contenido?",
+            "icon": "favorite",
+            "filled_icon": false,
+            "row_content": "<p>El frasco de V10 contiene 360 ml</p>",
+            "page": ""
+          }
+        },
+        "faq_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Tiene contraindicaciones o efectos secundarios?",
+            "icon": "favorite",
+            "filled_icon": false,
+            "row_content": "<p>V10 es un suplemento natural y seguro, pero en casos de alergias a sus ingredientes, se recomienda consultar con un médico antes de su consumo.</p>",
+            "page": ""
+          }
+        },
+        "faq_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿A partir de qué edad se puede tomar V10?",
+            "icon": "favorite",
+            "filled_icon": false,
+            "row_content": "<p>V10 está diseñado para niños desde <strong>1 hasta 16 años</strong>, con dosis específicas según la edad.</p>",
+            "page": ""
+          }
+        },
+        "faq_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Cuánto tiempo tarda en verse los efectos?",
+            "icon": "favorite",
+            "filled_icon": false,
+            "row_content": "<p>El producto funciona en el 100% de los niños, solo que varía el tiempo en hacer efecto. Hay niños que ven resultados desde los 5 días de utilizarlo y a otros les toma un poco más de tiempo.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "caption": "",
+        "heading": "Preguntas Frecuentes",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "background-1",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "row_heading_size": "medium",
+        "collapse_icon": "carret",
+        "display_top_border": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["main", "product_gallery", "benefits_section", "ingredients", "usage_instructions", "certifications", "testimonials", "faq"]
+} 

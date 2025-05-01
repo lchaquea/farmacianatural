@@ -1,0 +1,247 @@
+{%- style -%}
+  .hyperlab-main-product {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hyperlab-main-product__urgency {
+    background-color: #FF6B00;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-main-product__title {
+    margin-bottom: 1rem;
+  }
+
+  .hyperlab-main-product__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-main-product__variant-picker {
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-main-product__benefits {
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-main-product__benefit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .hyperlab-main-product__benefit-icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .hyperlab-main-product__buy-buttons {
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-main-product__buy-button {
+    background-color: #FF6B00;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .hyperlab-main-product__shipping {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hyperlab-main-product {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="hyperlab-main-product">
+  <div class="page-width">
+    {%- if section.settings.urgency_text != blank -%}
+      <div class="hyperlab-main-product__urgency">
+        {{ section.settings.urgency_text }}
+      </div>
+    {%- endif -%}
+
+    <h1 class="hyperlab-main-product__title">{{ product.title }}</h1>
+
+    <div class="hyperlab-main-product__price">
+      {{ product.price | money }}
+    </div>
+
+    <div class="hyperlab-main-product__variant-picker">
+      {%- for option in product.options_with_values -%}
+        <div class="hyperlab-main-product__option">
+          <label for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <select
+            id="Option-{{ section.id }}-{{ forloop.index0 }}"
+            name="options[{{ option.name | escape }}]"
+            form="{{ product_form_id }}"
+          >
+            {%- for value in option.values -%}
+              <option
+                value="{{ value | escape }}"
+                {% if option.selected_value == value %}
+                  selected="selected"
+                {% endif %}
+              >
+                {{ value }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="hyperlab-main-product__benefits">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'benefit' -%}
+          <div class="hyperlab-main-product__benefit-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <span class="hyperlab-main-product__benefit-icon">{{ block.settings.icon }}</span>
+            {%- endif -%}
+            {{ block.settings.text }}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="hyperlab-main-product__buy-buttons">
+      <button class="hyperlab-main-product__buy-button">
+        Comprar ahora
+      </button>
+      <button class="hyperlab-main-product__buy-button">
+        Agregar al carrito
+      </button>
+    </div>
+
+    <div class="hyperlab-main-product__shipping">
+      {{ section.settings.shipping_text }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hyperlab Main Product",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Urgency Text",
+      "default": "¡Oferta por tiempo limitado!"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Shipping Text",
+      "default": "Envío gratis en compras superiores a $100.000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "🍽️"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Mejora el apetito"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hyperlab Main Product",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🍽️",
+            "text": "Mejora el apetito"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🛡️",
+            "text": "Fortalece el sistema inmunológico"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "💊",
+            "text": "Vitaminas esenciales"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

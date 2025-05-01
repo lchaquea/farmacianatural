@@ -1,0 +1,270 @@
+{%- style -%}
+  .hyperlab-testimonials {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .hyperlab-testimonials__heading {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hyperlab-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: 2rem;
+  }
+
+  .hyperlab-testimonials__card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hyperlab-testimonials__stars {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hyperlab-testimonials__text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .hyperlab-testimonials__author {
+    display: flex;
+    align-items: center;
+  }
+
+  .hyperlab-testimonials__author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    object-fit: cover;
+  }
+
+  .hyperlab-testimonials__author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hyperlab-testimonials__author-name {
+    font-weight: bold;
+  }
+
+  .hyperlab-testimonials__author-location {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hyperlab-testimonials {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    .hyperlab-testimonials__grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+<div class="hyperlab-testimonials">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hyperlab-testimonials__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hyperlab-testimonials__grid">
+      {%- for block in section.blocks -%}
+        <div class="hyperlab-testimonials__card" {{ block.shopify_attributes }}>
+          <div class="hyperlab-testimonials__stars">
+            {%- for i in (1..5) -%}
+              {%- if i <= block.settings.rating -%}
+                ★
+              {%- else -%}
+                ☆
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          <div class="hyperlab-testimonials__text">
+            {{ block.settings.text }}
+          </div>
+
+          <div class="hyperlab-testimonials__author">
+            {%- if block.settings.author_image != blank -%}
+              {{ block.settings.author_image | image_url: width: 100 | image_tag:
+                loading: 'lazy',
+                width: 50,
+                height: 50,
+                class: 'hyperlab-testimonials__author-image'
+              }}
+            {%- endif -%}
+            <div class="hyperlab-testimonials__author-info">
+              <span class="hyperlab-testimonials__author-name">{{ block.settings.author_name }}</span>
+              <span class="hyperlab-testimonials__author-location">{{ block.settings.author_location }}</span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hyperlab Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Lo que dicen nuestros clientes"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Columns on Desktop",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "label": "Columns on Mobile",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F8F8F8"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Mi hijo ha mejorado mucho su apetito desde que toma V10. ¡Lo recomiendo totalmente!</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "María G."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Author Location",
+          "default": "Bogotá, Colombia"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hyperlab Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>Mi hijo ha mejorado mucho su apetito desde que toma V10. ¡Lo recomiendo totalmente!</p>",
+            "author_name": "María G.",
+            "author_location": "Bogotá, Colombia"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>Excelente producto natural. Mi hija ya no se enferma tanto como antes.</p>",
+            "author_name": "Carlos M.",
+            "author_location": "Medellín, Colombia"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>El mejor multivitamínico que he probado para mis hijos. ¡100% recomendado!</p>",
+            "author_name": "Laura P.",
+            "author_location": "Cali, Colombia"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

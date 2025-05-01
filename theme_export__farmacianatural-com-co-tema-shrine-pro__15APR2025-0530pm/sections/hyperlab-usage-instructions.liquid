@@ -1,0 +1,231 @@
+{%- style -%}
+  .hyperlab-usage-instructions {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .hyperlab-usage-instructions__container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .hyperlab-usage-instructions__content {
+    flex: 1;
+  }
+
+  .hyperlab-usage-instructions__image {
+    flex: 1;
+  }
+
+  .hyperlab-usage-instructions__heading {
+    margin-bottom: 2rem;
+  }
+
+  .hyperlab-usage-instructions__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hyperlab-usage-instructions__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .hyperlab-usage-instructions__icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .hyperlab-usage-instructions__age {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  .hyperlab-usage-instructions__dosage {
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .hyperlab-usage-instructions {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    .hyperlab-usage-instructions__container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hyperlab-usage-instructions__image {
+      order: -1;
+    }
+  }
+{%- endstyle -%}
+
+<div class="hyperlab-usage-instructions">
+  <div class="page-width">
+    <div class="hyperlab-usage-instructions__container">
+      <div class="hyperlab-usage-instructions__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hyperlab-usage-instructions__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        <ul class="hyperlab-usage-instructions__list">
+          {%- for block in section.blocks -%}
+            <li class="hyperlab-usage-instructions__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <span class="hyperlab-usage-instructions__icon">{{ block.settings.icon }}</span>
+              {%- endif -%}
+              <span class="hyperlab-usage-instructions__age">{{ block.settings.age }}</span>
+              <span class="hyperlab-usage-instructions__dosage">{{ block.settings.dosage }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="hyperlab-usage-instructions__image">
+          {{ section.settings.image | image_url: width: 800 | image_tag:
+            loading: 'lazy',
+            width: section.settings.image.width,
+            height: section.settings.image.height,
+            class: 'hyperlab-usage-instructions__image-element'
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hyperlab Usage Instructions",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Cómo usar V10"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Usage Instructions Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "instruction",
+      "name": "Instruction",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "👶"
+        },
+        {
+          "type": "text",
+          "id": "age",
+          "label": "Age Range",
+          "default": "12-24 meses:"
+        },
+        {
+          "type": "text",
+          "id": "dosage",
+          "label": "Dosage",
+          "default": "1 cucharadita pequeña al día"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hyperlab Usage Instructions",
+      "blocks": [
+        {
+          "type": "instruction",
+          "settings": {
+            "icon": "👶",
+            "age": "12-24 meses:",
+            "dosage": "1 cucharadita pequeña al día"
+          }
+        },
+        {
+          "type": "instruction",
+          "settings": {
+            "icon": "🧒",
+            "age": "24-48 meses:",
+            "dosage": "2 cucharaditas pequeñas al día"
+          }
+        },
+        {
+          "type": "instruction",
+          "settings": {
+            "icon": "👦",
+            "age": "4+ años:",
+            "dosage": "2 cucharadas grandes al día"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
