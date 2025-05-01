@@ -1,67 +1,88 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "V10 Product Template",
   "layout": "theme",
   "wrapper": "div.page-width",
   "sections": {
-    "hyperlab-announcement-bar": {
-      "type": "hyperlab-announcement-bar",
-      "settings": {
-        "show_announcement": true,
-        "announcement_text": "ENVÍO GRATIS Y PAGO EN CASA CONTRAENTREGA"
-      }
-    },
     "hyperlab-v10-hero": {
       "type": "hyperlab-v10-hero",
       "settings": {
+        "logo": "shopify://shop_images/Logo-V10-2020-_1.png",
         "headline": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?",
-        "subheadline": "¡NO TE PREOCUPES MÁS!"
+        "subheadline": "¡NO TE PREOCUPES MÁS!",
+        "product_handle": "v10"
       }
     },
     "hyperlab-v10-product-info": {
       "type": "hyperlab-v10-product-info",
       "settings": {
+        "product_handle": "",
         "description": "<p>MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVITANDO VIRUS</p>"
       }
     },
     "hyperlab-v10-vitamin-benefits": {
       "type": "hyperlab-v10-vitamin-benefits",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-social-proof": {
       "type": "hyperlab-v10-social-proof",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-trust-badges": {
       "type": "hyperlab-v10-trust-badges",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-ingredients": {
       "type": "hyperlab-v10-ingredients",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-before-after": {
       "type": "hyperlab-v10-before-after",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-dosage": {
       "type": "hyperlab-v10-dosage",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-comparison": {
       "type": "hyperlab-v10-comparison",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-reviews": {
       "type": "hyperlab-v10-reviews",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     },
     "hyperlab-v10-faq": {
       "type": "hyperlab-v10-faq",
-      "settings": {}
+      "settings": {
+        "product_handle": ""
+      }
     }
   },
   "order": [
-    "hyperlab-announcement-bar",
     "hyperlab-v10-hero",
     "hyperlab-v10-product-info",
     "hyperlab-v10-vitamin-benefits",
