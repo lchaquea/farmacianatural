@@ -4,6 +4,10 @@
 <div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
   <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
     <div class="hero-header">
+      <div class="announcement-bar">
+        <p>ENVÍO GRATIS Y PAGO EN CASA CONTRAENTREGA</p>
+      </div>
+      
       <div class="logo-container">
         {%- if section.settings.logo != blank -%}
           <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
@@ -13,31 +17,33 @@
       <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
     </div>
 
-    <div class="product-gallery">
-      <div class="main-image">
-        {%- if section.settings.main_image != blank -%}
-          <img src="{{ section.settings.main_image | img_url: 'large' }}" 
-               alt="{{ section.settings.main_image.alt | escape }}"
-               class="featured-image"
-               id="ProductPhotoImg">
+    <div class="product-gallery-container">
+      <div class="main-image-container">
+        <div class="main-image">
+          {%- if section.settings.main_image != blank -%}
+            <img src="{{ section.settings.main_image | img_url: 'large' }}" 
+                 alt="{{ section.settings.main_image.alt | escape }}"
+                 class="featured-image"
+                 id="ProductPhotoImg">
+          {%- endif -%}
+        </div>
+
+        {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
+        {%- if gallery_images.size > 0 -%}
+          <div class="thumbnail-list">
+            {%- for block in gallery_images -%}
+              {%- if block.settings.image != blank -%}
+                <button class="thumbnail-item" data-image-id="{{ block.settings.image.id }}">
+                  <img src="{{ block.settings.image | img_url: '150x150', crop: 'center' }}" 
+                       alt="{{ block.settings.image.alt | escape }}"
+                       data-full-url="{{ block.settings.image | img_url: 'large' }}"
+                       class="thumbnail">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
         {%- endif -%}
       </div>
-
-      {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
-      {%- if gallery_images.size > 0 -%}
-        <div class="thumbnail-list">
-          {%- for block in gallery_images -%}
-            {%- if block.settings.image != blank -%}
-              <button class="thumbnail-item" data-image-id="{{ block.settings.image.id }}">
-                <img src="{{ block.settings.image | img_url: '100x100', crop: 'center' }}" 
-                     alt="{{ block.settings.image.alt | escape }}"
-                     data-full-url="{{ block.settings.image | img_url: 'large' }}"
-                     class="thumbnail">
-              </button>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
     </div>
 
     <div class="hero-cta">
@@ -178,30 +184,44 @@
 
 {% stylesheet %}
 .hyperlab-v10-hero {
-  padding: 60px 0;
+  padding: 0;
   background-color: #fff;
-}
-
-.hyperlab-v10-hero.full-width {
-  width: 100%;
-  max-width: none;
-  padding-left: 0;
-  padding-right: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-content {
   margin: 0 auto;
-  padding: 0 24px;
-  max-width: 1200px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.announcement-bar {
+  background: #f0f0f0;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  width: 100%;
+  margin: 0;
+}
+
+.announcement-bar p {
+  margin: 0;
 }
 
 .hero-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+  padding: 0;
 }
 
 .logo-container {
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .hero-logo {
@@ -212,111 +232,70 @@
 .hero-title {
   font-size: 32px;
   font-weight: 800;
-  margin: 0;
+  margin: 0 auto;
   line-height: 1.2;
   color: #1a1a1a;
+  max-width: 600px;
+  padding: 0 20px;
 }
 
-.product-gallery {
-  margin-bottom: 40px;
-  position: relative;
+.product-gallery-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.main-image-container {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
 }
 
 .main-image {
-  margin-bottom: 24px;
+  flex: 1;
   background: #ffffff;
-  padding: 32px;
-  border-radius: 12px;
-  border: 1px solid #ff6b00;
-  transition: all 0.3s ease;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
 }
 
 .featured-image {
   width: 100%;
   height: auto;
-  max-width: 500px;
-  margin: 0 auto;
   display: block;
-  transition: transform 0.3s ease;
+  border-radius: 8px;
 }
 
 .thumbnail-list {
   display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 8px 4px;
-  justify-content: center;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  background: transparent;
-  max-width: 100%;
-  margin: 0 auto;
-  position: relative;
-}
-
-.thumbnail-list::-webkit-scrollbar {
-  display: none;
-}
-
-/* Custom scrollbar arrows */
-.thumbnail-list::before,
-.thumbnail-list::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 24px;
-  height: 24px;
-  background: #ff6b00;
-  transform: translateY(-50%) rotate(45deg);
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-.thumbnail-list::before {
-  left: 0;
-  border-bottom: 2px solid #fff;
-  border-left: 2px solid #fff;
-}
-
-.thumbnail-list::after {
-  right: 0;
-  border-top: 2px solid #fff;
-  border-right: 2px solid #fff;
-}
-
-.thumbnail-list:hover::before,
-.thumbnail-list:hover::after {
-  opacity: 1;
+  flex-direction: column;
+  gap: 8px;
+  width: 80px;
 }
 
 .thumbnail-item {
-  border: 1px solid transparent;
+  border: 1px solid #e0e0e0;
   padding: 4px;
   background: #ffffff;
   cursor: pointer;
   opacity: 0.6;
   transition: all 0.3s ease;
-  flex: 0 0 auto;
   width: 80px;
   height: 80px;
-  position: relative;
-  overflow: hidden;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .thumbnail-item:hover {
   opacity: 0.8;
-  transform: translateY(-2px);
+  border-color: #ff6b00;
 }
 
 .thumbnail-item.active {
   opacity: 1;
   border-color: #ff6b00;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.1);
 }
 
 .thumbnail {
@@ -330,7 +309,8 @@
 
 .hero-cta {
   text-align: center;
-  margin-bottom: 40px;
+  padding: 0 20px 32px;
+  margin-top: auto;
 }
 
 .subheadline-container {
@@ -339,6 +319,12 @@
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
+}
+
+.subheadline {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .certification-badge {
@@ -352,56 +338,27 @@
 }
 
 .primary-button {
-  background-color: #ff6b00;
+  background-color: #1a1a1a;
   color: white;
   border: none;
-  padding: 15px 30px;
-  border-radius: 25px;
+  padding: 16px 32px;
+  border-radius: 100px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   margin: 0 auto;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
 
 .button-subtext {
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0.8;
-}
-
-/* Button Animations */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.shake {
-  animation: shake 1.5s ease-in-out infinite;
-}
-
-.pulse {
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.bounce {
-  animation: bounce 1.5s ease-in-out infinite;
+  margin-top: 4px;
 }
 
 @media screen and (min-width: 768px) {
@@ -413,17 +370,30 @@
     font-size: 18px;
   }
 
-  .featured-image {
-    max-width: 600px;
+  .main-image-container {
+    flex-direction: row-reverse;
+  }
+
+  .thumbnail-list {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-image-container {
+    flex-direction: column;
+  }
+
+  .thumbnail-list {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    padding: 0;
   }
 
   .thumbnail-item {
-    width: 100px;
-    height: 100px;
-  }
-
-  .hero-content {
-    padding: 0 40px;
+    width: 60px;
+    height: 60px;
   }
 }
 {% endstylesheet %}
@@ -432,62 +402,30 @@
 document.addEventListener('DOMContentLoaded', function() {
   const thumbnails = document.querySelectorAll('.thumbnail-item');
   const mainImage = document.getElementById('ProductPhotoImg');
-  const thumbnailList = document.querySelector('.thumbnail-list');
 
   // Set first thumbnail as active by default
   if (thumbnails.length > 0) {
     thumbnails[0].classList.add('active');
   }
 
-  // Image switcher functionality
   thumbnails.forEach(thumb => {
     thumb.addEventListener('click', function() {
       const newSrc = this.querySelector('img').getAttribute('data-full-url');
       
       // Animate main image switch
       mainImage.style.opacity = '0';
-      mainImage.style.transform = 'scale(0.95)';
+      mainImage.style.transform = 'scale(0.98)';
       
       setTimeout(() => {
         mainImage.src = newSrc;
         mainImage.style.opacity = '1';
         mainImage.style.transform = 'scale(1)';
-      }, 200);
+      }, 150);
       
       // Update active state
       thumbnails.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
     });
-  });
-
-  // Horizontal scroll with arrows
-  let scrolling = false;
-  const scrollStep = 200;
-
-  thumbnailList.addEventListener('mousemove', (e) => {
-    const rect = thumbnailList.getBoundingClientRect();
-    const isLeftSide = e.clientX - rect.left < 50;
-    const isRightSide = rect.right - e.clientX < 50;
-
-    if (isLeftSide && thumbnailList.scrollLeft > 0) {
-      thumbnailList.style.cursor = 'w-resize';
-    } else if (isRightSide && thumbnailList.scrollLeft < thumbnailList.scrollWidth - rect.width) {
-      thumbnailList.style.cursor = 'e-resize';
-    } else {
-      thumbnailList.style.cursor = 'default';
-    }
-  });
-
-  thumbnailList.addEventListener('click', (e) => {
-    const rect = thumbnailList.getBoundingClientRect();
-    const isLeftSide = e.clientX - rect.left < 50;
-    const isRightSide = rect.right - e.clientX < 50;
-
-    if (isLeftSide) {
-      thumbnailList.scrollBy({ left: -scrollStep, behavior: 'smooth' });
-    } else if (isRightSide) {
-      thumbnailList.scrollBy({ left: scrollStep, behavior: 'smooth' });
-    }
   });
 });
 {% endjavascript %} 
