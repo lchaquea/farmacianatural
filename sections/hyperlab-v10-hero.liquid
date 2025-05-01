@@ -14,38 +14,43 @@
 
   <div class="product-gallery">
     <div class="main-image">
-      {%- if product.featured_image -%}
-        <img src="{{ product.featured_image | img_url: 'large' }}" 
-             alt="{{ product.featured_image.alt | escape }}"
+      {%- if section.settings.main_image != blank -%}
+        <img src="{{ section.settings.main_image | img_url: 'large' }}" 
+             alt="{{ section.settings.main_image.alt | escape }}"
              class="featured-image"
-             id="ProductPhotoImg"
-             data-zoom-image="{{ product.featured_image | img_url: '1024x1024' }}">
+             id="ProductPhotoImg">
       {%- endif -%}
     </div>
 
     <div class="thumbnail-list">
-      {%- for image in product.images limit: 5 -%}
-        <button class="thumbnail-item" data-image-id="{{ image.id }}">
-          <img src="{{ image | img_url: '100x100', crop: 'center' }}" 
-               alt="{{ image.alt | escape }}"
-               class="thumbnail">
-        </button>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'gallery_image' and block.settings.image != blank -%}
+          <button class="thumbnail-item" data-image-id="{{ block.settings.image.id }}">
+            <img src="{{ block.settings.image | img_url: '100x100', crop: 'center' }}" 
+                 alt="{{ block.settings.image.alt | escape }}"
+                 data-full-url="{{ block.settings.image | img_url: 'large' }}"
+                 class="thumbnail">
+          </button>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
 
   <div class="hero-cta">
-    <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
-    <button class="primary-button">
-      CLICK AQUÍ Y PAGA AL RECIBIR
-      <span class="button-subtext">paga en casa contraentrega</span>
-    </button>
-  </div>
-
-  <div class="ticker-container">
-    <div class="ticker-content">
-      <p>MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVITANDO VIRUS</p>
+    <div class="subheadline-container">
+      <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
+      {%- if section.settings.certification_badge != blank -%}
+        <div class="certification-badge">
+          <img src="{{ section.settings.certification_badge | img_url: '100x' }}" 
+               alt="Certificación INVIMA" 
+               class="certification-image">
+        </div>
+      {%- endif -%}
     </div>
+    <button class="primary-button shake">
+      {{ section.settings.button_text | default: "CLICK AQUÍ Y PAGA AL RECIBIR" }}
+      <span class="button-subtext">{{ section.settings.button_subtext | default: "paga en casa contraentrega" }}</span>
+    </button>
   </div>
 </div>
 
@@ -71,11 +76,47 @@
       "default": "¡NO TE PREOCUPES MÁS!"
     },
     {
+      "type": "image_picker",
+      "id": "certification_badge",
+      "label": "Certification Badge"
+    },
+    {
       "type": "product",
       "id": "product_handle",
       "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Product Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "CLICK AQUÍ Y PAGA AL RECIBIR"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Button Subtext",
+      "default": "paga en casa contraentrega"
     }
-  ]
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5
 }
 {% endschema %}
 
@@ -124,6 +165,7 @@
   gap: 10px;
   overflow-x: auto;
   padding: 10px 0;
+  justify-content: center;
 }
 
 .thumbnail-item {
@@ -131,6 +173,13 @@
   padding: 0;
   background: none;
   cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail-item.active {
+  opacity: 1;
+  border: 2px solid #ff6b00;
 }
 
 .thumbnail {
@@ -145,9 +194,22 @@
   margin-bottom: 30px;
 }
 
-.subheadline {
-  font-size: 20px;
+.subheadline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   margin-bottom: 20px;
+}
+
+.certification-badge {
+  flex-shrink: 0;
+}
+
+.certification-image {
+  max-width: 60px;
+  height: auto;
+  display: block;
 }
 
 .primary-button {
@@ -164,6 +226,11 @@
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.primary-button:hover {
+  transform: scale(1.05);
 }
 
 .button-subtext {
@@ -171,26 +238,20 @@
   opacity: 0.8;
 }
 
-.ticker-container {
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin: 20px 0;
-  overflow: hidden;
+/* Shaking animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
-.ticker-content {
-  white-space: nowrap;
-  animation: ticker 20s linear infinite;
+.shake {
+  animation: shake 1.5s ease-in-out infinite;
+  animation-play-state: paused;
 }
 
-.ticker-content p {
-  margin: 0;
-  font-size: 14px;
-}
-
-@keyframes ticker {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+.shake:hover {
+  animation-play-state: running;
 }
 
 @media screen and (min-width: 768px) {
@@ -209,14 +270,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const thumbnails = document.querySelectorAll('.thumbnail-item');
   const mainImage = document.getElementById('ProductPhotoImg');
 
+  // Set first thumbnail as active by default
+  if (thumbnails.length > 0) {
+    thumbnails[0].classList.add('active');
+  }
+
   thumbnails.forEach(thumb => {
     thumb.addEventListener('click', function() {
-      const newSrc = this.querySelector('img').src.replace('100x100', 'large');
-      const newZoomSrc = this.querySelector('img').src.replace('100x100', '1024x1024');
-      
+      const newSrc = this.querySelector('img').getAttribute('data-full-url');
       mainImage.src = newSrc;
-      mainImage.setAttribute('data-zoom-image', newZoomSrc);
       
+      // Update active state
       thumbnails.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
     });
