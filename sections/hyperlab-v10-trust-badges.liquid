@@ -1,0 +1,130 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-trust-badges">
+  <div class="trust-badges-container">
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16L12 21L20 16M4 12L12 17L20 12M4 8L12 13L20 8L12 3L4 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Envío gratis</h3>
+    </div>
+
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Resultados garantizados</h3>
+    </div>
+
+    <div class="trust-badge">
+      <div class="badge-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 12L11 14L15 10M12 3L20 7V11C20 15.4183 16.4183 19 12 19C7.58172 19 4 15.4183 4 11V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Certificado Invima</h3>
+      <p class="invima-number">RSA-0021962-2022</p>
+    </div>
+  </div>
+
+  <button class="primary-button">
+    CLICK AQUÍ Y PAGA AL RECIBIR
+    <span class="button-subtext">paga en casa contraentrega</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Trust Badges",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-trust-badges {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.trust-badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.trust-badge {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.trust-badge:hover {
+  transform: translateY(-5px);
+}
+
+.badge-icon {
+  margin-bottom: 15px;
+  color: #ff6b00;
+}
+
+.trust-badge h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.invima-number {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.primary-button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.button-subtext {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .trust-badges-container {
+    flex-wrap: nowrap;
+  }
+
+  .trust-badge {
+    min-width: 0;
+  }
+}
+{% endstylesheet %} 

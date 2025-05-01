@@ -1,0 +1,224 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-hero">
+  <div class="hero-header">
+    <div class="logo-container">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
+      {%- endif -%}
+    </div>
+    
+    <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
+  </div>
+
+  <div class="product-gallery">
+    <div class="main-image">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | img_url: 'large' }}" 
+             alt="{{ product.featured_image.alt | escape }}"
+             class="featured-image"
+             id="ProductPhotoImg"
+             data-zoom-image="{{ product.featured_image | img_url: '1024x1024' }}">
+      {%- endif -%}
+    </div>
+
+    <div class="thumbnail-list">
+      {%- for image in product.images limit: 5 -%}
+        <button class="thumbnail-item" data-image-id="{{ image.id }}">
+          <img src="{{ image | img_url: '100x100', crop: 'center' }}" 
+               alt="{{ image.alt | escape }}"
+               class="thumbnail">
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
+    <button class="primary-button">
+      CLICK AQUÍ Y PAGA AL RECIBIR
+      <span class="button-subtext">paga en casa contraentrega</span>
+    </button>
+  </div>
+
+  <div class="ticker-container">
+    <div class="ticker-content">
+      <p>MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVITANDO VIRUS</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Hero Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
+    },
+    {
+      "type": "text",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "¡NO TE PREOCUPES MÁS!"
+    },
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-hero {
+  padding: 20px 0;
+}
+
+.hero-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.hero-logo {
+  max-width: 100px;
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.product-gallery {
+  margin-bottom: 30px;
+}
+
+.main-image {
+  margin-bottom: 20px;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.featured-image {
+  width: 100%;
+  height: auto;
+}
+
+.thumbnail-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.thumbnail-item {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.hero-cta {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subheadline {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.primary-button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.button-subtext {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.ticker-container {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.ticker-content {
+  white-space: nowrap;
+  animation: ticker 20s linear infinite;
+}
+
+.ticker-content p {
+  margin: 0;
+  font-size: 14px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@media screen and (min-width: 768px) {
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .primary-button {
+    font-size: 18px;
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  const mainImage = document.getElementById('ProductPhotoImg');
+
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      const newSrc = this.querySelector('img').src.replace('100x100', 'large');
+      const newZoomSrc = this.querySelector('img').src.replace('100x100', '1024x1024');
+      
+      mainImage.src = newSrc;
+      mainImage.setAttribute('data-zoom-image', newZoomSrc);
+      
+      thumbnails.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
+{% endjavascript %} 

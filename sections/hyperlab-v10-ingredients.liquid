@@ -1,0 +1,129 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-ingredients">
+  <h2 class="section-title">¿TUS HIJOS NO ESTÁN COMIENDO BIEN?</h2>
+
+  <div class="ingredients-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
+    <div class="ingredients-list">
+      <div class="ingredient-item">
+        <h3>CHONTADURO</h3>
+        <p>Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico</p>
+      </div>
+
+      <div class="ingredient-item">
+        <h3>BOROJÓ</h3>
+        <p>Fuente de energía natural, mejora el rendimiento físico y mental</p>
+      </div>
+
+      <div class="ingredient-item">
+        <h3>VITAMINAS Y MINERALES</h3>
+        <p>Estimulan el apetito y apoyan el desarrollo cognitivo. Fortalecen huesos, músculos y mejoran la concentración</p>
+      </div>
+
+      <div class="ingredient-item">
+        <h3>MIEL Y NARANJA</h3>
+        <p>Evita el consumo de azúcares procesados y mejora la digestión</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Ingredients",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-ingredients {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.ingredients-content {
+  background-color: #f8f8f8;
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.ingredients-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+}
+
+.ingredients-list {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ingredient-item {
+  margin-bottom: 25px;
+  text-align: left;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ingredient-item:last-child {
+  margin-bottom: 0;
+}
+
+.ingredient-item h3 {
+  color: #ff6b00;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ingredient-item p {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 768px) {
+  .section-title {
+    font-size: 32px;
+  }
+
+  .ingredients-content {
+    padding: 50px;
+  }
+
+  .ingredient-item {
+    padding: 25px;
+  }
+}
+{% endstylesheet %} 

@@ -1,0 +1,248 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-reviews">
+  <h2 class="section-title">+1,000 FAMILIAS CONFIAN EN V10 PARA MEJORAR LA SALUD DE SUS HIJOS</h2>
+
+  <div class="reviews-container">
+    <div class="review-submission">
+      <h3>Agregar reseña</h3>
+      <p class="submission-text">Quieres que tu reel se vea en nuestra página?</p>
+      <p class="submission-subtext">Comparte tu opinión, es probable que te vuelvas viral</p>
+
+      <div class="rating-input">
+        <div class="stars-container">
+          <input type="radio" id="star5" name="rating" value="5">
+          <label for="star5">★</label>
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4">★</label>
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3">★</label>
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2">★</label>
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1">★</label>
+        </div>
+      </div>
+
+      <div class="reel-submission">
+        <input type="text" 
+               placeholder="Comparte tu video reel" 
+               class="reel-input"
+               aria-label="Reel URL">
+        <button type="submit" class="submit-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="payment-methods">
+      <h3>Ordena ya con envío gratis</h3>
+      <div class="payment-buttons">
+        <button class="payment-button">
+          <span class="icon">★</span>
+          Addi
+        </button>
+        <button class="payment-button">
+          <span class="icon">★</span>
+          Sistecrédito
+        </button>
+        <button class="payment-button">
+          <span class="icon">★</span>
+          MercadoPago
+        </button>
+        <button class="payment-button">
+          <span class="icon">★</span>
+          PSE
+        </button>
+      </div>
+      <p class="payment-note">Métodos de pago a cuotas</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Reviews",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-reviews {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.reviews-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.review-submission {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.review-submission h3 {
+  font-size: 24px;
+  margin: 0 0 15px;
+  color: #333;
+}
+
+.submission-text {
+  font-size: 18px;
+  margin: 0 0 5px;
+  color: #333;
+}
+
+.submission-subtext {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 20px;
+}
+
+.rating-input {
+  margin-bottom: 20px;
+}
+
+.stars-container {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+
+.stars-container input {
+  display: none;
+}
+
+.stars-container label {
+  font-size: 30px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.stars-container label:hover,
+.stars-container label:hover ~ label,
+.stars-container input:checked ~ label {
+  color: #FFD700;
+}
+
+.reel-submission {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.reel-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 14px;
+}
+
+.submit-button {
+  background: #ff6b00;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.payment-methods {
+  text-align: center;
+}
+
+.payment-methods h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.payment-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.payment-button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.payment-button:hover {
+  transform: translateY(-2px);
+}
+
+.payment-button .icon {
+  color: #ff6b00;
+}
+
+.payment-note {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .section-title {
+    font-size: 32px;
+  }
+
+  .payment-buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const reelInput = document.querySelector('.reel-input');
+  const submitButton = document.querySelector('.submit-button');
+  
+  submitButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    const reelUrl = reelInput.value.trim();
+    
+    if (reelUrl) {
+      // Handle submission (you'll need to implement this based on your requirements)
+      console.log('Submitted reel:', reelUrl);
+      reelInput.value = '';
+    }
+  });
+});
+{% endjavascript %} 

@@ -1,0 +1,61 @@
+{%- if section.settings.show_announcement -%}
+  <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
+    <div class="page-width">
+      <div class="announcement-bar__content">
+        {%- if section.settings.announcement_text != blank -%}
+          <p class="announcement-bar__message h5">
+            {{ section.settings.announcement_text | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "ENVÍO GRATIS Y PAGO EN CASA CONTRAENTREGA"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.announcement-bar {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.announcement-bar__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.announcement-bar__message {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+{% endstylesheet %} 

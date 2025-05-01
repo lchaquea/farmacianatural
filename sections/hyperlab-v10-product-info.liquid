@@ -1,0 +1,276 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-product-info">
+  <div class="product-header">
+    <h1 class="product-title">MULTIVITAMÍNICO V10</h1>
+    
+    <div class="price-container">
+      <span class="price">${{ product.price | money_without_currency }}</span>
+      <span class="shipping-tag">envío gratis</span>
+    </div>
+
+    <div class="rating-container">
+      <div class="stars">★★★★★</div>
+    </div>
+
+    <div class="social-proof">
+      <div class="metric">
+        <span class="icon">★</span>
+        <span class="text">4.8 (9,327)</span>
+      </div>
+      <div class="metric">
+        <span class="icon">👶</span>
+        <span class="text">+1M niños con apetito</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-tabs">
+    <div class="tabs-header">
+      <button class="tab-button active" data-tab="descripcion">Descripción</button>
+      <button class="tab-button" data-tab="ingredientes">Ingredientes</button>
+      <button class="tab-button" data-tab="resultados">Resultados</button>
+      <button class="tab-button" data-tab="modo-uso">Modo de uso</button>
+    </div>
+
+    <div class="tab-content active" id="descripcion">
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+    <div class="tab-content" id="ingredientes">
+      <h3>Cuales son los ingredientes?</h3>
+      <p class="flavor-text">Sabor a naranja endulzado con miel de abejas</p>
+      <ul class="ingredients-list">
+        <li>Agua Purificada</li>
+        <li>Miel de abejas</li>
+        <li>Jugo de Chontaduro</li>
+        <li>Jugo de Borojó</li>
+        <li>Vitaminas: C - B3 - E - B6 - B2 - B1 - D</li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="resultados">
+      <div class="results-content">
+        <p>El producto funciona en el 100% de los niños, variando el tiempo de efecto:</p>
+        <ul>
+          <li>Algunos niños muestran resultados desde los 5 días de uso</li>
+          <li>Otros pueden tomar un poco más de tiempo</li>
+          <li>Recomendamos usar mínimo dos tarros para garantizar el 100% de efectividad</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="modo-uso">
+      <div class="usage-content">
+        <h3>Instrucciones de uso:</h3>
+        <ul class="dosage-list">
+          <li>12-24 meses: 1 cucharadita pequeña al día</li>
+          <li>24-48 meses: 2 cucharaditas pequeñas al día (mañana y tarde/noche)</li>
+          <li>Mayores de 4 años: 2 cucharadas grandes al día (mañana y tarde)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <button class="primary-button">
+    CLICK AQUÍ Y PAGA AL RECIBIR
+    <span class="button-subtext">paga en casa contraentrega</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Product Info",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Product Description",
+      "default": "<p>MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVITANDO VIRUS</p>"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-product-info {
+  padding: 20px 0;
+}
+
+.product-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.shipping-tag {
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.rating-container {
+  margin-bottom: 15px;
+}
+
+.stars {
+  color: #FFD700;
+  font-size: 20px;
+}
+
+.social-proof {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.product-tabs {
+  margin-bottom: 30px;
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #666;
+}
+
+.tab-button.active {
+  color: #000;
+  border-bottom: 2px solid #ff6b00;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.ingredients-list,
+.dosage-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ingredients-list li,
+.dosage-list li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.ingredients-list li:before,
+.dosage-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ff6b00;
+}
+
+.flavor-text {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.primary-button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.button-subtext {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .product-title {
+    font-size: 32px;
+  }
+
+  .tabs-header {
+    justify-content: center;
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const tabId = button.getAttribute('data-tab');
+      
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      button.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+});
+{% endjavascript %} 

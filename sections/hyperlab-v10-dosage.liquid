@@ -1,0 +1,170 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-dosage">
+  <h2 class="section-title">CUÁL ES LA DOSIS?</h2>
+
+  <div class="dosage-container">
+    <div class="dosage-cards">
+      <div class="dosage-card">
+        <div class="card-image">
+          <img src="{{ section.settings.image_under_2 | img_url: 'master' }}" alt="Menores de 2 años">
+        </div>
+        <div class="card-content">
+          <h3>Menores de 2 años</h3>
+          <p>Una cucharadita al día en cualquier hora de la mañana</p>
+          <div class="author-note">
+            <span class="heart-icon">♥</span>
+            <span>Carolina Soto a sus hijos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dosage-card">
+        <div class="card-image">
+          <img src="{{ section.settings.image_2_4 | img_url: 'master' }}" alt="Niños entre 2 y 4 años">
+        </div>
+        <div class="card-content">
+          <h3>Niños entre 2 y 4 años</h3>
+          <p>Dos cucharaditas al día, una en la mañana y otra en la tarde</p>
+          <div class="author-note">
+            <span class="heart-icon">♥</span>
+            <span>Carolina Soto a sus hijos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dosage-card">
+        <div class="card-image">
+          <img src="{{ section.settings.image_4_16 | img_url: 'master' }}" alt="Niños entre 4 y 16 años">
+        </div>
+        <div class="card-content">
+          <h3>Niños entre 4 y 16 años</h3>
+          <p>Dos cucharadas soperas al día, 1 en la mañana y otra en la tarde</p>
+          <div class="author-note">
+            <span class="heart-icon">♥</span>
+            <span>Carolina Soto a sus hijos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Dosage",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_under_2",
+      "label": "Image for Under 2 Years"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2_4",
+      "label": "Image for 2-4 Years"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4_16",
+      "label": "Image for 4-16 Years"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-dosage {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.dosage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dosage-cards {
+  display: grid;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.dosage-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  background: #f4f4f4;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.card-content p {
+  margin: 0 0 15px;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.author-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.heart-icon {
+  color: #ff6b00;
+}
+
+@media screen and (min-width: 768px) {
+  .section-title {
+    font-size: 32px;
+  }
+
+  .dosage-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dosage-cards {
+    grid-template-columns: 1fr;
+  }
+}
+{% endstylesheet %} 
