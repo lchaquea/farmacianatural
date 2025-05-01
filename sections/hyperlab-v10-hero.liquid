@@ -4,10 +4,6 @@
 <div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
   <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
     <div class="hero-header">
-      <div class="announcement-bar">
-        <p>ENVÍO GRATIS Y PAGO EN CASA CONTRAENTREGA</p>
-      </div>
-      
       <div class="logo-container">
         {%- if section.settings.logo != blank -%}
           <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
@@ -201,23 +197,10 @@
   flex: 1;
 }
 
-.announcement-bar {
-  background: #f0f0f0;
-  padding: 12px;
-  text-align: center;
-  font-weight: 600;
-  width: 100%;
-  margin: 0;
-}
-
-.announcement-bar p {
-  margin: 0;
-}
-
 .hero-header {
   text-align: center;
   margin-bottom: 24px;
-  padding: 0;
+  padding: 24px 0 0;
 }
 
 .logo-container {
