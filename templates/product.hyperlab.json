@@ -282,7 +282,79 @@
       ],
       "name": "V10 Social Proof",
       "settings": {
-        "product_handle": ""
+        "product_handle": "v10-multivitaminico"
+      }
+    },
+    "comparison_table_7WHGPc": {
+      "type": "comparison-table",
+      "blocks": {
+        "row_VCqkAL": {
+          "type": "row",
+          "settings": {
+            "benefit": "Benefit",
+            "us": true,
+            "others": false
+          }
+        },
+        "row_6NyUQE": {
+          "type": "row",
+          "settings": {
+            "benefit": "Benefit",
+            "us": true,
+            "others": false
+          }
+        },
+        "row_xEd9eF": {
+          "type": "row",
+          "settings": {
+            "benefit": "Benefit",
+            "us": true,
+            "others": false
+          }
+        }
+      },
+      "block_order": [
+        "row_VCqkAL",
+        "row_6NyUQE",
+        "row_xEd9eF"
+      ],
+      "name": "Comparison table",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "title": "Comparison table",
+        "heading_size": "h1",
+        "text": "<p>Talk about how and why is your brand better than the others.</p>",
+        "button_label": "",
+        "link": "",
+        "button_style_secondary": false,
+        "atc_button_label": "",
+        "atc_product": "v10-multivitaminico",
+        "color_scheme": "background-1",
+        "layout": "table_second",
+        "style": "minimal",
+        "logo_width": 90,
+        "mobile_logo_width": 60,
+        "us_label": "V10",
+        "us_label_size": 18,
+        "others_label": "Otros",
+        "others_label_size": 18,
+        "checkmark_style": "regular",
+        "checkmark_color": "#53AF01",
+        "checkmark_bg_color": "#53AF01",
+        "x_style": "regular",
+        "x_color": "#121212",
+        "x_bg_color": "#DBDBDB",
+        "opposite_icon_colors": "original",
+        "highlighted_color_scheme": "accent-1",
+        "highlighted_separator_opacity": 0,
+        "highlighted_overlay_opacity": 0,
+        "other_cells_color_scheme": "background-1",
+        "regular_separator_opacity": 10,
+        "regular_overlay_opacity": 0,
+        "minimalistic_border_opacity": 16,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
@@ -290,6 +362,7 @@
     "main",
     "related-products",
     "hyperlab_v10_before_after_TkrE9M",
-    "hyperlab_v10_social_proof_UwxeDx"
+    "hyperlab_v10_social_proof_UwxeDx",
+    "comparison_table_7WHGPc"
   ]
 }
