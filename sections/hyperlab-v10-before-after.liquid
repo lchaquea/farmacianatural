@@ -35,9 +35,9 @@
     </div>
   </div>
 
-  <button class="primary-button">
-    CLICK AQUÍ Y PAGA AL RECIBIR
-    <span class="button-subtext">paga en casa contraentrega</span>
+  <button class="primary-button" onclick="window.location.href='{{ section.settings.button_link }}'">
+    {{ section.settings.button_text }}
+    <span class="button-subtext">{{ section.settings.button_subtext }}</span>
   </button>
 </div>
 
@@ -59,6 +59,23 @@
       "type": "image_picker",
       "id": "after_image",
       "label": "After Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "CLICK AQUÍ Y PAGA AL RECIBIR"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Button Subtext",
+      "default": "paga en casa contraentrega"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
     }
   ],
   "blocks": [
@@ -129,6 +146,7 @@
   justify-content: center;
   gap: 30px;
   margin-bottom: 40px;
+  flex-direction: row;
 }
 
 .image-container {
@@ -240,12 +258,13 @@
 
 @media screen and (max-width: 767px) {
   .comparison-images {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .image-container {
     width: 100%;
+    max-width: 400px;
   }
 }
 {% endstylesheet %} 

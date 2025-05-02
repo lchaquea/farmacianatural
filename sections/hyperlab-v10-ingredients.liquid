@@ -1,29 +1,22 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
 <div class="hyperlab-v10-ingredients">
-  <h2 class="section-title">¿TUS HIJOS NO ESTÁN COMIENDO BIEN?</h2>
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+  
+  {% if section.settings.title_image %}
+    <div class="title-image">
+      <img src="{{ section.settings.title_image | img_url: 'master' }}" alt="{{ section.settings.title }}">
+    </div>
+  {% endif %}
 
   <div class="ingredients-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
     <div class="ingredients-list">
-      <div class="ingredient-item">
-        <h3>CHONTADURO</h3>
-        <p>Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico</p>
-      </div>
-
-      <div class="ingredient-item">
-        <h3>BOROJÓ</h3>
-        <p>Fuente de energía natural, mejora el rendimiento físico y mental</p>
-      </div>
-
-      <div class="ingredient-item">
-        <h3>VITAMINAS Y MINERALES</h3>
-        <p>Estimulan el apetito y apoyan el desarrollo cognitivo. Fortalecen huesos, músculos y mejoran la concentración</p>
-      </div>
-
-      <div class="ingredient-item">
-        <h3>MIEL Y NARANJA</h3>
-        <p>Evita el consumo de azúcares procesados y mejora la digestión</p>
-      </div>
+      {% for block in section.blocks %}
+        <div class="ingredient-item" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -38,9 +31,75 @@
       "label": "Product"
     },
     {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
+    },
+    {
+      "type": "image_picker",
+      "id": "title_image",
+      "label": "Title Image"
+    },
+    {
       "type": "image_picker",
       "id": "background_image",
       "label": "Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "CHONTADURO"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V10 Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "CHONTADURO",
+            "description": "Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "BOROJÓ",
+            "description": "Fuente de energía natural, mejora el rendimiento físico y mental"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "VITAMINAS Y MINERALES",
+            "description": "Estimulan el apetito y apoyan el desarrollo cognitivo. Fortalecen huesos, músculos y mejoran la concentración"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "MIEL Y NARANJA",
+            "description": "Evita el consumo de azúcares procesados y mejora la digestión"
+          }
+        }
+      ]
     }
   ]
 }
@@ -104,6 +163,7 @@
   font-size: 18px;
   margin-bottom: 10px;
   font-weight: bold;
+  text-align: center;
 }
 
 .ingredient-item p {
@@ -125,5 +185,14 @@
   .ingredient-item {
     padding: 25px;
   }
+}
+
+.title-image {
+  margin-bottom: 30px;
+}
+
+.title-image img {
+  max-width: 100%;
+  height: auto;
 }
 {% endstylesheet %} 
