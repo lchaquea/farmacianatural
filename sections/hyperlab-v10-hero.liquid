@@ -19,20 +19,30 @@
 
         <div class="product-gallery">
           <div class="gallery-container">
-            <div class="main-image-container">
+            <div class="main-image-wrapper">
               <button class="gallery-nav prev" aria-label="Previous image">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
               
-              <div class="main-image">
-                {%- assign main_image = section.settings.main_image | default: section.settings.image_1 -%}
-                {%- if main_image != blank -%}
-                  <img src="{{ main_image | img_url: 'large' }}" 
-                       alt="{{ main_image.alt | escape }}"
-                       class="featured-image">
-                {%- endif -%}
+              <div class="main-image-container">
+                <div class="main-image">
+                  {%- assign gallery_images = "" | split: "" -%}
+                  {%- for i in (1..5) -%}
+                    {%- assign image_setting = 'image_' | append: i -%}
+                    {%- assign current_image = section.settings[image_setting] -%}
+                    {%- if current_image != blank -%}
+                      {%- assign gallery_images = gallery_images | push: current_image -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if gallery_images.size > 0 -%}
+                    <img src="{{ gallery_images[0] | img_url: '1000x' }}" 
+                         alt="{{ gallery_images[0].alt | escape }}"
+                         class="featured-image">
+                  {%- endif -%}
+                </div>
               </div>
 
               <button class="gallery-nav next" aria-label="Next image">
@@ -43,18 +53,14 @@
             </div>
 
             <div class="thumbnails-container">
-              {%- for i in (1..5) -%}
-                {%- assign image_setting = 'image_' | append: i -%}
-                {%- assign current_image = section.settings[image_setting] -%}
-                {%- if current_image != blank -%}
-                  <button class="thumbnail-button {% if forloop.first %}active{% endif %}" 
-                          data-image-url="{{ current_image | img_url: 'large' }}"
-                          data-image-index="{{ forloop.index0 }}">
-                    <img src="{{ current_image | img_url: '150x150', crop: 'center' }}" 
-                         alt="{{ current_image.alt | escape }}"
-                         class="thumbnail-image">
-                  </button>
-                {%- endif -%}
+              {%- for image in gallery_images -%}
+                <button class="thumbnail-button {% if forloop.first %}active{% endif %}" 
+                        data-image-url="{{ image | img_url: '1000x' }}"
+                        data-image-index="{{ forloop.index0 }}">
+                  <img src="{{ image | img_url: '100x100', crop: 'center' }}" 
+                       alt="{{ image.alt | escape }}"
+                       class="thumbnail-image">
+                </button>
               {%- endfor -%}
             </div>
           </div>
@@ -125,11 +131,6 @@
     {
       "type": "header",
       "content": "Gallery Settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "main_image",
-      "label": "Main Image (Featured)"
     },
     {
       "type": "image_picker",
@@ -252,34 +253,38 @@
 .product-gallery {
   margin: 0 auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   padding: 0 20px;
 }
 
 .gallery-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
-.main-image-container {
+.main-image-wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.main-image-container {
+  width: 100%;
+  max-width: 1000px;
   background: #ffffff;
   border-radius: 12px;
-  padding: 24px;
+  padding: 16px;
 }
 
 .main-image {
-  flex: 1;
   position: relative;
   border: 2px solid #ff6b00;
   border-radius: 8px;
-  margin: 12px;
   overflow: hidden;
-  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -288,7 +293,7 @@
   height: auto;
   display: block;
   border-radius: 6px;
-  padding: 12px;
+  padding: 8px;
 }
 
 .gallery-nav {
@@ -303,19 +308,18 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-shrink: 0;
-  z-index: 2;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
 }
 
 .gallery-nav.prev {
-  left: 12px;
+  left: 0;
 }
 
 .gallery-nav.next {
-  right: 12px;
+  right: 0;
 }
 
 .gallery-nav:hover {
@@ -330,23 +334,30 @@
 
 .thumbnails-container {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 0 24px;
+  flex-wrap: nowrap;
+  padding: 0 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.thumbnails-container::-webkit-scrollbar {
+  display: none;
 }
 
 .thumbnail-button {
-  width: 70px;
-  height: 70px;
-  padding: 4px;
+  width: 60px;
+  height: 60px;
+  padding: 3px;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #ffffff;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
-  margin: 4px;
+  flex: 0 0 auto;
 }
 
 .thumbnail-button:hover {
@@ -444,8 +455,12 @@
 }
 
 @media screen and (max-width: 767px) {
+  .main-image-wrapper {
+    padding: 0 40px;
+  }
+
   .main-image-container {
-    padding: 16px;
+    padding: 12px;
   }
 
   .gallery-nav {
@@ -458,9 +473,15 @@
     height: 16px;
   }
 
+  .thumbnails-container {
+    gap: 6px;
+    padding: 0 8px;
+  }
+
   .thumbnail-button {
-    width: 60px;
-    height: 60px;
+    width: calc((100% - 24px) / 5);
+    height: auto;
+    aspect-ratio: 1;
   }
 
   .primary-button {
@@ -500,6 +521,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update active state
     thumbnails.forEach(thumb => thumb.classList.remove('active'));
     selectedThumbnail.classList.add('active');
+
+    // Scroll thumbnail into view if needed
+    selectedThumbnail.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
 
     currentIndex = index;
   }
