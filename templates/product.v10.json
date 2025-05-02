@@ -151,27 +151,21 @@
           "type": "trust_badge",
           "settings": {
             "title": "Envío gratis",
-            "emoji": "",
-            "subtitle": "",
-            "custom_icon": ""
+            "subtitle": ""
           }
         },
         "trust_badge_gKnyez": {
           "type": "trust_badge",
           "settings": {
             "title": "Resultados Garantizados",
-            "emoji": "",
-            "subtitle": "",
-            "custom_icon": ""
+            "subtitle": ""
           }
         },
         "trust_badge_cACE7d": {
           "type": "trust_badge",
           "settings": {
             "title": "Certificado Invima",
-            "emoji": "",
-            "subtitle": "",
-            "custom_icon": ""
+            "subtitle": ""
           }
         }
       },
@@ -187,19 +181,24 @@
     "hyperlab-v10-ingredients": {
       "type": "hyperlab-v10-ingredients",
       "settings": {
-        "product_handle": ""
+        "product_handle": "",
+        "title": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
       }
     },
     "hyperlab-v10-before-after": {
       "type": "hyperlab-v10-before-after",
       "settings": {
-        "product_handle": ""
+        "product_handle": "",
+        "button_text": "CLICK AQUÍ Y PAGA AL RECIBIR",
+        "button_subtext": "paga en casa contraentrega",
+        "button_link": ""
       }
     },
     "hyperlab-v10-dosage": {
       "type": "hyperlab-v10-dosage",
       "settings": {
-        "product_handle": ""
+        "product_handle": "",
+        "title": "CUÁL ES LA DOSIS?"
       }
     },
     "hyperlab-v10-comparison": {
@@ -210,10 +209,95 @@
         "product_handle": ""
       }
     },
+    "hyperlab_v10_social_proof_UNiNWT": {
+      "type": "hyperlab-v10-social-proof",
+      "blocks": {
+        "reel_6j8UDT": {
+          "type": "reel",
+          "settings": {
+            "title": "Customer Story",
+            "reel_url": ""
+          }
+        },
+        "reel_dAnxar": {
+          "type": "reel",
+          "settings": {
+            "title": "Customer Story",
+            "reel_url": ""
+          }
+        },
+        "reel_c8JreU": {
+          "type": "reel",
+          "settings": {
+            "title": "Customer Story",
+            "reel_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_6j8UDT",
+        "reel_dAnxar",
+        "reel_c8JreU"
+      ],
+      "name": "V10 Social Proof",
+      "settings": {
+        "product_handle": ""
+      }
+    },
     "hyperlab-v10-reviews": {
       "type": "hyperlab-v10-reviews",
       "settings": {
-        "product_handle": ""
+        "product_handle": "",
+        "title": "",
+        "submission_title": "Agregar reseña",
+        "submission_text": "Quieres que tu reel se vea en nuestra página?",
+        "submission_subtext": "Comparte tu opinión, es probable que te vuelvas viral",
+        "input_placeholder": "Comparte tu video reel"
+      }
+    },
+    "hyperlab_v10_payment_methods_PeTDna": {
+      "type": "hyperlab-v10-payment-methods",
+      "blocks": {
+        "payment_method_C9nnBU": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Addi",
+            "icon": "★"
+          }
+        },
+        "payment_method_xrmBMt": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Sistecrédito",
+            "icon": "★"
+          }
+        },
+        "payment_method_4YK9Eq": {
+          "type": "payment_method",
+          "settings": {
+            "name": "MercadoPago",
+            "icon": "★"
+          }
+        },
+        "payment_method_484Ae7": {
+          "type": "payment_method",
+          "settings": {
+            "name": "PSE",
+            "icon": "★"
+          }
+        }
+      },
+      "block_order": [
+        "payment_method_C9nnBU",
+        "payment_method_xrmBMt",
+        "payment_method_4YK9Eq",
+        "payment_method_484Ae7"
+      ],
+      "name": "V10 Payment Methods",
+      "settings": {
+        "product_handle": "",
+        "title": "Ordena ya con envío gratis",
+        "note": "Métodos de pago a cuotas"
       }
     },
     "hyperlab-v10-faq": {
@@ -221,10 +305,56 @@
       "settings": {
         "product_handle": ""
       }
+    },
+    "hyperlab_v10_payment_methods_GYMpNz": {
+      "type": "hyperlab-v10-payment-methods",
+      "blocks": {
+        "payment_method_MWiGq3": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Addi",
+            "icon": "★"
+          }
+        },
+        "payment_method_NwWKFr": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Sistecrédito",
+            "icon": "★"
+          }
+        },
+        "payment_method_8UP9ef": {
+          "type": "payment_method",
+          "settings": {
+            "name": "MercadoPago",
+            "icon": "★"
+          }
+        },
+        "payment_method_VAiG6Y": {
+          "type": "payment_method",
+          "settings": {
+            "name": "PSE",
+            "icon": "★"
+          }
+        }
+      },
+      "block_order": [
+        "payment_method_MWiGq3",
+        "payment_method_NwWKFr",
+        "payment_method_8UP9ef",
+        "payment_method_VAiG6Y"
+      ],
+      "name": "V10 Payment Methods",
+      "settings": {
+        "product_handle": "",
+        "title": "Ordena ya con envío gratis",
+        "note": "Métodos de pago a cuotas"
+      }
     }
   },
   "order": [
     "hyperlab-v10-hero",
+    "hyperlab_v10_payment_methods_GYMpNz",
     "hyperlab-v10-product-info",
     "hyperlab-v10-vitamin-benefits",
     "hyperlab-v10-social-proof",
@@ -233,7 +363,9 @@
     "hyperlab-v10-before-after",
     "hyperlab-v10-dosage",
     "hyperlab-v10-comparison",
+    "hyperlab_v10_social_proof_UNiNWT",
     "hyperlab-v10-reviews",
+    "hyperlab_v10_payment_methods_PeTDna",
     "hyperlab-v10-faq"
   ]
 }
