@@ -29,6 +29,51 @@
         "button_animation": "shake"
       }
     },
+    "hyperlab_v10_payment_methods_GYMpNz": {
+      "type": "hyperlab-v10-payment-methods",
+      "blocks": {
+        "payment_method_MWiGq3": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Addi",
+            "icon": "★"
+          }
+        },
+        "payment_method_NwWKFr": {
+          "type": "payment_method",
+          "settings": {
+            "name": "Sistecrédito",
+            "icon": "★"
+          }
+        },
+        "payment_method_8UP9ef": {
+          "type": "payment_method",
+          "settings": {
+            "name": "MercadoPago",
+            "icon": "★"
+          }
+        },
+        "payment_method_VAiG6Y": {
+          "type": "payment_method",
+          "settings": {
+            "name": "PSE",
+            "icon": "★"
+          }
+        }
+      },
+      "block_order": [
+        "payment_method_MWiGq3",
+        "payment_method_NwWKFr",
+        "payment_method_8UP9ef",
+        "payment_method_VAiG6Y"
+      ],
+      "name": "V10 Payment Methods",
+      "settings": {
+        "product_handle": "",
+        "title": "Ordena ya con envío gratis",
+        "note": "Métodos de pago a cuotas"
+      }
+    },
     "hyperlab-v10-product-info": {
       "type": "hyperlab-v10-product-info",
       "settings": {
@@ -187,8 +232,22 @@
     },
     "hyperlab-v10-before-after": {
       "type": "hyperlab-v10-before-after",
+      "blocks": {
+        "testimonial_DFkMKe": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Ana Sofia Henao",
+            "avatar": "shopify://shop_images/2.png",
+            "testimonial": "Testimonios con un ángulo de ANTES no había apetito, y DESPUÉS CON APETITO"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DFkMKe"
+      ],
       "settings": {
         "product_handle": "",
+        "after_image": "shopify://shop_images/Screenshot_2025-03-25_at_10.36.02_AM.png",
         "button_text": "CLICK AQUÍ Y PAGA AL RECIBIR",
         "button_subtext": "paga en casa contraentrega",
         "button_link": ""
@@ -196,6 +255,20 @@
     },
     "hyperlab-v10-dosage": {
       "type": "hyperlab-v10-dosage",
+      "blocks": {
+        "dosage_TP4Rcw": {
+          "type": "dosage",
+          "settings": {
+            "image": "shopify://shop_images/Diseno_sin_titulo_6_691a9f4a-99ac-4155-ae63-0ca087940dfb.png",
+            "title": "Menores de 2 años",
+            "description": "Una cucharadita al día en cualquier hora de la mañana",
+            "author": "Carolina Soto a sus hijos"
+          }
+        }
+      },
+      "block_order": [
+        "dosage_TP4Rcw"
+      ],
       "settings": {
         "product_handle": "",
         "title": "CUÁL ES LA DOSIS?"
@@ -304,51 +377,6 @@
       "type": "hyperlab-v10-faq",
       "settings": {
         "product_handle": ""
-      }
-    },
-    "hyperlab_v10_payment_methods_GYMpNz": {
-      "type": "hyperlab-v10-payment-methods",
-      "blocks": {
-        "payment_method_MWiGq3": {
-          "type": "payment_method",
-          "settings": {
-            "name": "Addi",
-            "icon": "★"
-          }
-        },
-        "payment_method_NwWKFr": {
-          "type": "payment_method",
-          "settings": {
-            "name": "Sistecrédito",
-            "icon": "★"
-          }
-        },
-        "payment_method_8UP9ef": {
-          "type": "payment_method",
-          "settings": {
-            "name": "MercadoPago",
-            "icon": "★"
-          }
-        },
-        "payment_method_VAiG6Y": {
-          "type": "payment_method",
-          "settings": {
-            "name": "PSE",
-            "icon": "★"
-          }
-        }
-      },
-      "block_order": [
-        "payment_method_MWiGq3",
-        "payment_method_NwWKFr",
-        "payment_method_8UP9ef",
-        "payment_method_VAiG6Y"
-      ],
-      "name": "V10 Payment Methods",
-      "settings": {
-        "product_handle": "",
-        "title": "Ordena ya con envío gratis",
-        "note": "Métodos de pago a cuotas"
       }
     }
   },
