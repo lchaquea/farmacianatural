@@ -146,6 +146,40 @@
     },
     "hyperlab-v10-trust-badges": {
       "type": "hyperlab-v10-trust-badges",
+      "blocks": {
+        "trust_badge_CMdNAM": {
+          "type": "trust_badge",
+          "settings": {
+            "title": "Envío gratis",
+            "emoji": "",
+            "subtitle": "",
+            "custom_icon": ""
+          }
+        },
+        "trust_badge_gKnyez": {
+          "type": "trust_badge",
+          "settings": {
+            "title": "Resultados Garantizados",
+            "emoji": "",
+            "subtitle": "",
+            "custom_icon": ""
+          }
+        },
+        "trust_badge_cACE7d": {
+          "type": "trust_badge",
+          "settings": {
+            "title": "Certificado Invima",
+            "emoji": "",
+            "subtitle": "",
+            "custom_icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "trust_badge_CMdNAM",
+        "trust_badge_gKnyez",
+        "trust_badge_cACE7d"
+      ],
       "settings": {
         "product_handle": ""
       }
