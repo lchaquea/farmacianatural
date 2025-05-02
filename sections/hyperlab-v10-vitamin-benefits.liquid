@@ -16,7 +16,7 @@
   <div class="benefits-container">
     <h3 class="benefits-subtitle">{{ section.settings.subtitle }}</h3>
     
-    <div class="benefits-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
+    <div class="benefits-content parallax-container" {% if section.settings.background_image %}data-parallax-background="{{ section.settings.background_image | img_url: 'master' }}"{% endif %}>
       <div class="benefits-layout">
         <div class="benefits-grid">
           {% for block in section.blocks %}
@@ -150,6 +150,8 @@
 .hyperlab-v10-vitamin-benefits {
   padding: 40px 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .section-title {
@@ -194,31 +196,50 @@
 }
 
 .benefits-content {
-  background-color: #f8f8f8;
+  background-color: transparent;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   padding: 50px 20px;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
-.benefits-content::before {
+.parallax-container {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.parallax-container::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateZ(-1px) scale(2);
+  z-index: -1;
+  filter: blur(2px);
 }
 
 .benefits-layout {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateZ(0);
 }
 
 .benefits-grid {
@@ -313,7 +334,8 @@
 
 @media screen and (max-width: 767px) {
   .benefits-content {
-    padding: 30px 15px;
+    min-height: auto;
+    background-attachment: scroll;
   }
 
   .benefits-grid {
@@ -340,7 +362,9 @@
 {% javascript %}
 document.addEventListener('DOMContentLoaded', function() {
   const benefitCards = document.querySelectorAll('.benefit-card');
+  const parallaxContainer = document.querySelector('.parallax-container');
   
+  // Card hover effects
   benefitCards.forEach(card => {
     card.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-5px)';
@@ -350,5 +374,30 @@ document.addEventListener('DOMContentLoaded', function() {
       this.style.transform = 'translateY(0)';
     });
   });
+
+  // Parallax effect
+  if (parallaxContainer && parallaxContainer.dataset.parallaxBackground) {
+    parallaxContainer.style.backgroundImage = `url(${parallaxContainer.dataset.parallaxBackground})`;
+    
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          const scrolled = window.pageYOffset;
+          const rate = scrolled * 0.5;
+          
+          // Only apply parallax on desktop
+          if (window.innerWidth > 767) {
+            parallaxContainer.style.transform = `translate3d(0, ${rate}px, 0)`;
+          }
+          
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
+    });
+  }
 });
 {% endjavascript %} 
