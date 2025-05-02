@@ -100,6 +100,12 @@
       "default": false
     },
     {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "rgba(255, 107, 0, 0.1)"
+    },
+    {
       "type": "header",
       "content": "Content Settings"
     },
@@ -206,7 +212,7 @@
 {% stylesheet %}
 .hyperlab-v10-hero {
   padding: 0;
-  background-color: #fff;
+  background-color: {{ section.settings.background_color }};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
