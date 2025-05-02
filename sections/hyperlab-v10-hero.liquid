@@ -17,35 +17,46 @@
           <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
         </div>
 
-        <div class="product-carousel">
-          <div class="carousel-container">
-            {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
-            {%- if gallery_images.size > 0 -%}
-              <div class="carousel-main">
-                {%- for block in gallery_images -%}
-                  {%- if block.settings.image != blank -%}
-                    <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-                      <img src="{{ block.settings.image | img_url: 'large' }}" 
-                           alt="{{ block.settings.image.alt | escape }}"
-                           class="carousel-image">
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
+        <div class="product-gallery">
+          <div class="gallery-container">
+            <div class="main-image-container">
+              <button class="gallery-nav prev" aria-label="Previous image">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              
+              <div class="main-image">
+                {%- assign main_image = section.settings.main_image | default: section.settings.image_1 -%}
+                {%- if main_image != blank -%}
+                  <img src="{{ main_image | img_url: 'large' }}" 
+                       alt="{{ main_image.alt | escape }}"
+                       class="featured-image">
+                {%- endif -%}
               </div>
 
-              <div class="carousel-thumbnails">
-                {%- for block in gallery_images -%}
-                  {%- if block.settings.image != blank -%}
-                    <button class="carousel-thumb {% if forloop.first %}active{% endif %}" 
-                            data-slide-index="{{ forloop.index0 }}">
-                      <img src="{{ block.settings.image | img_url: '150x150', crop: 'center' }}" 
-                           alt="{{ block.settings.image.alt | escape }}"
-                           class="thumb-image">
-                    </button>
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
+              <button class="gallery-nav next" aria-label="Next image">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="thumbnails-container">
+              {%- for i in (1..5) -%}
+                {%- assign image_setting = 'image_' | append: i -%}
+                {%- assign current_image = section.settings[image_setting] -%}
+                {%- if current_image != blank -%}
+                  <button class="thumbnail-button {% if forloop.first %}active{% endif %}" 
+                          data-image-url="{{ current_image | img_url: 'large' }}"
+                          data-image-index="{{ forloop.index0 }}">
+                    <img src="{{ current_image | img_url: '150x150', crop: 'center' }}" 
+                         alt="{{ current_image.alt | escape }}"
+                         class="thumbnail-image">
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
           </div>
         </div>
 
@@ -113,17 +124,37 @@
     },
     {
       "type": "header",
-      "content": "Product Gallery"
-    },
-    {
-      "type": "product",
-      "id": "product_handle",
-      "label": "Product"
+      "content": "Gallery Settings"
     },
     {
       "type": "image_picker",
       "id": "main_image",
-      "label": "Main Product Image"
+      "label": "Main Image (Featured)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Gallery Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Gallery Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Gallery Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Gallery Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Gallery Image 5"
     },
     {
       "type": "header",
@@ -170,21 +201,7 @@
       ],
       "default": "shake"
     }
-  ],
-  "blocks": [
-    {
-      "type": "gallery_image",
-      "name": "Gallery Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 5
+  ]
 }
 {% endschema %}
 
@@ -232,58 +249,77 @@
   padding: 0 20px;
 }
 
-.product-carousel {
+.product-gallery {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
 }
 
-.carousel-container {
+.gallery-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 24px;
 }
 
-.carousel-main {
+.main-image-container {
   position: relative;
+  display: flex;
+  align-items: center;
   background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.main-image {
+  flex: 1;
+  position: relative;
+  border: 2px solid #ff6b00;
   border-radius: 8px;
+  margin: 0 16px;
   overflow: hidden;
 }
 
-.carousel-slide {
-  display: none;
-  width: 100%;
-  padding: 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-}
-
-.carousel-slide.active {
-  display: block;
-}
-
-.carousel-image {
+.featured-image {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
-.carousel-thumbnails {
+.gallery-nav {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #ff6b00;
+  color: white;
+  border-radius: 50%;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.gallery-nav:hover {
+  background: #e65c00;
+}
+
+.thumbnails-container {
+  display: flex;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.carousel-thumb {
-  width: 80px;
-  height: 80px;
+.thumbnail-button {
+  width: 100px;
+  height: 100px;
   padding: 4px;
-  border: 1px solid #e0e0e0;
+  border: 2px solid #ff6b00;
   border-radius: 8px;
   background: #ffffff;
   cursor: pointer;
@@ -291,19 +327,20 @@
   transition: all 0.3s ease;
 }
 
-.carousel-thumb:hover {
-  border-color: #ff6b00;
+.thumbnail-button:hover {
+  border-color: #e65c00;
 }
 
-.carousel-thumb.active {
-  border-color: #ff6b00;
+.thumbnail-button.active {
+  border-color: #e65c00;
+  box-shadow: 0 0 0 2px #e65c00;
 }
 
-.thumb-image {
+.thumbnail-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .hero-cta {
@@ -373,13 +410,32 @@
     font-size: 42px;
   }
 
-  .carousel-thumb {
-    width: 100px;
-    height: 100px;
+  .gallery-nav {
+    width: 50px;
+    height: 50px;
+  }
+
+  .thumbnail-button {
+    width: 120px;
+    height: 120px;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .main-image-container {
+    padding: 12px;
+  }
+
+  .gallery-nav {
+    width: 32px;
+    height: 32px;
+  }
+
+  .thumbnail-button {
+    width: 80px;
+    height: 80px;
+  }
+
   .primary-button {
     font-size: 18px;
     padding: 16px;
@@ -396,21 +452,47 @@
 
 {% javascript %}
 document.addEventListener('DOMContentLoaded', function() {
-  const slides = document.querySelectorAll('.carousel-slide');
-  const thumbnails = document.querySelectorAll('.carousel-thumb');
+  const mainImage = document.querySelector('.featured-image');
+  const thumbnails = document.querySelectorAll('.thumbnail-button');
+  const prevButton = document.querySelector('.gallery-nav.prev');
+  const nextButton = document.querySelector('.gallery-nav.next');
+  let currentIndex = 0;
 
-  thumbnails.forEach(thumb => {
-    thumb.addEventListener('click', function() {
-      const slideIndex = this.getAttribute('data-slide-index');
-      
-      // Hide all slides and remove active class from thumbnails
-      slides.forEach(slide => slide.classList.remove('active'));
-      thumbnails.forEach(t => t.classList.remove('active'));
-      
-      // Show selected slide and activate thumbnail
-      slides[slideIndex].classList.add('active');
-      this.classList.add('active');
-    });
+  function updateMainImage(index) {
+    const selectedThumbnail = thumbnails[index];
+    if (!selectedThumbnail) return;
+
+    // Update main image
+    const imageUrl = selectedThumbnail.dataset.imageUrl;
+    mainImage.src = imageUrl;
+
+    // Update active state
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    selectedThumbnail.classList.add('active');
+
+    currentIndex = index;
+  }
+
+  thumbnails.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => updateMainImage(index));
+  });
+
+  prevButton.addEventListener('click', () => {
+    const newIndex = currentIndex - 1;
+    if (newIndex >= 0) {
+      updateMainImage(newIndex);
+    } else {
+      updateMainImage(thumbnails.length - 1);
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    const newIndex = currentIndex + 1;
+    if (newIndex < thumbnails.length) {
+      updateMainImage(newIndex);
+    } else {
+      updateMainImage(0);
+    }
   });
 });
 {% endjavascript %} 
