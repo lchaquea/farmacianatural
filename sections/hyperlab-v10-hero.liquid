@@ -259,7 +259,7 @@
 .gallery-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   margin-bottom: 24px;
 }
 
@@ -269,7 +269,7 @@
   align-items: center;
   background: #ffffff;
   border-radius: 12px;
-  padding: 16px;
+  padding: 24px;
 }
 
 .main-image {
@@ -277,8 +277,10 @@
   position: relative;
   border: 2px solid #ff6b00;
   border-radius: 8px;
-  margin: 0 16px;
+  margin: 12px;
   overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .featured-image {
@@ -286,26 +288,44 @@
   height: auto;
   display: block;
   border-radius: 6px;
+  padding: 12px;
 }
 
 .gallery-nav {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border: none;
-  background: #ff6b00;
-  color: white;
+  background: rgba(255, 107, 0, 0.2);
+  color: #ff6b00;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   flex-shrink: 0;
   z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-nav.prev {
+  left: 12px;
+}
+
+.gallery-nav.next {
+  right: 12px;
 }
 
 .gallery-nav:hover {
-  background: #e65c00;
+  background: rgba(255, 107, 0, 0.4);
+}
+
+.gallery-nav svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
 }
 
 .thumbnails-container {
@@ -313,27 +333,28 @@
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0 24px;
 }
 
 .thumbnail-button {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   padding: 4px;
-  border: 2px solid #ff6b00;
+  border: 2px solid transparent;
   border-radius: 8px;
   background: #ffffff;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
+  margin: 4px;
 }
 
 .thumbnail-button:hover {
-  border-color: #e65c00;
+  border-color: rgba(255, 107, 0, 0.5);
 }
 
 .thumbnail-button.active {
-  border-color: #e65c00;
-  box-shadow: 0 0 0 2px #e65c00;
+  border-color: #ff6b00;
 }
 
 .thumbnail-image {
@@ -341,6 +362,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
+  padding: 2px;
 }
 
 .hero-cta {
@@ -423,17 +445,22 @@
 
 @media screen and (max-width: 767px) {
   .main-image-container {
-    padding: 12px;
+    padding: 16px;
   }
 
   .gallery-nav {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .gallery-nav svg {
+    width: 16px;
+    height: 16px;
   }
 
   .thumbnail-button {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 
   .primary-button {
@@ -462,9 +489,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedThumbnail = thumbnails[index];
     if (!selectedThumbnail) return;
 
-    // Update main image
-    const imageUrl = selectedThumbnail.dataset.imageUrl;
-    mainImage.src = imageUrl;
+    // Update main image with smooth transition
+    mainImage.style.opacity = '0';
+    setTimeout(() => {
+      const imageUrl = selectedThumbnail.dataset.imageUrl;
+      mainImage.src = imageUrl;
+      mainImage.style.opacity = '1';
+    }, 150);
 
     // Update active state
     thumbnails.forEach(thumb => thumb.classList.remove('active'));
@@ -472,6 +503,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     currentIndex = index;
   }
+
+  // Add smooth transition to main image
+  mainImage.style.transition = 'opacity 0.15s ease-in-out';
 
   thumbnails.forEach((thumb, index) => {
     thumb.addEventListener('click', () => updateMainImage(index));
