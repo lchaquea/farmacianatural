@@ -2,7 +2,7 @@
 
 {% render 'hyperlab-global-styles' %}
 
-<div class="hyperlab-section hyperlab-bg-white">
+<div class="hyperlab-v10-product-general">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'ticker' -%}
@@ -14,7 +14,7 @@
         </div>
 
       {%- when 'hero' -%}
-        <div class="hyperlab-v10-hero" {{ block.shopify_attributes }}>
+        <div class="hero-section" {{ block.shopify_attributes }}>
           <div class="hero-content">
             <div class="hero-header">
               <div class="logo-container">
@@ -136,6 +136,7 @@
 {% schema %}
 {
   "name": "V10 Product General",
+  "tag": "div",
   "class": "hyperlab-section",
   "settings": [
     {
@@ -372,7 +373,7 @@
 }
 
 /* Hero styles */
-.hyperlab-v10-hero {
+.hero-section {
   padding: 0;
   background-color: #fff;
   min-height: 100vh;
