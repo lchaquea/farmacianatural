@@ -15,6 +15,7 @@
       "type": "hyperlab-v10-hero",
       "settings": {
         "full_width": false,
+        "background_color": "#ffa438",
         "logo": "shopify://shop_images/Logo-V10-2020-_1.png",
         "headline": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?",
         "subheadline": "¡NO TE PREOCUPES MÁS!",
