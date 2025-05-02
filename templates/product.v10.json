@@ -14,17 +14,31 @@
     "hyperlab-v10-hero": {
       "type": "hyperlab-v10-hero",
       "settings": {
+        "full_width": false,
         "logo": "shopify://shop_images/Logo-V10-2020-_1.png",
         "headline": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?",
         "subheadline": "¡NO TE PREOCUPES MÁS!",
-        "product_handle": "v10"
+        "image_1": "shopify://shop_images/pfull_comprimido.jpg",
+        "image_2": "shopify://shop_images/parasivitta_-_comprimido.jpg",
+        "image_3": "shopify://shop_images/BANNERS_WEB_FARMACIA-04_e89368e0-95d1-43d2-924e-ee94758541e4_1.jpg",
+        "image_4": "shopify://shop_images/desintoxicante-dretoxvitta-560138.png",
+        "button_text": "CLICK AQUÍ Y PAGA AL RECIBIR",
+        "button_subtext": "paga en casa contraentrega",
+        "button_link": "",
+        "button_animation": "shake"
       }
     },
     "hyperlab-v10-product-info": {
       "type": "hyperlab-v10-product-info",
       "settings": {
         "product_handle": "",
-        "description": "<p>MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVITANDO VIRUS</p>"
+        "ticker_message": "MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVIANDO VIRUS",
+        "scarcity_text": "¡Solo quedan 12 unidades en stock!",
+        "scarcity_emoji": "🔥",
+        "button_text": "CLICK AQUÍ Y PAGA AL RECIBIR",
+        "button_subtext": "paga en casa contraentrega",
+        "button_link": "",
+        "button_animation": "bounce"
       }
     },
     "hyperlab-v10-vitamin-benefits": {
@@ -66,6 +80,8 @@
     "hyperlab-v10-comparison": {
       "type": "hyperlab-v10-comparison",
       "settings": {
+        "title": "¿Por qué elegir V10?",
+        "subtitle": "",
         "product_handle": ""
       }
     },
