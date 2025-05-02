@@ -1,13 +1,13 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
 <div class="hyperlab-v10-reviews">
-  <h2 class="section-title">+1,000 FAMILIAS CONFIAN EN V10 PARA MEJORAR LA SALUD DE SUS HIJOS</h2>
+  <h2 class="section-title">{{ section.settings.title }}</h2>
 
   <div class="reviews-container">
     <div class="review-submission">
-      <h3>Agregar reseña</h3>
-      <p class="submission-text">Quieres que tu reel se vea en nuestra página?</p>
-      <p class="submission-subtext">Comparte tu opinión, es probable que te vuelvas viral</p>
+      <h3>{{ section.settings.submission_title }}</h3>
+      <p class="submission-text">{{ section.settings.submission_text }}</p>
+      <p class="submission-subtext">{{ section.settings.submission_subtext }}</p>
 
       <div class="rating-input">
         <div class="stars-container">
@@ -26,7 +26,7 @@
 
       <div class="reel-submission">
         <input type="text" 
-               placeholder="Comparte tu video reel" 
+               placeholder="{{ section.settings.input_placeholder }}" 
                class="reel-input"
                aria-label="Reel URL">
         <button type="submit" class="submit-button">
@@ -35,29 +35,6 @@
           </svg>
         </button>
       </div>
-    </div>
-
-    <div class="payment-methods">
-      <h3>Ordena ya con envío gratis</h3>
-      <div class="payment-buttons">
-        <button class="payment-button">
-          <span class="icon">★</span>
-          Addi
-        </button>
-        <button class="payment-button">
-          <span class="icon">★</span>
-          Sistecrédito
-        </button>
-        <button class="payment-button">
-          <span class="icon">★</span>
-          MercadoPago
-        </button>
-        <button class="payment-button">
-          <span class="icon">★</span>
-          PSE
-        </button>
-      </div>
-      <p class="payment-note">Métodos de pago a cuotas</p>
     </div>
   </div>
 </div>
@@ -70,6 +47,36 @@
       "type": "product",
       "id": "product_handle",
       "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "+1,000 FAMILIAS CONFIAN EN V10 PARA MEJORAR LA SALUD DE SUS HIJOS"
+    },
+    {
+      "type": "text",
+      "id": "submission_title",
+      "label": "Submission Title",
+      "default": "Agregar reseña"
+    },
+    {
+      "type": "text",
+      "id": "submission_text",
+      "label": "Submission Text",
+      "default": "Quieres que tu reel se vea en nuestra página?"
+    },
+    {
+      "type": "text",
+      "id": "submission_subtext",
+      "label": "Submission Subtext",
+      "default": "Comparte tu opinión, es probable que te vuelvas viral"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input Placeholder",
+      "default": "Comparte tu video reel"
     }
   ]
 }
@@ -100,6 +107,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
+  text-align: left;
 }
 
 .review-submission h3 {
@@ -174,57 +182,9 @@
   cursor: pointer;
 }
 
-.payment-methods {
-  text-align: center;
-}
-
-.payment-methods h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.payment-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.payment-button {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.payment-button:hover {
-  transform: translateY(-2px);
-}
-
-.payment-button .icon {
-  color: #ff6b00;
-}
-
-.payment-note {
-  font-size: 14px;
-  color: #666;
-  margin: 0;
-}
-
 @media screen and (min-width: 768px) {
   .section-title {
     font-size: 32px;
-  }
-
-  .payment-buttons {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 {% endstylesheet %}

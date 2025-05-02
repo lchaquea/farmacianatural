@@ -1,0 +1,161 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+<div class="hyperlab-v10-payment-methods">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+
+  <div class="payment-methods-container">
+    <div class="payment-buttons">
+      {% for block in section.blocks %}
+        <button class="payment-button" {{ block.shopify_attributes }}>
+          <span class="icon">{{ block.settings.icon }}</span>
+          {{ block.settings.name }}
+        </button>
+      {% endfor %}
+    </div>
+    <p class="payment-note">{{ section.settings.note }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "V10 Payment Methods",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ordena ya con envío gratis"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Payment Note",
+      "default": "Métodos de pago a cuotas"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "payment_method",
+      "name": "Payment Method",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Payment Method Name",
+          "default": "Addi"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "★"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V10 Payment Methods",
+      "blocks": [
+        {
+          "type": "payment_method",
+          "settings": {
+            "name": "Addi",
+            "icon": "★"
+          }
+        },
+        {
+          "type": "payment_method",
+          "settings": {
+            "name": "Sistecrédito",
+            "icon": "★"
+          }
+        },
+        {
+          "type": "payment_method",
+          "settings": {
+            "name": "MercadoPago",
+            "icon": "★"
+          }
+        },
+        {
+          "type": "payment_method",
+          "settings": {
+            "name": "PSE",
+            "icon": "★"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.hyperlab-v10-payment-methods {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.payment-methods-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.payment-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.payment-button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.payment-button:hover {
+  transform: translateY(-2px);
+}
+
+.payment-button .icon {
+  color: #ff6b00;
+}
+
+.payment-note {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .section-title {
+    font-size: 32px;
+  }
+
+  .payment-buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+{% endstylesheet %} 
