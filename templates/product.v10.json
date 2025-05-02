@@ -45,7 +45,10 @@
     "hyperlab-v10-vitamin-benefits": {
       "type": "hyperlab-v10-vitamin-benefits",
       "settings": {
-        "product_handle": ""
+        "main_title": "MÁS DE UN MILLÓN DE MAMAS FELICES",
+        "subtitle": "¿Qué dicen nuestras mamás?",
+        "center_text": "5 BENEFICIOS EN 1",
+        "gallery_image_1": "shopify://shop_images/gempages_509384768677217183-9e172394-9127-4496-9733-9cec14236c62.png"
       }
     },
     "hyperlab-v10-social-proof": {
