@@ -23,8 +23,8 @@
         <div class="stars">★★★★★</div>
 
         <div class="scarcity-widget">
-          <span class="scarcity-icon">{{ section.settings.scarcity_emoji }}</span>
-          <span class="scarcity-text">{{ section.settings.scarcity_text }}</span>
+          <span class="scarcity-icon">⏰</span>
+          <span class="scarcity-text">Quedan <span class="countdown">24:00:00</span> con envío gratis!</span>
         </div>
 
         <div class="stats-row">
@@ -347,18 +347,18 @@
   padding: 0 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 4px;
   background: #fff;
-  padding: 8px;
-  border-radius: 12px;
+  padding: 4px;
+  border-radius: 8px;
 }
 
 .tab-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
+  gap: 2px;
+  padding: 8px 4px;
   border: none;
   background: none;
   cursor: pointer;
@@ -380,19 +380,19 @@
 }
 
 .tab-icon {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .tab-text {
-  font-size: 12px;
+  font-size: 10px;
   white-space: nowrap;
 }
 
 .tab-content {
   display: none;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -492,9 +492,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: nowrap;
-  margin: 15px 0;
+  margin: 10px 0;
   width: 100%;
 }
 
@@ -509,30 +509,30 @@
 
 .rating-score {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .review-count {
   color: #666;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .metric {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: #f8f8f8;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 100px;
   white-space: nowrap;
 }
 
 .icon {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .text {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -543,14 +543,14 @@
 }
 
 .content-block {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .content-block h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: #1a1a1a;
 }
 
@@ -730,6 +730,11 @@
   opacity: 0.8;
 }
 
+.countdown {
+  font-weight: 700;
+  color: #ff6b00;
+}
+
 @media screen and (min-width: 768px) {
   .product-title {
     font-size: 32px;
@@ -750,44 +755,85 @@
   }
 
   .tabs-header {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 2px;
   }
 
   .tab-button {
-    padding: 10px;
+    padding: 6px 2px;
   }
 
   .tab-icon {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .tab-text {
-    font-size: 11px;
+    font-size: 9px;
   }
 
-  .stats-row {
+  .content-block {
+    padding: 0 10px;
+  }
+
+  .content-block h3 {
+    font-size: 16px;
+  }
+
+  .benefit-list li {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .ingredients-grid {
     gap: 8px;
   }
 
-  .rating-score {
-    font-size: 14px;
+  .ingredient-item {
+    padding: 8px;
   }
 
-  .review-count {
+  .ingredient-icon {
+    font-size: 20px;
+  }
+
+  .ingredient-name {
     font-size: 12px;
   }
 
-  .metric {
-    padding: 4px 10px;
+  .vitamin-tag {
+    font-size: 11px;
+    padding: 4px 8px;
   }
 
-  .icon {
+  .timeline-item {
+    padding-left: 16px;
+    margin-bottom: 16px;
+  }
+
+  .day-marker {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .dosage-cards {
+    gap: 8px;
+  }
+
+  .dosage-card {
+    padding: 12px;
+  }
+
+  .age-range {
     font-size: 14px;
   }
 
-  .text {
-    font-size: 12px;
+  .dosage {
+    font-size: 16px;
+  }
+
+  .frequency {
+    font-size: 11px;
   }
 }
 
@@ -830,19 +876,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Update scarcity number randomly
-  function updateScarcity() {
-    const scarcityText = document.querySelector('.scarcity-text');
-    if (scarcityText) {
-      const randomUnits = Math.floor(Math.random() * 8) + 5; // Random number between 5-12
-      const template = scarcityText.getAttribute('data-template') || '¡Solo quedan {n} unidades en stock!';
-      scarcityText.textContent = template.replace('{n}', randomUnits);
-    }
+  // Countdown timer functionality
+  function updateCountdown() {
+    const countdownElement = document.querySelector('.countdown');
+    if (!countdownElement) return;
+
+    const now = new Date();
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+
+    const diff = end - now;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
-  // Update every 30 seconds
-  setInterval(updateScarcity, 30000);
-  
+  // Update countdown every second
+  setInterval(updateCountdown, 1000);
+  updateCountdown(); // Initial call
+
   // Smooth scroll to reviews when rating is clicked
   const ratingLink = document.querySelector('.rating-link');
   if (ratingLink) {
