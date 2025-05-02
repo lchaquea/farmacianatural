@@ -1,5 +1,73 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
+<div class="shopify-section">
+  <div class="ticker-container">
+    <div class="ticker-wrapper">
+      <div class="ticker-text">{{ section.settings.ticker_message }}</div>
+      <div class="ticker-text" aria-hidden="true">{{ section.settings.ticker_message }}</div>
+    </div>
+  </div>
+
+  <div class="hyperlab-v10-product-info">
+    <div class="product-header">
+      <div class="product-header-content">
+        <h1 class="product-title">MULTIVITAMÍNICO V10 PARA NIÑOS</h1>
+        
+        <div class="price-container">
+          <span class="price">${{ product.price | money_without_currency }}</span>
+          <span class="shipping-tag">envío gratis</span>
+        </div>
+
+        <div class="stars">★★★★★</div>
+
+        <div class="scarcity-widget">
+          <span class="scarcity-icon">{{ section.settings.scarcity_emoji }}</span>
+          <span class="scarcity-text">{{ section.settings.scarcity_text }}</span>
+        </div>
+
+        <div class="stats-row">
+          <a href="#reviews" class="rating-link">
+            <span class="rating-score">4.8</span>
+            <span class="review-count">(9,327 reseñas verificadas)</span>
+          </a>
+          <div class="metric">
+            <span class="icon">👶</span>
+            <span class="text">+1M niños con apetito</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-tabs">
+      <div class="tabs-header-wrapper">
+        <div class="tabs-header">
+          <button class="tab-button active" data-tab="descripcion">
+            <span class="tab-icon">📝</span>
+            <span class="tab-text">Descripción</span>
+          </button>
+          <button class="tab-button" data-tab="ingredientes">
+            <span class="tab-icon">🍊</span>
+            <span class="tab-text">Ingredientes</span>
+          </button>
+          <button class="tab-button" data-tab="resultados">
+            <span class="tab-icon">✨</span>
+            <span class="tab-text">Resultados</span>
+          </button>
+          <button class="tab-button" data-tab="modo-uso">
+            <span class="tab-icon">📋</span>
+            <span class="tab-text">Modo de uso</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="tab-content-wrapper">
+        <div class="tab-content active" id="descripcion">
+          <div class="content-block">
+            <h3>¿Qué es V10?</h3>
+            <p>V10 es un multivitamínico natural diseñado específicamente para niños que:</p>
+            <ul class="benefit-list">
+              <li>No quieren comer</li>
+              <li>Están bajos de peso</li>
 <div class="ticker-container">
   <div class="ticker-wrapper">
     <div class="ticker-text">{{ section.settings.ticker_message }}</div>

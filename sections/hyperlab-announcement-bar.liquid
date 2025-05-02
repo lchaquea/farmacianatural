@@ -1,13 +1,11 @@
 {%- if section.settings.show_announcement -%}
   <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
-    <div class="page-width">
-      <div class="announcement-bar__content">
-        {%- if section.settings.announcement_text != blank -%}
-          <p class="announcement-bar__message h5">
-            {{ section.settings.announcement_text | escape }}
-          </p>
-        {%- endif -%}
-      </div>
+    <div class="announcement-bar__content">
+      {%- if section.settings.announcement_text != blank -%}
+        <p class="announcement-bar__message h5">
+          {{ section.settings.announcement_text | escape }}
+        </p>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
@@ -40,17 +38,27 @@
 {% endschema %}
 
 {% stylesheet %}
+.announcement-bar-section {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+}
+
 .announcement-bar {
+  width: 100vw;
   background-color: #f4f4f4;
   text-align: center;
   padding: 10px 0;
-  width: 100%;
+  margin: 0;
 }
 
 .announcement-bar__content {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .announcement-bar__message {
