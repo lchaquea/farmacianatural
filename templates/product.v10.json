@@ -44,6 +44,55 @@
     },
     "hyperlab-v10-vitamin-benefits": {
       "type": "hyperlab-v10-vitamin-benefits",
+      "blocks": {
+        "vitamin_benefit_MAWWNJ": {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "👁️",
+            "title": "VITAMINA A ",
+            "description": "Ayuda al cuidado de la vision, el crecimiento y  desarrollo de los niños"
+          }
+        },
+        "vitamin_benefit_Nn9VDK": {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "🧠",
+            "title": "VITAMINA E ",
+            "description": "Aporta al desarrollo neurológico"
+          }
+        },
+        "vitamin_benefit_n3FVnX": {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "⚡",
+            "title": "VITAMINA B1 o TIAMINA",
+            "description": "Aporta energia adecuada para realizar actividades\nde alto rendimiento"
+          }
+        },
+        "vitamin_benefit_eQGFGQ": {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "🦴",
+            "title": "CALCIO",
+            "description": "Mantiene fuertes los huesos de los niños durante\nsu crecimiento"
+          }
+        },
+        "vitamin_benefit_A7FmkH": {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "☀️",
+            "title": "VITAMINA D",
+            "description": "Necesaria para la absorción adecuada del calcio"
+          }
+        }
+      },
+      "block_order": [
+        "vitamin_benefit_MAWWNJ",
+        "vitamin_benefit_Nn9VDK",
+        "vitamin_benefit_n3FVnX",
+        "vitamin_benefit_eQGFGQ",
+        "vitamin_benefit_A7FmkH"
+      ],
       "settings": {
         "main_title": "MÁS DE UN MILLÓN DE MAMAS FELICES",
         "subtitle": "¿Qué dicen nuestras mamás?",
