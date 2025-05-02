@@ -3,7 +3,6 @@
 
 {% render 'hyperlab-global-styles' %}
 
-<div class="hyperlab-flex-container">
 <div class="hyperlab-section hyperlab-bg-white">
   <div class="hyperlab-content">
     <div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
@@ -391,6 +390,20 @@
   .button-subtext {
     font-size: 14px;
     margin-top: 4px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hyperlab-section {
+    width: 50% !important;
+  }
+  
+  .hyperlab-content {
+    height: 100%;
+  }
+  
+  .hyperlab-v10-hero {
+    height: 100%;
   }
 }
 {% endstylesheet %}
