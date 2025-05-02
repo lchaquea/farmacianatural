@@ -207,12 +207,17 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
 }
 
 .parallax-container {
   position: relative;
   transform-style: preserve-3d;
   will-change: transform;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .parallax-container::before {
@@ -228,6 +233,8 @@
   transform: translateZ(-1px) scale(2);
   z-index: -1;
   filter: blur(2px);
+  -webkit-transform: translateZ(-1px) scale(2);
+  -webkit-backface-visibility: hidden;
 }
 
 .benefits-layout {
@@ -334,8 +341,16 @@
 
 @media screen and (max-width: 767px) {
   .benefits-content {
-    min-height: auto;
-    background-attachment: scroll;
+    min-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .parallax-container {
+    transform: translateZ(0);
+  }
+  
+  .benefits-layout {
+    padding: 20px;
   }
 
   .benefits-grid {
@@ -375,29 +390,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Parallax effect
+  // Improved Parallax effect for both mobile and desktop
   if (parallaxContainer && parallaxContainer.dataset.parallaxBackground) {
     parallaxContainer.style.backgroundImage = `url(${parallaxContainer.dataset.parallaxBackground})`;
     
+    let lastScrollY = window.pageYOffset;
     let ticking = false;
     
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * 0.3; // Reduced rate for smoother effect
+      
+      // Apply transform with hardware acceleration
+      parallaxContainer.style.transform = `translate3d(0, ${rate}px, 0)`;
+      parallaxContainer.style.webkitTransform = `translate3d(0, ${rate}px, 0)`;
+      
+      ticking = false;
+    }
+    
+    // Optimized scroll handler
     window.addEventListener('scroll', function() {
+      lastScrollY = window.pageYOffset;
+      
       if (!ticking) {
         window.requestAnimationFrame(function() {
-          const scrolled = window.pageYOffset;
-          const rate = scrolled * 0.5;
-          
-          // Only apply parallax on desktop
-          if (window.innerWidth > 767) {
-            parallaxContainer.style.transform = `translate3d(0, ${rate}px, 0)`;
-          }
-          
-          ticking = false;
+          updateParallax();
         });
-        
         ticking = true;
       }
+    }, { passive: true }); // Add passive flag for better scroll performance
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+      setTimeout(updateParallax, 100);
     });
+    
+    // Initial position
+    updateParallax();
   }
 });
 {% endjavascript %} 
