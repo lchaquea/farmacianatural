@@ -1,0 +1,904 @@
+{%- assign product = all_products[section.settings.product_handle] | default: product -%}
+
+{% render 'hyperlab-global-styles' %}
+
+<div class="hyperlab-section hyperlab-bg-white">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'ticker' -%}
+        <div class="ticker-container" {{ block.shopify_attributes }}>
+          <div class="ticker-wrapper">
+            <div class="ticker-text">{{ block.settings.message }}</div>
+            <div class="ticker-text" aria-hidden="true">{{ block.settings.message }}</div>
+          </div>
+        </div>
+
+      {%- when 'hero' -%}
+        <div class="hyperlab-v10-hero" {{ block.shopify_attributes }}>
+          <div class="hero-content">
+            <div class="hero-header">
+              <div class="logo-container">
+                {%- if block.settings.logo != blank -%}
+                  <img src="{{ block.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
+                {%- endif -%}
+              </div>
+              
+              <h1 class="hero-title">{{ block.settings.headline }}</h1>
+            </div>
+
+            <div class="product-carousel">
+              <div class="carousel-container">
+                {%- if block.settings.gallery_images.size > 0 -%}
+                  <div class="carousel-main">
+                    {%- for image in block.settings.gallery_images -%}
+                      <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
+                        <img src="{{ image | img_url: 'large' }}" 
+                             alt="{{ image.alt | escape }}"
+                             class="carousel-image">
+                      </div>
+                    {%- endfor -%}
+                  </div>
+
+                  <div class="carousel-thumbnails">
+                    {%- for image in block.settings.gallery_images -%}
+                      <button class="carousel-thumb {% if forloop.first %}active{% endif %}" 
+                              data-slide-index="{{ forloop.index0 }}">
+                        <img src="{{ image | img_url: '150x150', crop: 'center' }}" 
+                             alt="{{ image.alt | escape }}"
+                             class="thumb-image">
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="hero-cta">
+              <div class="subheadline-container">
+                <h2 class="subheadline">{{ block.settings.subheadline }}</h2>
+                {%- if block.settings.certification_badge != blank -%}
+                  <div class="certification-badge">
+                    <img src="{{ block.settings.certification_badge | img_url: '100x' }}" 
+                         alt="Certificación INVIMA" 
+                         class="certification-image">
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {%- when 'product_header' -%}
+        <div class="product-header" {{ block.shopify_attributes }}>
+          <div class="product-header-content">
+            <h1 class="product-title">{{ block.settings.title }}</h1>
+            
+            <div class="price-container">
+              <span class="price">${{ product.price | money_without_currency }}</span>
+              <span class="shipping-tag">{{ block.settings.shipping_text }}</span>
+            </div>
+
+            <div class="stars">{{ block.settings.stars }}</div>
+
+            <div class="scarcity-widget">
+              <span class="scarcity-icon">{{ block.settings.scarcity_emoji }}</span>
+              <span class="scarcity-text">{{ block.settings.scarcity_text }}</span>
+            </div>
+
+            <div class="stats-row">
+              <a href="#reviews" class="rating-link">
+                <span class="rating-score">{{ block.settings.rating }}</span>
+                <span class="review-count">{{ block.settings.review_count }}</span>
+              </a>
+              <div class="metric">
+                <span class="icon">{{ block.settings.metric_icon }}</span>
+                <span class="text">{{ block.settings.metric_text }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {%- when 'tabs' -%}
+        <div class="product-tabs" {{ block.shopify_attributes }}>
+          <div class="tabs-header-wrapper">
+            <div class="tabs-header">
+              {%- for tab in block.settings.tabs -%}
+                <button class="tab-button {% if forloop.first %}active{% endif %}" data-tab="{{ tab.id }}">
+                  <span class="tab-icon">{{ tab.icon }}</span>
+                  <span class="tab-text">{{ tab.title }}</span>
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="tab-content-wrapper">
+            {%- for tab in block.settings.tabs -%}
+              <div class="tab-content {% if forloop.first %}active{% endif %}" id="{{ tab.id }}">
+                <div class="content-block">
+                  {{ tab.content }}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+      {%- when 'button' -%}
+        <div class="button-container" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.button_link }}" class="primary-button {{ block.settings.button_animation }}">
+            {{ block.settings.button_text }}
+            <span class="button-subtext">{{ block.settings.button_subtext }}</span>
+          </a>
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "V10 Product General",
+  "class": "hyperlab-section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_handle",
+      "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ticker",
+      "name": "Ticker Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Ticker Message",
+          "default": "MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVIANDO VIRUS"
+        }
+      ]
+    },
+    {
+      "type": "hero",
+      "name": "Hero Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
+        },
+        {
+          "type": "text",
+          "id": "subheadline",
+          "label": "Subheadline",
+          "default": "¡NO TE PREOCUPES MÁS!"
+        },
+        {
+          "type": "image_picker",
+          "id": "certification_badge",
+          "label": "Certification Badge"
+        },
+        {
+          "type": "image_picker",
+          "id": "gallery_images",
+          "label": "Gallery Images",
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "type": "product_header",
+      "name": "Product Header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "MULTIVITAMÍNICO V10 PARA NIÑOS"
+        },
+        {
+          "type": "text",
+          "id": "shipping_text",
+          "label": "Shipping Text",
+          "default": "envío gratis"
+        },
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Stars",
+          "default": "★★★★★"
+        },
+        {
+          "type": "text",
+          "id": "scarcity_text",
+          "label": "Scarcity Text",
+          "default": "¡Solo quedan 12 unidades en stock!"
+        },
+        {
+          "type": "text",
+          "id": "scarcity_emoji",
+          "label": "Scarcity Emoji",
+          "default": "🔥"
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review Count",
+          "default": "(9,327 reseñas verificadas)"
+        },
+        {
+          "type": "text",
+          "id": "metric_icon",
+          "label": "Metric Icon",
+          "default": "👶"
+        },
+        {
+          "type": "text",
+          "id": "metric_text",
+          "label": "Metric Text",
+          "default": "+1M niños con apetito"
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "name": "Product Tabs",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Tab Settings"
+        },
+        {
+          "type": "text",
+          "id": "tabs",
+          "label": "Tabs",
+          "info": "Add tabs in format: id|icon|title|content",
+          "default": "descripcion|📝|Descripción|¿Qué es V10? V10 es un multivitamínico natural diseñado específicamente para niños que: No quieren comer, Están bajos de peso, Necesitan mejorar sus defensas, Tienen bajo apetito. Elaborado con ingredientes 100% naturales y certificado por INVIMA."
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "CLICK AQUÍ Y PAGA AL RECIBIR"
+        },
+        {
+          "type": "text",
+          "id": "button_subtext",
+          "label": "Button Subtext",
+          "default": "paga en casa contraentrega"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_animation",
+          "label": "Button Animation",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "bounce",
+              "label": "Bounce"
+            },
+            {
+              "value": "pulse",
+              "label": "Pulse"
+            },
+            {
+              "value": "shake",
+              "label": "Shake"
+            }
+          ],
+          "default": "bounce"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V10 Product General",
+      "blocks": [
+        {
+          "type": "ticker"
+        },
+        {
+          "type": "hero"
+        },
+        {
+          "type": "product_header"
+        },
+        {
+          "type": "tabs"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+/* Ticker styles */
+.ticker-container {
+  width: 100%;
+  background-color: #4CAF50;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.ticker-wrapper {
+  display: flex;
+  width: fit-content;
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-text {
+  color: white;
+  white-space: nowrap;
+  padding: 0 50px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Hero styles */
+.hyperlab-v10-hero {
+  padding: 0;
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-content {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.hero-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 24px 0 0;
+}
+
+.logo-container {
+  margin: 24px 0;
+}
+
+.hero-logo {
+  max-width: 120px;
+  height: auto;
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 auto;
+  line-height: 1.2;
+  color: #1a1a1a;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.product-carousel {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.carousel-main {
+  position: relative;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.carousel-slide.active {
+  display: block;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.carousel-thumbnails {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.carousel-thumb {
+  width: 80px;
+  height: 80px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.carousel-thumb:hover {
+  border-color: #ff6b00;
+}
+
+.carousel-thumb.active {
+  border-color: #ff6b00;
+}
+
+.thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.hero-cta {
+  text-align: center;
+  padding: 0 20px 32px;
+  margin-top: auto;
+}
+
+.subheadline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.subheadline {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.certification-badge {
+  flex-shrink: 0;
+}
+
+.certification-image {
+  max-width: 60px;
+  height: auto;
+  display: block;
+}
+
+/* Product Header styles */
+.product-header {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+}
+
+.product-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.shipping-tag {
+  background-color: #4CAF50;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.stars {
+  color: #FFD700;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.scarcity-widget {
+  background: #fff3e6;
+  border: 1px solid #ff6b00;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scarcity-icon {
+  font-size: 20px;
+}
+
+.scarcity-text {
+  font-size: 14px;
+  color: #ff6b00;
+  font-weight: 500;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.rating-link {
+  text-decoration: none;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.rating-score {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.review-count {
+  color: #666;
+  font-size: 14px;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8f8f8;
+  padding: 6px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 16px;
+}
+
+.text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Tabs styles */
+.product-tabs {
+  width: 100%;
+  background: #f8f8f8;
+  padding: 40px 0;
+  margin: 0;
+}
+
+.tabs-header-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tab-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tabs-header {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #666;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background: #f8f8f8;
+  color: #1a1a1a;
+}
+
+.tab-button.active {
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.tab-icon {
+  font-size: 20px;
+}
+
+.tab-text {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.tab-content {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Button styles */
+.button-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.primary-button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  animation: pulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+}
+
+.button-subtext {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Responsive styles */
+@media screen and (min-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .product-title {
+    font-size: 32px;
+  }
+
+  .tab-text {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .product-title {
+    font-size: 24px;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+
+  .tabs-header {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .tab-button {
+    padding: 10px;
+  }
+
+  .tab-icon {
+    font-size: 18px;
+  }
+
+  .tab-text {
+    font-size: 11px;
+  }
+
+  .stats-row {
+    gap: 8px;
+  }
+
+  .rating-score {
+    font-size: 14px;
+  }
+
+  .review-count {
+    font-size: 12px;
+  }
+
+  .metric {
+    padding: 4px 10px;
+  }
+
+  .icon {
+    font-size: 14px;
+  }
+
+  .text {
+    font-size: 12px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-20px);}
+  60% {transform: translateY(-10px);}
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+  100% {transform: scale(1);}
+}
+
+@keyframes shake {
+  0%, 100% {transform: translateX(0);}
+  10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+  20%, 40%, 60%, 80% {transform: translateX(5px);}
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  // Carousel functionality
+  const slides = document.querySelectorAll('.carousel-slide');
+  const thumbnails = document.querySelectorAll('.carousel-thumb');
+
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      const slideIndex = this.getAttribute('data-slide-index');
+      
+      slides.forEach(slide => slide.classList.remove('active'));
+      thumbnails.forEach(t => t.classList.remove('active'));
+      
+      slides[slideIndex].classList.add('active');
+      this.classList.add('active');
+    });
+  });
+
+  // Tab switching functionality
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const tabId = button.getAttribute('data-tab');
+      
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      button.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // Update scarcity number randomly
+  function updateScarcity() {
+    const scarcityText = document.querySelector('.scarcity-text');
+    if (scarcityText) {
+      const randomUnits = Math.floor(Math.random() * 8) + 5;
+      const template = scarcityText.getAttribute('data-template') || '¡Solo quedan {n} unidades en stock!';
+      scarcityText.textContent = template.replace('{n}', randomUnits);
+    }
+  }
+
+  setInterval(updateScarcity, 30000);
+  
+  // Smooth scroll to reviews
+  const ratingLink = document.querySelector('.rating-link');
+  if (ratingLink) {
+    ratingLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const reviewsSection = document.querySelector(e.currentTarget.getAttribute('href'));
+      if (reviewsSection) {
+        reviewsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+});
+{% endjavascript %} 
