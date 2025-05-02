@@ -17,25 +17,30 @@
     <h3 class="benefits-subtitle">{{ section.settings.subtitle }}</h3>
     
     <div class="benefits-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
-      <div class="vitamin-circle-container">
-        <div class="vitamin-center">
+      <div class="benefits-layout">
+        <div class="benefits-center">
           <div class="center-content">
             <span class="center-emoji">💪</span>
             <span class="center-text">{{ section.settings.center_text }}</span>
           </div>
         </div>
-        
-        {% for block in section.blocks %}
-          {% if block.type == 'vitamin_benefit' %}
-            <div class="vitamin-item" style="--rotation: {{ forloop.index0 | times: 72 }}deg">
-              <div class="vitamin-content">
-                <span class="benefit-emoji">{{ block.settings.emoji }}</span>
-                <h4>{{ block.settings.title }}</h4>
-                <p>{{ block.settings.description }}</p>
+
+        <div class="benefits-grid">
+          {% for block in section.blocks %}
+            {% if block.type == 'vitamin_benefit' %}
+              <div class="benefit-card" {{ block.shopify_attributes }}>
+                <div class="benefit-icon">
+                  <span class="benefit-emoji">{{ block.settings.emoji }}</span>
+                </div>
+                <div class="benefit-info">
+                  <h4>{{ block.settings.title }}</h4>
+                  <p>{{ block.settings.description }}</p>
+                </div>
+                <div class="benefit-connector"></div>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -129,7 +134,7 @@
           "type": "vitamin_benefit",
           "settings": {
             "emoji": "⚡",
-            "title": "VITAMINA B1",
+            "title": "VITAMINA B1 o TIAMINA",
             "description": "Aporta energía adecuada para realizar actividades de alto rendimiento"
           }
         },
@@ -183,7 +188,7 @@
 .gallery-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 56.25%;
 }
 
 .gallery-image {
@@ -206,9 +211,10 @@
   background-color: #f8f8f8;
   background-size: cover;
   background-position: center;
-  padding: 50px 30px;
+  padding: 50px 20px;
   border-radius: 10px;
   position: relative;
+  overflow: hidden;
 }
 
 .benefits-content::before {
@@ -222,95 +228,117 @@
   border-radius: 10px;
 }
 
-.vitamin-circle-container {
+.benefits-layout {
   position: relative;
-  width: 100%;
-  max-width: 600px;
+  z-index: 1;
+  max-width: 1200px;
   margin: 0 auto;
-  aspect-ratio: 1;
 }
 
-.vitamin-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
+.benefits-center {
+  width: 150px;
+  height: 150px;
   background: #ff6b00;
   border-radius: 50%;
+  margin: 0 auto 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.2);
+  position: relative;
 }
 
 .center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  color: white;
 }
 
 .center-emoji {
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .center-text {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
 }
 
-.vitamin-item {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 160px;
-  height: 160px;
-  margin: -80px;
-  transform-origin: 50% 50%;
-  transform: rotate(var(--rotation)) translate(220px) rotate(calc(-1 * var(--rotation)));
-  transition: all 0.3s ease;
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
 }
 
-.vitamin-content {
+.benefit-card {
   background: white;
-  border-radius: 50%;
-  padding: 15px;
-  height: 100%;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: left;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 107, 0, 0.1);
+  border-radius: 12px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.vitamin-content:hover {
-  transform: scale(1.05);
+  flex-shrink: 0;
 }
 
 .benefit-emoji {
   font-size: 24px;
-  margin-bottom: 5px;
 }
 
-.vitamin-item h4 {
+.benefit-info {
+  flex: 1;
+}
+
+.benefit-info h4 {
   color: #ff6b00;
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 16px;
+  margin: 0 0 8px;
   font-weight: bold;
 }
 
-.vitamin-item p {
+.benefit-info p {
   margin: 0;
   color: #333;
-  font-size: 12px;
-  line-height: 1.3;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.benefit-connector {
+  position: absolute;
+  background: linear-gradient(90deg, rgba(255, 107, 0, 0.2), rgba(255, 107, 0, 0));
+  height: 2px;
+  width: 100px;
+  top: 50%;
+  left: -80px;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.benefit-card:hover .benefit-connector {
+  opacity: 1;
 }
 
 @media screen and (min-width: 768px) {
@@ -318,65 +346,92 @@
     font-size: 32px;
   }
 
-  .vitamin-center {
-    width: 150px;
-    height: 150px;
+  .benefits-content {
+    padding: 60px 30px;
+  }
+
+  .benefits-center {
+    width: 180px;
+    height: 180px;
   }
 
   .center-emoji {
-    font-size: 32px;
+    font-size: 40px;
   }
 
   .center-text {
-    font-size: 14px;
-  }
-
-  .vitamin-item {
-    width: 180px;
-    height: 180px;
-    margin: -90px;
-  }
-
-  .vitamin-item h4 {
     font-size: 16px;
   }
 
-  .vitamin-item p {
-    font-size: 13px;
+  .benefit-card {
+    padding: 25px;
+  }
+
+  .benefit-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .benefit-emoji {
+    font-size: 28px;
+  }
+
+  .benefit-info h4 {
+    font-size: 18px;
+  }
+
+  .benefit-info p {
+    font-size: 15px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .vitamin-circle-container {
-    transform: scale(0.8);
-  }
-  
   .benefits-content {
     padding: 30px 15px;
   }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .benefit-card {
+    padding: 15px;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .benefit-emoji {
+    font-size: 20px;
+  }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.benefits-center {
+  animation: pulse 2s infinite;
 }
 {% endstylesheet %}
 
 {% javascript %}
 document.addEventListener('DOMContentLoaded', function() {
-  const vitaminItems = document.querySelectorAll('.vitamin-content');
+  const benefitCards = document.querySelectorAll('.benefit-card');
   
-  vitaminItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.05)';
+  benefitCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-5px)';
     });
     
-    item.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
     });
   });
 });
