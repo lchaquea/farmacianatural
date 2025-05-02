@@ -18,13 +18,6 @@
     
     <div class="benefits-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
       <div class="benefits-layout">
-        <div class="benefits-center">
-          <div class="center-content">
-            <span class="center-emoji">💪</span>
-            <span class="center-text">{{ section.settings.center_text }}</span>
-          </div>
-        </div>
-
         <div class="benefits-grid">
           {% for block in section.blocks %}
             {% if block.type == 'vitamin_benefit' %}
@@ -36,7 +29,6 @@
                   <h4>{{ block.settings.title }}</h4>
                   <p>{{ block.settings.description }}</p>
                 </div>
-                <div class="benefit-connector"></div>
               </div>
             {% endif %}
           {% endfor %}
@@ -61,12 +53,6 @@
       "id": "subtitle",
       "label": "Subtitle",
       "default": "¿Qué dicen nuestras mamás?"
-    },
-    {
-      "type": "text",
-      "id": "center_text",
-      "label": "Center Circle Text",
-      "default": "5 BENEFICIOS EN 1"
     },
     {
       "type": "header",
@@ -119,7 +105,7 @@
           "settings": {
             "emoji": "👁️",
             "title": "VITAMINA A",
-            "description": "Ayuda al cuidado de la visión, el crecimiento y desarrollo de los niños"
+            "description": "ayuda al cuidado de la vision, el crecimiento y desarrollo de los niños"
           }
         },
         {
@@ -135,7 +121,7 @@
           "settings": {
             "emoji": "⚡",
             "title": "VITAMINA B1 o TIAMINA",
-            "description": "Aporta energía adecuada para realizar actividades de alto rendimiento"
+            "description": "Aporta energia adecuada para realizar actividades de alto rendimiento"
           }
         },
         {
@@ -235,38 +221,6 @@
   margin: 0 auto;
 }
 
-.benefits-center {
-  width: 150px;
-  height: 150px;
-  background: #ff6b00;
-  border-radius: 50%;
-  margin: 0 auto 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.2);
-  position: relative;
-}
-
-.center-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: white;
-}
-
-.center-emoji {
-  font-size: 32px;
-}
-
-.center-text {
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-}
-
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -325,22 +279,6 @@
   line-height: 1.4;
 }
 
-.benefit-connector {
-  position: absolute;
-  background: linear-gradient(90deg, rgba(255, 107, 0, 0.2), rgba(255, 107, 0, 0));
-  height: 2px;
-  width: 100px;
-  top: 50%;
-  left: -80px;
-  transform: translateY(-50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.benefit-card:hover .benefit-connector {
-  opacity: 1;
-}
-
 @media screen and (min-width: 768px) {
   .section-title {
     font-size: 32px;
@@ -348,19 +286,6 @@
 
   .benefits-content {
     padding: 60px 30px;
-  }
-
-  .benefits-center {
-    width: 180px;
-    height: 180px;
-  }
-
-  .center-emoji {
-    font-size: 40px;
-  }
-
-  .center-text {
-    font-size: 16px;
   }
 
   .benefit-card {
@@ -408,16 +333,6 @@
   .benefit-emoji {
     font-size: 20px;
   }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.benefits-center {
-  animation: pulse 2s infinite;
 }
 {% endstylesheet %}
 
