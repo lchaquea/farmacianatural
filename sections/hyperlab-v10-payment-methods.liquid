@@ -103,7 +103,7 @@
 }
 
 .section-title {
-  font-size: 28px;
+  font-size: var(--font-size-xl);
   font-weight: bold;
   margin-bottom: var(--spacing-lg);
   text-transform: uppercase;
@@ -133,6 +133,7 @@
   gap: var(--spacing-xs);
   cursor: pointer;
   transition: transform 0.2s;
+  font-size: var(--font-size-sm);
 }
 
 .payment-button:hover {
@@ -144,14 +145,14 @@
 }
 
 .payment-note {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   color: #666;
   margin: 0;
 }
 
 @media screen and (min-width: 768px) {
   .section-title {
-    font-size: 32px;
+    font-size: var(--font-size-2xl);
   }
 
   .payment-buttons {
