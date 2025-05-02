@@ -1,37 +1,41 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
 <div class="hyperlab-v10-vitamin-benefits">
-  <h2 class="section-title">MÁS DE UN MILLÓN DE MAMAS FELICES</h2>
+  <h2 class="section-title">{{ section.settings.main_title }}</h2>
   
+  <div class="benefits-gallery">
+    <div class="gallery-container">
+      <div class="gallery-wrapper">
+        {% if section.settings.gallery_image_1 != blank %}
+          <img src="{{ section.settings.gallery_image_1 | img_url: '800x' }}" alt="{{ section.settings.gallery_image_1.alt }}" class="gallery-image">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
   <div class="benefits-container">
-    <h3 class="benefits-subtitle">¿Qué dicen nuestras mamás?</h3>
+    <h3 class="benefits-subtitle">{{ section.settings.subtitle }}</h3>
     
     <div class="benefits-content" {% if section.settings.background_image %}style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"{% endif %}>
-      <div class="vitamin-list">
-        <div class="vitamin-item">
-          <h4>VITAMINA A</h4>
-          <p>Ayuda al cuidado de la visión, el crecimiento y desarrollo de los niños</p>
+      <div class="vitamin-circle-container">
+        <div class="vitamin-center">
+          <div class="center-content">
+            <span class="center-emoji">💪</span>
+            <span class="center-text">{{ section.settings.center_text }}</span>
+          </div>
         </div>
         
-        <div class="vitamin-item">
-          <h4>VITAMINA E</h4>
-          <p>Aporta al desarrollo neurológico</p>
-        </div>
-        
-        <div class="vitamin-item">
-          <h4>VITAMINA B1 o TIAMINA</h4>
-          <p>Aporta energía adecuada para realizar actividades de alto rendimiento</p>
-        </div>
-        
-        <div class="vitamin-item">
-          <h4>CALCIO</h4>
-          <p>Mantiene fuertes los huesos de los niños durante su crecimiento</p>
-        </div>
-        
-        <div class="vitamin-item">
-          <h4>VITAMINA D</h4>
-          <p>Necesaria para la absorción adecuada del calcio</p>
-        </div>
+        {% for block in section.blocks %}
+          {% if block.type == 'vitamin_benefit' %}
+            <div class="vitamin-item" style="--rotation: {{ forloop.index0 | times: 72 }}deg">
+              <div class="vitamin-content">
+                <span class="benefit-emoji">{{ block.settings.emoji }}</span>
+                <h4>{{ block.settings.title }}</h4>
+                <p>{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -42,14 +46,110 @@
   "name": "V10 Vitamin Benefits",
   "settings": [
     {
-      "type": "product",
-      "id": "product_handle",
-      "label": "Product"
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "MÁS DE UN MILLÓN DE MAMAS FELICES"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "¿Qué dicen nuestras mamás?"
+    },
+    {
+      "type": "text",
+      "id": "center_text",
+      "label": "Center Circle Text",
+      "default": "5 BENEFICIOS EN 1"
+    },
+    {
+      "type": "header",
+      "content": "Gallery Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_1",
+      "label": "Gallery Image"
     },
     {
       "type": "image_picker",
       "id": "background_image",
       "label": "Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vitamin_benefit",
+      "name": "Vitamin Benefit",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Benefit Emoji",
+          "default": "💊"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "VITAMINA"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Descripción del beneficio"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "V10 Vitamin Benefits",
+      "blocks": [
+        {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "👁️",
+            "title": "VITAMINA A",
+            "description": "Ayuda al cuidado de la visión, el crecimiento y desarrollo de los niños"
+          }
+        },
+        {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "🧠",
+            "title": "VITAMINA E",
+            "description": "Aporta al desarrollo neurológico"
+          }
+        },
+        {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "⚡",
+            "title": "VITAMINA B1",
+            "description": "Aporta energía adecuada para realizar actividades de alto rendimiento"
+          }
+        },
+        {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "🦴",
+            "title": "CALCIO",
+            "description": "Mantiene fuertes los huesos de los niños durante su crecimiento"
+          }
+        },
+        {
+          "type": "vitamin_benefit",
+          "settings": {
+            "emoji": "☀️",
+            "title": "VITAMINA D",
+            "description": "Necesaria para la absorción adecuada del calcio"
+          }
+        }
+      ]
     }
   ]
 }
@@ -68,9 +168,37 @@
   text-transform: uppercase;
 }
 
+.benefits-gallery {
+  margin: 30px auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.gallery-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.gallery-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
 .benefits-subtitle {
   font-size: 20px;
-  margin-bottom: 30px;
+  margin: 30px 0;
   color: #333;
 }
 
@@ -78,7 +206,7 @@
   background-color: #f8f8f8;
   background-size: cover;
   background-position: center;
-  padding: 30px;
+  padding: 50px 30px;
   border-radius: 10px;
   position: relative;
 }
@@ -94,38 +222,95 @@
   border-radius: 10px;
 }
 
-.vitamin-list {
+.vitamin-circle-container {
   position: relative;
-  z-index: 1;
-  max-width: 800px;
+  width: 100%;
+  max-width: 600px;
   margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.vitamin-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: #ff6b00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.center-emoji {
+  font-size: 24px;
+}
+
+.center-text {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .vitamin-item {
-  margin-bottom: 25px;
-  text-align: left;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  margin: -80px;
+  transform-origin: 50% 50%;
+  transform: rotate(var(--rotation)) translate(220px) rotate(calc(-1 * var(--rotation)));
+  transition: all 0.3s ease;
 }
 
-.vitamin-item:last-child {
-  margin-bottom: 0;
+.vitamin-content {
+  background: white;
+  border-radius: 50%;
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.vitamin-content:hover {
+  transform: scale(1.05);
+}
+
+.benefit-emoji {
+  font-size: 24px;
+  margin-bottom: 5px;
 }
 
 .vitamin-item h4 {
   color: #ff6b00;
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 14px;
+  margin: 5px 0;
   font-weight: bold;
 }
 
 .vitamin-item p {
   margin: 0;
   color: #333;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.3;
 }
 
 @media screen and (min-width: 768px) {
@@ -133,12 +318,66 @@
     font-size: 32px;
   }
 
-  .benefits-content {
-    padding: 50px;
+  .vitamin-center {
+    width: 150px;
+    height: 150px;
+  }
+
+  .center-emoji {
+    font-size: 32px;
+  }
+
+  .center-text {
+    font-size: 14px;
   }
 
   .vitamin-item {
-    padding: 20px;
+    width: 180px;
+    height: 180px;
+    margin: -90px;
+  }
+
+  .vitamin-item h4 {
+    font-size: 16px;
+  }
+
+  .vitamin-item p {
+    font-size: 13px;
   }
 }
-{% endstylesheet %} 
+
+@media screen and (max-width: 767px) {
+  .vitamin-circle-container {
+    transform: scale(0.8);
+  }
+  
+  .benefits-content {
+    padding: 30px 15px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+{% endstylesheet %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const vitaminItems = document.querySelectorAll('.vitamin-content');
+  
+  vitaminItems.forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.05)';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+{% endjavascript %} 
