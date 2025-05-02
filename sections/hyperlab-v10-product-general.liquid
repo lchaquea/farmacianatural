@@ -28,26 +28,13 @@
 
             <div class="product-carousel">
               <div class="carousel-container">
-                {%- if block.settings.gallery_images.size > 0 -%}
+                {%- if block.settings.gallery_images != blank -%}
                   <div class="carousel-main">
-                    {%- for image in block.settings.gallery_images -%}
-                      <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-                        <img src="{{ image | img_url: 'large' }}" 
-                             alt="{{ image.alt | escape }}"
-                             class="carousel-image">
-                      </div>
-                    {%- endfor -%}
-                  </div>
-
-                  <div class="carousel-thumbnails">
-                    {%- for image in block.settings.gallery_images -%}
-                      <button class="carousel-thumb {% if forloop.first %}active{% endif %}" 
-                              data-slide-index="{{ forloop.index0 }}">
-                        <img src="{{ image | img_url: '150x150', crop: 'center' }}" 
-                             alt="{{ image.alt | escape }}"
-                             class="thumb-image">
-                      </button>
-                    {%- endfor -%}
+                    <div class="carousel-slide active" data-slide-index="0">
+                      <img src="{{ block.settings.gallery_images | img_url: 'large' }}" 
+                           alt="{{ block.settings.gallery_images.alt | escape }}"
+                           class="carousel-image">
+                    </div>
                   </div>
                 {%- endif -%}
               </div>
@@ -82,7 +69,7 @@
 
             <div class="scarcity-widget">
               <span class="scarcity-icon">{{ block.settings.scarcity_emoji }}</span>
-              <span class="scarcity-text">{{ block.settings.scarcity_text }}</span>
+              <span class="scarcity-text" data-template="{{ block.settings.scarcity_text }}">{{ block.settings.scarcity_text }}</span>
             </div>
 
             <div class="stats-row">
@@ -102,23 +89,28 @@
         <div class="product-tabs" {{ block.shopify_attributes }}>
           <div class="tabs-header-wrapper">
             <div class="tabs-header">
-              {%- for tab in block.settings.tabs -%}
-                <button class="tab-button {% if forloop.first %}active{% endif %}" data-tab="{{ tab.id }}">
-                  <span class="tab-icon">{{ tab.icon }}</span>
-                  <span class="tab-text">{{ tab.title }}</span>
-                </button>
-              {%- endfor -%}
+              <button class="tab-button active" data-tab="tab1">
+                <span class="tab-icon">{{ block.settings.tab1_icon }}</span>
+                <span class="tab-text">{{ block.settings.tab1_title }}</span>
+              </button>
+              <button class="tab-button" data-tab="tab2">
+                <span class="tab-icon">{{ block.settings.tab2_icon }}</span>
+                <span class="tab-text">{{ block.settings.tab2_title }}</span>
+              </button>
             </div>
           </div>
 
           <div class="tab-content-wrapper">
-            {%- for tab in block.settings.tabs -%}
-              <div class="tab-content {% if forloop.first %}active{% endif %}" id="{{ tab.id }}">
-                <div class="content-block">
-                  {{ tab.content }}
-                </div>
+            <div class="tab-content active" id="tab1">
+              <div class="content-block">
+                {{ block.settings.tab1_content }}
               </div>
-            {%- endfor -%}
+            </div>
+            <div class="tab-content" id="tab2">
+              <div class="content-block">
+                {{ block.settings.tab2_content }}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -149,6 +141,7 @@
     {
       "type": "ticker",
       "name": "Ticker Message",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -161,6 +154,7 @@
     {
       "type": "hero",
       "name": "Hero Section",
+      "limit": 1,
       "settings": [
         {
           "type": "image_picker",
@@ -188,13 +182,14 @@
           "type": "image_picker",
           "id": "gallery_images",
           "label": "Gallery Images",
-          "multiple": true
+          "info": "Add multiple images for the product gallery"
         }
       ]
     },
     {
       "type": "product_header",
       "name": "Product Header",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -218,7 +213,7 @@
           "type": "text",
           "id": "scarcity_text",
           "label": "Scarcity Text",
-          "default": "¡Solo quedan 12 unidades en stock!"
+          "default": "¡Solo quedan {n} unidades en stock!"
         },
         {
           "type": "text",
@@ -255,23 +250,50 @@
     {
       "type": "tabs",
       "name": "Product Tabs",
+      "limit": 1,
       "settings": [
         {
-          "type": "header",
-          "content": "Tab Settings"
+          "type": "text",
+          "id": "tab1_title",
+          "label": "Tab 1 Title",
+          "default": "Descripción"
         },
         {
           "type": "text",
-          "id": "tabs",
-          "label": "Tabs",
-          "info": "Add tabs in format: id|icon|title|content",
-          "default": "descripcion|📝|Descripción|¿Qué es V10? V10 es un multivitamínico natural diseñado específicamente para niños que: No quieren comer, Están bajos de peso, Necesitan mejorar sus defensas, Tienen bajo apetito. Elaborado con ingredientes 100% naturales y certificado por INVIMA."
+          "id": "tab1_icon",
+          "label": "Tab 1 Icon",
+          "default": "📝"
+        },
+        {
+          "type": "richtext",
+          "id": "tab1_content",
+          "label": "Tab 1 Content",
+          "default": "<p>¿Qué es V10? V10 es un multivitamínico natural diseñado específicamente para niños que: No quieren comer, Están bajos de peso, Necesitan mejorar sus defensas, Tienen bajo apetito. Elaborado con ingredientes 100% naturales y certificado por INVIMA.</p>"
+        },
+        {
+          "type": "text",
+          "id": "tab2_title",
+          "label": "Tab 2 Title",
+          "default": "Beneficios"
+        },
+        {
+          "type": "text",
+          "id": "tab2_icon",
+          "label": "Tab 2 Icon",
+          "default": "✨"
+        },
+        {
+          "type": "richtext",
+          "id": "tab2_content",
+          "label": "Tab 2 Content",
+          "default": "<p>Beneficios principales: Aumenta el apetito naturalmente, Fortalece el sistema inmunológico, Mejora la absorción de nutrientes, Ayuda al crecimiento saludable.</p>"
         }
       ]
     },
     {
       "type": "button",
       "name": "Button",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
