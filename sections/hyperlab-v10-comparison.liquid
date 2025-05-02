@@ -1,192 +1,135 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
-<div class="hyperlab-v10-comparison">
-  <h2 class="section-title">EL PRODUCTO #1 PARA MEJORAR EL APETITO DE LOS NIÑOS EN LATINOAMÉRICA</h2>
+{% render 'hyperlab-global-styles' %}
 
-  <div class="comparison-container">
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th>Características</th>
-          <th>V10</th>
-          <th>Otros</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Fórmula Natural</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Refuerza sistema inmunológico</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Sin azúcares refinados</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Energía día a día</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Diseñado para niños</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-        <tr>
-          <td>5 en 1: vitaminas</td>
-          <td>
-            <span class="check">✓</span>
-          </td>
-          <td>
-            <span class="empty">□</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="hyperlab-section hyperlab-bg-white hyperlab-py-40">
+  <div class="hyperlab-content">
+    <div class="comparison-header">
+      <h2 class="section-title">{{ section.settings.title | default: "¿Por qué elegir V10?" }}</h2>
+      {% if section.settings.subtitle %}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="comparison-grid">
+      {% for block in section.blocks %}
+        <div class="comparison-item">
+          <div class="comparison-icon">{{ block.settings.icon }}</div>
+          <h3 class="comparison-title">{{ block.settings.title }}</h3>
+          <p class="comparison-text">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
   </div>
-
-  <button class="primary-button">
-    CLICK AQUÍ Y PAGA AL RECIBIR
-    <span class="button-subtext">paga en casa contraentrega</span>
-  </button>
 </div>
 
 {% schema %}
 {
   "name": "V10 Comparison",
+  "class": "hyperlab-section",
   "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "¿Por qué elegir V10?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle"
+    },
     {
       "type": "product",
       "id": "product_handle",
       "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_item",
+      "name": "Comparison Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
     }
   ]
 }
 {% endschema %}
 
 {% stylesheet %}
-.hyperlab-v10-comparison {
-  padding: 40px 0;
+.comparison-header {
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .section-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a1a1a;
 }
 
-.comparison-container {
-  max-width: 800px;
-  margin: 0 auto 40px;
-  padding: 0 20px;
-}
-
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.comparison-table th,
-.comparison-table td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.comparison-table th {
-  background: #f8f8f8;
-  font-weight: bold;
-  color: #333;
-}
-
-.comparison-table th:not(:first-child),
-.comparison-table td:not(:first-child) {
-  text-align: center;
-  width: 100px;
-}
-
-.comparison-table tr:last-child td {
-  border-bottom: none;
-}
-
-.check {
-  color: #4CAF50;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.empty {
-  color: #999;
-  font-size: 20px;
-}
-
-.primary-button {
-  background-color: #ff6b00;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 300px;
+.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-.button-subtext {
-  font-size: 12px;
-  opacity: 0.8;
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-@media screen and (min-width: 768px) {
-  .section-title {
-    font-size: 32px;
-  }
+.comparison-item {
+  background: #f8f8f8;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.comparison-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.comparison-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+
+.comparison-text {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
 }
 
 @media screen and (max-width: 767px) {
-  .comparison-table {
-    font-size: 14px;
+  .section-title {
+    font-size: 28px;
   }
 
-  .comparison-table th,
-  .comparison-table td {
-    padding: 10px;
+  .comparison-grid {
+    grid-template-columns: 1fr;
   }
 }
 {% endstylesheet %} 

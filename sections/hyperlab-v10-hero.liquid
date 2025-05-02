@@ -1,65 +1,71 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 <!-- Updated: May 1, 2024 -->
 
-<div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
-  <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
-    <div class="hero-header">
-      <div class="logo-container">
-        {%- if section.settings.logo != blank -%}
-          <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
-        {%- endif -%}
-      </div>
-      
-      <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
-    </div>
+{% render 'hyperlab-global-styles' %}
 
-    <div class="product-carousel">
-      <div class="carousel-container">
-        {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
-        {%- if gallery_images.size > 0 -%}
-          <div class="carousel-main">
-            {%- for block in gallery_images -%}
-              {%- if block.settings.image != blank -%}
-                <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
-                  <img src="{{ block.settings.image | img_url: 'large' }}" 
-                       alt="{{ block.settings.image.alt | escape }}"
-                       class="carousel-image">
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
+<div class="hyperlab-section hyperlab-bg-white">
+  <div class="hyperlab-content">
+    <div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
+      <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
+        <div class="hero-header">
+          <div class="logo-container">
+            {%- if section.settings.logo != blank -%}
+              <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
+            {%- endif -%}
           </div>
+          
+          <h1 class="hero-title">{{ section.settings.headline | default: "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?" }}</h1>
+        </div>
 
-          <div class="carousel-thumbnails">
-            {%- for block in gallery_images -%}
-              {%- if block.settings.image != blank -%}
-                <button class="carousel-thumb {% if forloop.first %}active{% endif %}" 
-                        data-slide-index="{{ forloop.index0 }}">
-                  <img src="{{ block.settings.image | img_url: '150x150', crop: 'center' }}" 
-                       alt="{{ block.settings.image.alt | escape }}"
-                       class="thumb-image">
-                </button>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-      </div>
-    </div>
+        <div class="product-carousel">
+          <div class="carousel-container">
+            {%- assign gallery_images = section.blocks | where: "type", "gallery_image" -%}
+            {%- if gallery_images.size > 0 -%}
+              <div class="carousel-main">
+                {%- for block in gallery_images -%}
+                  {%- if block.settings.image != blank -%}
+                    <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide-index="{{ forloop.index0 }}">
+                      <img src="{{ block.settings.image | img_url: 'large' }}" 
+                           alt="{{ block.settings.image.alt | escape }}"
+                           class="carousel-image">
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
 
-    <div class="hero-cta">
-      <div class="subheadline-container">
-        <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
-        {%- if section.settings.certification_badge != blank -%}
-          <div class="certification-badge">
-            <img src="{{ section.settings.certification_badge | img_url: '100x' }}" 
-                 alt="Certificación INVIMA" 
-                 class="certification-image">
+              <div class="carousel-thumbnails">
+                {%- for block in gallery_images -%}
+                  {%- if block.settings.image != blank -%}
+                    <button class="carousel-thumb {% if forloop.first %}active{% endif %}" 
+                            data-slide-index="{{ forloop.index0 }}">
+                      <img src="{{ block.settings.image | img_url: '150x150', crop: 'center' }}" 
+                           alt="{{ block.settings.image.alt | escape }}"
+                           class="thumb-image">
+                    </button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
+        </div>
+
+        <div class="hero-cta">
+          <div class="subheadline-container">
+            <h2 class="subheadline">{{ section.settings.subheadline | default: "¡NO TE PREOCUPES MÁS!" }}</h2>
+            {%- if section.settings.certification_badge != blank -%}
+              <div class="certification-badge">
+                <img src="{{ section.settings.certification_badge | img_url: '100x' }}" 
+                     alt="Certificación INVIMA" 
+                     class="certification-image">
+              </div>
+            {%- endif -%}
+          </div>
+          <a href="{{ section.settings.button_link | default: '#' }}" class="primary-button {{ section.settings.button_animation }}">
+            {{ section.settings.button_text | default: "CLICK AQUÍ Y PAGA AL RECIBIR" }}
+            <span class="button-subtext">{{ section.settings.button_subtext | default: "paga en casa contraentrega" }}</span>
+          </a>
+        </div>
       </div>
-      <a href="{{ section.settings.button_link | default: '#' }}" class="primary-button {{ section.settings.button_animation }}">
-        {{ section.settings.button_text | default: "CLICK AQUÍ Y PAGA AL RECIBIR" }}
-        <span class="button-subtext">{{ section.settings.button_subtext | default: "paga en casa contraentrega" }}</span>
-      </a>
     </div>
   </div>
 </div>
@@ -67,6 +73,7 @@
 {% schema %}
 {
   "name": "V10 Hero Section",
+  "class": "hyperlab-section",
   "settings": [
     {
       "type": "header",
