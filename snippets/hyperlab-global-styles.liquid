@@ -17,17 +17,6 @@
   width: 100vw !important;
 }
 
-/* Side by side layout */
-body {
-  overflow-x: hidden;
-}
-
-.shopify-section:has(.hyperlab-v10-hero) {
-  display: flex;
-  flex-direction: row;
-  width: 100vw !important;
-}
-
 /* Common layout classes */
 .hyperlab-section {
   width: 100vw;
@@ -80,26 +69,7 @@ body {
 }
 
 /* Responsive adjustments */
-@media screen and (min-width: 1024px) {
-  .shopify-section:has(.hyperlab-v10-hero) {
-    flex-direction: row;
-  }
-
-  .shopify-section:has(.hyperlab-v10-hero) .hyperlab-section {
-    width: 50% !important;
-    min-height: 100vh;
-  }
-}
-
-@media screen and (max-width: 1023px) {
-  .shopify-section:has(.hyperlab-v10-hero) {
-    flex-direction: column;
-  }
-
-  .shopify-section:has(.hyperlab-v10-hero) .hyperlab-section {
-    width: 100% !important;
-  }
-
+@media screen and (max-width: 767px) {
   .hyperlab-content {
     padding: 15px;
   }
