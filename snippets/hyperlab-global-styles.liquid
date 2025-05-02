@@ -44,6 +44,27 @@
   padding: 0 20px;
 }
 
+/* Side by side layout */
+.hyperlab-flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .hyperlab-flex-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .hyperlab-flex-container > .hyperlab-section {
+    width: 50%;
+    min-height: 100vh;
+  }
+}
+
 /* Common background colors */
 .hyperlab-bg-white {
   background-color: #fff;
