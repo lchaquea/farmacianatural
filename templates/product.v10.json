@@ -50,6 +50,45 @@
     },
     "hyperlab-v10-social-proof": {
       "type": "hyperlab-v10-social-proof",
+      "blocks": {
+        "reel_gtfmke": {
+          "type": "reel",
+          "settings": {
+            "title": "Ana Sofia Henao",
+            "thumbnail_image": "shopify://shop_images/2.png",
+            "reel_url": ""
+          }
+        },
+        "reel_xjwPtR": {
+          "type": "reel",
+          "settings": {
+            "title": "Carolina Soto",
+            "thumbnail_image": "shopify://shop_images/3.png",
+            "reel_url": ""
+          }
+        },
+        "reel_mEA7fW": {
+          "type": "reel",
+          "settings": {
+            "title": "Laura Tobón",
+            "thumbnail_image": "shopify://shop_images/Diseno_sin_titulo_6_691a9f4a-99ac-4155-ae63-0ca087940dfb.png",
+            "reel_url": ""
+          }
+        },
+        "reel_D3R8Bp": {
+          "type": "reel",
+          "settings": {
+            "title": "Customer Story",
+            "reel_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_gtfmke",
+        "reel_xjwPtR",
+        "reel_mEA7fW",
+        "reel_D3R8Bp"
+      ],
       "settings": {
         "product_handle": ""
       }
