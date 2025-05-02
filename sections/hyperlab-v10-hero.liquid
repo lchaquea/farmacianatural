@@ -28,19 +28,11 @@
               
               <div class="main-image-container">
                 <div class="main-image">
-                  {%- assign gallery_images = "" | split: "" -%}
-                  {%- for i in (1..5) -%}
-                    {%- assign image_setting = 'image_' | append: i -%}
-                    {%- assign current_image = section.settings[image_setting] -%}
-                    {%- if current_image != blank -%}
-                      {%- assign gallery_images = gallery_images | push: current_image -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-
-                  {%- if gallery_images.size > 0 -%}
-                    <img src="{{ gallery_images[0] | img_url: '1000x' }}" 
-                         alt="{{ gallery_images[0].alt | escape }}"
-                         class="featured-image">
+                  {%- if section.settings.image_1 != blank -%}
+                    <img src="{{ section.settings.image_1 | img_url: '1000x' }}" 
+                         alt="{{ section.settings.image_1.alt | escape }}"
+                         class="featured-image"
+                         data-index="0">
                   {%- endif -%}
                 </div>
               </div>
@@ -53,14 +45,19 @@
             </div>
 
             <div class="thumbnails-container">
-              {%- for image in gallery_images -%}
-                <button class="thumbnail-button {% if forloop.first %}active{% endif %}" 
-                        data-image-url="{{ image | img_url: '1000x' }}"
-                        data-image-index="{{ forloop.index0 }}">
-                  <img src="{{ image | img_url: '100x100', crop: 'center' }}" 
-                       alt="{{ image.alt | escape }}"
-                       class="thumbnail-image">
-                </button>
+              {%- for i in (1..5) -%}
+                {%- assign image_setting = 'image_' | append: i -%}
+                {%- assign current_image = section.settings[image_setting] -%}
+                {%- if current_image != blank -%}
+                  <button class="thumbnail-button {% if forloop.first %}active{% endif %}" 
+                          data-image-url="{{ current_image | img_url: '1000x' }}"
+                          data-image-index="{{ forloop.index0 }}"
+                          data-alt="{{ current_image.alt | escape }}">
+                    <img src="{{ current_image | img_url: '100x100', crop: 'center' }}" 
+                         alt="{{ current_image.alt | escape }}"
+                         class="thumbnail-image">
+                  </button>
+                {%- endif -%}
               {%- endfor -%}
             </div>
           </div>
@@ -135,7 +132,7 @@
     {
       "type": "image_picker",
       "id": "image_1",
-      "label": "Gallery Image 1"
+      "label": "Gallery Image 1 (Featured)"
     },
     {
       "type": "image_picker",
@@ -514,7 +511,10 @@ document.addEventListener('DOMContentLoaded', function() {
     mainImage.style.opacity = '0';
     setTimeout(() => {
       const imageUrl = selectedThumbnail.dataset.imageUrl;
+      const imageAlt = selectedThumbnail.dataset.alt;
       mainImage.src = imageUrl;
+      mainImage.alt = imageAlt;
+      mainImage.dataset.index = index;
       mainImage.style.opacity = '1';
     }, 150);
 
@@ -534,6 +534,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add smooth transition to main image
   mainImage.style.transition = 'opacity 0.15s ease-in-out';
+
+  // Initialize with first image
+  if (thumbnails.length > 0) {
+    currentIndex = 0;
+    updateMainImage(currentIndex);
+  }
 
   thumbnails.forEach((thumb, index) => {
     thumb.addEventListener('click', () => updateMainImage(index));
