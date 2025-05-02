@@ -225,6 +225,26 @@
     },
     "hyperlab-v10-ingredients": {
       "type": "hyperlab-v10-ingredients",
+      "blocks": {
+        "ingredient_Ej6BLU": {
+          "type": "ingredient",
+          "settings": {
+            "title": "CHONTADURO",
+            "description": "Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico"
+          }
+        },
+        "ingredient_gEJdm8": {
+          "type": "ingredient",
+          "settings": {
+            "title": "CHONTADURO",
+            "description": "Rico en vitaminas A y C, esenciales para la visión y el sistema inmunológico"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_Ej6BLU",
+        "ingredient_gEJdm8"
+      ],
       "settings": {
         "product_handle": "",
         "title": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
@@ -288,7 +308,16 @@
         "reel_6j8UDT": {
           "type": "reel",
           "settings": {
-            "title": "Customer Story",
+            "title": "Maria Marquez",
+            "thumbnail_image": "shopify://shop_images/Screenshot_2025-03-25_at_8.26.57_AM.png",
+            "reel_url": ""
+          }
+        },
+        "reel_ENYnVU": {
+          "type": "reel",
+          "settings": {
+            "title": "Luisa Gómez",
+            "thumbnail_image": "shopify://shop_images/509384768677217183-439f4cd2-5186-4e8b-9047-ea18d7e5da9d.png",
             "reel_url": ""
           }
         },
@@ -309,6 +338,7 @@
       },
       "block_order": [
         "reel_6j8UDT",
+        "reel_ENYnVU",
         "reel_dAnxar",
         "reel_c8JreU"
       ],
