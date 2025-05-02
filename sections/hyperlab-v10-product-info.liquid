@@ -1,6 +1,8 @@
 {%- assign product = all_products[section.settings.product_handle] | default: product -%}
 
-<div class="shopify-section">
+{% render 'hyperlab-global-styles' %}
+
+<div class="hyperlab-section">
   <div class="ticker-container">
     <div class="ticker-wrapper">
       <div class="ticker-text">{{ section.settings.ticker_message }}</div>
@@ -68,179 +70,113 @@
             <ul class="benefit-list">
               <li>No quieren comer</li>
               <li>Están bajos de peso</li>
-<div class="ticker-container">
-  <div class="ticker-wrapper">
-    <div class="ticker-text">{{ section.settings.ticker_message }}</div>
-    <div class="ticker-text" aria-hidden="true">{{ section.settings.ticker_message }}</div>
-  </div>
-</div>
-
-<div class="hyperlab-v10-product-info">
-  <div class="product-header">
-    <div class="product-header-content">
-      <h1 class="product-title">MULTIVITAMÍNICO V10 PARA NIÑOS</h1>
-      
-      <div class="price-container">
-        <span class="price">${{ product.price | money_without_currency }}</span>
-        <span class="shipping-tag">envío gratis</span>
-      </div>
-
-      <div class="stars">★★★★★</div>
-
-      <div class="scarcity-widget">
-        <span class="scarcity-icon">{{ section.settings.scarcity_emoji }}</span>
-        <span class="scarcity-text">{{ section.settings.scarcity_text }}</span>
-      </div>
-
-      <div class="stats-row">
-        <a href="#reviews" class="rating-link">
-          <span class="rating-score">4.8</span>
-          <span class="review-count">(9,327 reseñas verificadas)</span>
-        </a>
-        <div class="metric">
-          <span class="icon">👶</span>
-          <span class="text">+1M niños con apetito</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="product-tabs">
-    <div class="tabs-header-wrapper">
-      <div class="tabs-header">
-        <button class="tab-button active" data-tab="descripcion">
-          <span class="tab-icon">📝</span>
-          <span class="tab-text">Descripción</span>
-        </button>
-        <button class="tab-button" data-tab="ingredientes">
-          <span class="tab-icon">🍊</span>
-          <span class="tab-text">Ingredientes</span>
-        </button>
-        <button class="tab-button" data-tab="resultados">
-          <span class="tab-icon">✨</span>
-          <span class="tab-text">Resultados</span>
-        </button>
-        <button class="tab-button" data-tab="modo-uso">
-          <span class="tab-icon">📋</span>
-          <span class="tab-text">Modo de uso</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="tab-content-wrapper">
-      <div class="tab-content active" id="descripcion">
-        <div class="content-block">
-          <h3>¿Qué es V10?</h3>
-          <p>V10 es un multivitamínico natural diseñado específicamente para niños que:</p>
-          <ul class="benefit-list">
-            <li>No quieren comer</li>
-            <li>Están bajos de peso</li>
-            <li>Necesitan mejorar sus defensas</li>
-            <li>Tienen bajo apetito</li>
-          </ul>
-          <p>Elaborado con ingredientes 100% naturales y certificado por INVIMA.</p>
-        </div>
-      </div>
-
-      <div class="tab-content" id="ingredientes">
-        <div class="content-block">
-          <h3>Ingredientes Naturales</h3>
-          <p class="flavor-text">Delicioso sabor a naranja endulzado naturalmente con miel de abejas 🍯</p>
-          <div class="ingredients-grid">
-            <div class="ingredient-item">
-              <span class="ingredient-icon">💧</span>
-              <span class="ingredient-name">Agua Purificada</span>
-            </div>
-            <div class="ingredient-item">
-              <span class="ingredient-icon">🍯</span>
-              <span class="ingredient-name">Miel de abejas</span>
-            </div>
-            <div class="ingredient-item">
-              <span class="ingredient-icon">🌴</span>
-              <span class="ingredient-name">Jugo de Chontaduro</span>
-            </div>
-            <div class="ingredient-item">
-              <span class="ingredient-icon">🍊</span>
-              <span class="ingredient-name">Jugo de Borojó</span>
-            </div>
-          </div>
-          <div class="vitamins-section">
-            <h4>Vitaminas Esenciales</h4>
-            <div class="vitamins-grid">
-              <span class="vitamin-tag">Vitamina C</span>
-              <span class="vitamin-tag">Vitamina B3</span>
-              <span class="vitamin-tag">Vitamina E</span>
-              <span class="vitamin-tag">Vitamina B6</span>
-              <span class="vitamin-tag">Vitamina B2</span>
-              <span class="vitamin-tag">Vitamina B1</span>
-              <span class="vitamin-tag">Vitamina D</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="resultados">
-        <div class="content-block">
-          <h3>Resultados Comprobados</h3>
-          <div class="results-timeline">
-            <div class="timeline-item">
-              <span class="day-marker">Día 5-7</span>
-              <p>Primeros signos de mejora en el apetito</p>
-            </div>
-            <div class="timeline-item">
-              <span class="day-marker">Día 15</span>
-              <p>Aumento notable en el consumo de alimentos</p>
-            </div>
-            <div class="timeline-item">
-              <span class="day-marker">Día 30</span>
-              <p>Sistema inmunológico fortalecido y hábitos alimenticios mejorados</p>
-            </div>
-          </div>
-          <div class="guarantee-box">
-            <span class="guarantee-icon">✅</span>
-            <p>Efectividad garantizada con el uso de mínimo dos tarros</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="modo-uso">
-        <div class="content-block">
-          <h3>Dosificación por Edad</h3>
-          <div class="dosage-cards">
-            <div class="dosage-card">
-              <span class="age-range">12-24 meses</span>
-              <span class="dosage">1 cucharadita pequeña</span>
-              <span class="frequency">1 vez al día</span>
-            </div>
-            <div class="dosage-card">
-              <span class="age-range">2-4 años</span>
-              <span class="dosage">2 cucharaditas pequeñas</span>
-              <span class="frequency">Mañana y tarde/noche</span>
-            </div>
-            <div class="dosage-card">
-              <span class="age-range">+4 años</span>
-              <span class="dosage">2 cucharadas grandes</span>
-              <span class="frequency">Mañana y tarde</span>
-            </div>
-          </div>
-          <div class="usage-tips">
-            <h4>Consejos de uso</h4>
-            <ul class="tips-list">
-              <li>Agitar bien antes de usar</li>
-              <li>Tomar preferiblemente antes de las comidas</li>
-              <li>Conservar en lugar fresco</li>
+              <li>Necesitan mejorar sus defensas</li>
+              <li>Tienen bajo apetito</li>
             </ul>
+            <p>Elaborado con ingredientes 100% naturales y certificado por INVIMA.</p>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ingredientes">
+          <div class="content-block">
+            <h3>Ingredientes Naturales</h3>
+            <p class="flavor-text">Delicioso sabor a naranja endulzado naturalmente con miel de abejas 🍯</p>
+            <div class="ingredients-grid">
+              <div class="ingredient-item">
+                <span class="ingredient-icon">💧</span>
+                <span class="ingredient-name">Agua Purificada</span>
+              </div>
+              <div class="ingredient-item">
+                <span class="ingredient-icon">🍯</span>
+                <span class="ingredient-name">Miel de abejas</span>
+              </div>
+              <div class="ingredient-item">
+                <span class="ingredient-icon">🌴</span>
+                <span class="ingredient-name">Jugo de Chontaduro</span>
+              </div>
+              <div class="ingredient-item">
+                <span class="ingredient-icon">🍊</span>
+                <span class="ingredient-name">Jugo de Borojó</span>
+              </div>
+            </div>
+            <div class="vitamins-section">
+              <h4>Vitaminas Esenciales</h4>
+              <div class="vitamins-grid">
+                <span class="vitamin-tag">Vitamina C</span>
+                <span class="vitamin-tag">Vitamina B3</span>
+                <span class="vitamin-tag">Vitamina E</span>
+                <span class="vitamin-tag">Vitamina B6</span>
+                <span class="vitamin-tag">Vitamina B2</span>
+                <span class="vitamin-tag">Vitamina B1</span>
+                <span class="vitamin-tag">Vitamina D</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="resultados">
+          <div class="content-block">
+            <h3>Resultados Comprobados</h3>
+            <div class="results-timeline">
+              <div class="timeline-item">
+                <span class="day-marker">Día 5-7</span>
+                <p>Primeros signos de mejora en el apetito</p>
+              </div>
+              <div class="timeline-item">
+                <span class="day-marker">Día 15</span>
+                <p>Aumento notable en el consumo de alimentos</p>
+              </div>
+              <div class="timeline-item">
+                <span class="day-marker">Día 30</span>
+                <p>Sistema inmunológico fortalecido y hábitos alimenticios mejorados</p>
+              </div>
+            </div>
+            <div class="guarantee-box">
+              <span class="guarantee-icon">✅</span>
+              <p>Efectividad garantizada con el uso de mínimo dos tarros</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="modo-uso">
+          <div class="content-block">
+            <h3>Dosificación por Edad</h3>
+            <div class="dosage-cards">
+              <div class="dosage-card">
+                <span class="age-range">12-24 meses</span>
+                <span class="dosage">1 cucharadita pequeña</span>
+                <span class="frequency">1 vez al día</span>
+              </div>
+              <div class="dosage-card">
+                <span class="age-range">2-4 años</span>
+                <span class="dosage">2 cucharaditas pequeñas</span>
+                <span class="frequency">Mañana y tarde/noche</span>
+              </div>
+              <div class="dosage-card">
+                <span class="age-range">+4 años</span>
+                <span class="dosage">2 cucharadas grandes</span>
+                <span class="frequency">Mañana y tarde</span>
+              </div>
+            </div>
+            <div class="usage-tips">
+              <h4>Consejos de uso</h4>
+              <ul class="tips-list">
+                <li>Agitar bien antes de usar</li>
+                <li>Tomar preferiblemente antes de las comidas</li>
+                <li>Conservar en lugar fresco</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="button-container" style="width: 100%; background: #fff; padding: 40px 0; margin: 0;">
-    <a href="{{ section.settings.button_link }}" class="primary-button {{ section.settings.button_animation }}">
-      {{ section.settings.button_text }}
-      <span class="button-subtext">{{ section.settings.button_subtext }}</span>
-    </a>
+    <div class="button-container">
+      <a href="{{ section.settings.button_link }}" class="primary-button {{ section.settings.button_animation }}">
+        {{ section.settings.button_text }}
+        <span class="button-subtext">{{ section.settings.button_subtext }}</span>
+      </a>
+    </div>
   </div>
 </div>
 
