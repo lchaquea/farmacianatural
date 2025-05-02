@@ -312,14 +312,63 @@
 
 .tabs-header {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #666;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background: #f8f8f8;
+  color: #1a1a1a;
+}
+
+.tab-button.active {
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.tab-icon {
+  font-size: 20px;
+}
+
+.tab-text {
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .tab-content {
+  display: none;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tab-content.active {
+  display: block;
 }
 
 .primary-button {
@@ -672,15 +721,20 @@
   }
 
   .tabs-header {
-    padding: 6px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .tab-button {
-    padding: 8px 4px;
+    padding: 10px;
   }
 
   .tab-icon {
     font-size: 18px;
+  }
+
+  .tab-text {
+    font-size: 11px;
   }
 }
 
@@ -713,25 +767,15 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', () => {
       const tabId = button.getAttribute('data-tab');
       
+      // Remove active class from all buttons and contents
       tabButtons.forEach(btn => btn.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
       
+      // Add active class to clicked button and corresponding content
       button.classList.add('active');
       document.getElementById(tabId).classList.add('active');
     });
   });
-
-  // Smooth scroll to reviews when rating is clicked
-  const ratingLink = document.querySelector('.rating-link');
-  if (ratingLink) {
-    ratingLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const reviewsSection = document.querySelector(e.currentTarget.getAttribute('href'));
-      if (reviewsSection) {
-        reviewsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  }
 
   // Update scarcity number randomly
   function updateScarcity() {
@@ -745,5 +789,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Update every 30 seconds
   setInterval(updateScarcity, 30000);
+  
+  // Smooth scroll to reviews when rating is clicked
+  const ratingLink = document.querySelector('.rating-link');
+  if (ratingLink) {
+    ratingLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const reviewsSection = document.querySelector(e.currentTarget.getAttribute('href'));
+      if (reviewsSection) {
+        reviewsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 });
 {% endjavascript %} 
