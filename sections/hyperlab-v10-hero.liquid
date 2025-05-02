@@ -250,14 +250,14 @@
 .product-gallery {
   margin: 0 auto;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   padding: 0 20px;
 }
 
 .gallery-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 24px;
 }
 
@@ -271,7 +271,7 @@
 
 .main-image-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1250px;
   background: #ffffff;
   border-radius: 12px;
   padding: 16px;
@@ -334,10 +334,11 @@
   gap: 8px;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 0 12px;
+  padding: 0 8px;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  margin-top: 8px;
 }
 
 .thumbnails-container::-webkit-scrollbar {
@@ -472,7 +473,8 @@
 
   .thumbnails-container {
     gap: 6px;
-    padding: 0 8px;
+    padding: 0 6px;
+    margin-top: 6px;
   }
 
   .thumbnail-button {
@@ -503,19 +505,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const nextButton = document.querySelector('.gallery-nav.next');
   let currentIndex = 0;
 
-  function updateMainImage(index) {
+  function updateMainImage(index, direction = null) {
     const selectedThumbnail = thumbnails[index];
     if (!selectedThumbnail) return;
 
     // Update main image with smooth transition
+    const transitionClass = direction === 'prev' ? 'slide-right' : direction === 'next' ? 'slide-left' : '';
     mainImage.style.opacity = '0';
+    
     setTimeout(() => {
       const imageUrl = selectedThumbnail.dataset.imageUrl;
       const imageAlt = selectedThumbnail.dataset.alt;
       mainImage.src = imageUrl;
       mainImage.alt = imageAlt;
       mainImage.dataset.index = index;
+      if (transitionClass) mainImage.classList.add(transitionClass);
       mainImage.style.opacity = '1';
+      
+      setTimeout(() => {
+        if (transitionClass) mainImage.classList.remove(transitionClass);
+      }, 300);
     }, 150);
 
     // Update active state
@@ -548,18 +557,27 @@ document.addEventListener('DOMContentLoaded', function() {
   prevButton.addEventListener('click', () => {
     const newIndex = currentIndex - 1;
     if (newIndex >= 0) {
-      updateMainImage(newIndex);
+      updateMainImage(newIndex, 'prev');
     } else {
-      updateMainImage(thumbnails.length - 1);
+      updateMainImage(thumbnails.length - 1, 'prev');
     }
   });
 
   nextButton.addEventListener('click', () => {
     const newIndex = currentIndex + 1;
     if (newIndex < thumbnails.length) {
-      updateMainImage(newIndex);
+      updateMainImage(newIndex, 'next');
     } else {
-      updateMainImage(0);
+      updateMainImage(0, 'next');
+    }
+  });
+
+  // Add keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevButton.click();
+    } else if (e.key === 'ArrowRight') {
+      nextButton.click();
     }
   });
 });
