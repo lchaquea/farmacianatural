@@ -1,0 +1,100 @@
+/* V10 Template Spacing Standards */
+
+/* Base Spacing Units */
+:root {
+  --spacing-xs: 10px;
+  --spacing-sm: 15px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 40px;
+  --spacing-xxl: 50px;
+}
+
+/* Section Spacing */
+.hyperlab-v10-hero,
+.hyperlab-v10-product-info,
+.hyperlab-v10-vitamin-benefits,
+.hyperlab-v10-social-proof,
+.hyperlab-v10-trust-badges,
+.hyperlab-v10-ingredients,
+.hyperlab-v10-before-after,
+.hyperlab-v10-dosage,
+.hyperlab-v10-reviews,
+.hyperlab-v10-payment-methods,
+.hyperlab-v10-faq {
+  padding: var(--spacing-xl) 0;
+}
+
+/* Section Title Spacing */
+.section-title {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Container Spacing */
+.reviews-container,
+.payment-methods-container,
+.dosage-container,
+.before-after-container,
+.ingredients-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Card/Item Spacing */
+.review-submission,
+.payment-button,
+.dosage-card,
+.ingredient-item,
+.testimonial-item {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Grid/List Spacing */
+.payment-buttons,
+.dosage-cards,
+.ingredients-list,
+.testimonials {
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Content Spacing */
+.review-submission h3,
+.dosage-card h3,
+.ingredient-item h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.review-submission p,
+.dosage-card p,
+.ingredient-item p {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Responsive Adjustments */
+@media screen and (min-width: 768px) {
+  :root {
+    --spacing-xs: 12px;
+    --spacing-sm: 18px;
+    --spacing-md: 24px;
+    --spacing-lg: 36px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 60px;
+  }
+}
+
+/* Specific Section Adjustments */
+.hyperlab-v10-hero {
+  padding: var(--spacing-xxl) 0;
+}
+
+.hyperlab-v10-faq {
+  padding-bottom: var(--spacing-xxl);
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust based on your header height */
+} 

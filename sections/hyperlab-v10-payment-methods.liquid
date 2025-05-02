@@ -98,39 +98,39 @@
 
 {% stylesheet %}
 .hyperlab-v10-payment-methods {
-  padding: 40px 0;
+  padding: var(--spacing-xl) 0;
   text-align: center;
 }
 
 .section-title {
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-lg);
   text-transform: uppercase;
 }
 
 .payment-methods-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--spacing-md);
 }
 
 .payment-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .payment-button {
   background: white;
   border: 1px solid #ddd;
-  padding: 12px;
+  padding: var(--spacing-sm);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--spacing-xs);
   cursor: pointer;
   transition: transform 0.2s;
 }
