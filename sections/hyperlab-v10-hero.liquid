@@ -8,7 +8,7 @@
     <div class="hyperlab-v10-hero {% if section.settings.full_width %}full-width{% endif %}">
       <div class="hero-content {% if section.settings.full_width %}page-width{% endif %}">
         <div class="hero-header">
-          <div class="logo-container" style="margin-top: 2px; margin-bottom: 8px;">
+          <div class="logo-container" style="margin-top: 1px; margin-bottom: 8px;">
             {%- if section.settings.logo != blank -%}
               <img src="{{ section.settings.logo | img_url: '100x' }}" alt="{{ shop.name }}" class="hero-logo">
             {%- endif -%}
@@ -224,7 +224,7 @@
   background-image: url('data:image/svg+xml;utf8,<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.28"><polygon points="30,20 34,32 47,32 36,40 40,52 30,44 20,52 24,40 13,32 26,32" fill="%23fff"/><path d="M120 40 Q125 45 130 40 Q135 35 130 30 Q125 25 120 30 Q115 35 120 40 Z" fill="%23fff"/><path d="M80 120 Q85 125 90 120 Q95 115 90 110 Q85 105 80 110 Q75 115 80 120 Z" fill="%23fff"/><path d="M150 100 Q155 105 160 100 Q165 95 160 90 Q155 85 150 90 Q145 95 150 100 Z" fill="%23fff"/><path d="M60 60 Q62 62 64 60 Q66 58 64 56 Q62 54 60 56 Q58 58 60 60 Z" fill="%23fff"/><path d="M110 150 Q112 152 114 150 Q116 148 114 146 Q112 144 110 146 Q108 148 110 150 Z" fill="%23fff"/><path d="M50 150 Q55 155 60 150 Q65 145 60 140 Q55 135 50 140 Q45 145 50 150 Z" fill="%23fff"/><path d="M140 30 Q142 32 144 30 Q146 28 144 26 Q142 24 140 26 Q138 28 140 30 Z" fill="%23fff"/><path d="M90 60 Q92 62 94 60 Q96 58 94 56 Q92 54 90 56 Q88 58 90 60 Z" fill="%23fff"/><path d="M120 120 Q122 122 124 120 Q126 118 124 116 Q122 114 120 116 Q118 118 120 120 Z" fill="%23fff"/><path d="M60 100 Q62 102 64 100 Q66 98 64 96 Q62 94 60 96 Q58 98 60 100 Z" fill="%23fff"/><path d="M90 30 Q92 32 94 30 Q96 28 94 26 Q92 24 90 26 Q88 28 90 30 Z" fill="%23fff"/><path d="M150 150 Q155 155 160 150 Q165 145 160 140 Q155 135 150 140 Q145 145 150 150 Z" fill="%23fff"/></g></svg>');
   background-size: 180px 180px;
   background-repeat: repeat;
-  border-radius: 18px;
+  border-radius: 0;
 }
 
 .hero-content {
@@ -247,7 +247,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2px;
+  margin-top: 1px;
   margin-bottom: 8px;
 }
 
