@@ -19,7 +19,7 @@
 
         <div class="product-gallery">
           <div class="gallery-container">
-            <div class="main-image-wrapper">
+            <div class="main-image-wrapper gallery-block">
               <div class="main-image-container">
                 <div class="main-image">
                   {%- if section.settings.image_1 != blank -%}
@@ -31,8 +31,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="thumbnails-container">
+            <div class="thumbnails-container gallery-block">
               {%- for i in (1..5) -%}
                 {%- assign image_setting = 'image_' | append: i -%}
                 {%- assign current_image = section.settings[image_setting] -%}
@@ -41,7 +40,7 @@
                           data-image-url="{{ current_image | img_url: '1000x' }}"
                           data-image-index="{{ forloop.index0 }}"
                           data-alt="{{ current_image.alt | escape }}">
-                    <img src="{{ current_image | img_url: '100x100', crop: 'center' }}" 
+                    <img src="{{ current_image | img_url: '1000x1000', crop: 'center' }}" 
                          alt="{{ current_image.alt | escape }}"
                          class="thumbnail-image">
                   </button>
@@ -273,17 +272,22 @@
   margin-bottom: 24px;
 }
 
-.main-image-wrapper {
+.gallery-block {
+  width: 600px;
+  max-width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 16px auto;
+}
+
+.main-image-wrapper {
   background: #fff;
-  border-radius: 32px;
+  border-radius: 32px 32px 0 0;
   box-shadow: 0 4px 32px rgba(0,0,0,0.07);
   padding: 32px 32px 24px 32px;
-  max-width: 640px;
-  width: 100%;
+  margin-bottom: 0;
 }
 
 .main-image-container {
@@ -348,48 +352,45 @@
 }
 
 .thumbnails-container {
+  background: #fff;
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  padding: 12px 32px 16px 32px;
+  gap: 16px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  width: 600px;
+  max-width: 95vw;
   display: flex;
-  gap: 4px;
   justify-content: center;
-  flex-wrap: nowrap;
-  padding: 0 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  margin-top: 4px;
-}
-
-.thumbnails-container::-webkit-scrollbar {
-  display: none;
+  align-items: center;
 }
 
 .thumbnail-button {
-  width: 60px;
-  height: 60px;
-  padding: 3px;
+  width: 112px;
+  height: 112px;
+  padding: 2px;
   border: 2px solid transparent;
-  border-radius: 6px;
-  background: #ffffff;
+  border-radius: 12px;
+  background: #fff;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
   flex: 0 0 auto;
-}
-
-.thumbnail-button:hover {
-  border-color: rgba(255, 107, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .thumbnail-button.active {
   border-color: #ff6b00;
+  box-shadow: 0 4px 16px rgba(255,107,0,0.10);
 }
 
 .thumbnail-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
-  padding: 2px;
+  border-radius: 8px;
+  padding: 0;
 }
 
 .hero-cta {
@@ -474,15 +475,21 @@
 }
 
 @media screen and (max-width: 767px) {
-  .main-image-wrapper {
-    padding: 16px 4vw 12px 4vw;
-    border-radius: 18px;
-    max-width: 95vw;
+  .gallery-block,
+  .main-image-wrapper,
+  .thumbnails-container {
+    width: 98vw;
+    max-width: 98vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
-  .main-image img,
-  .featured-image {
-    width: 90vw;
-    max-width: 95vw;
+  .thumbnail-button {
+    width: 18vw;
+    height: 18vw;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 100px;
+    max-height: 100px;
   }
 
   .gallery-nav {
@@ -493,18 +500,6 @@
   .gallery-nav svg {
     width: 16px;
     height: 16px;
-  }
-
-  .thumbnails-container {
-    gap: 6px;
-    padding: 0 6px;
-    margin-top: 6px;
-  }
-
-  .thumbnail-button {
-    width: calc((100% - 24px) / 5);
-    height: auto;
-    aspect-ratio: 1;
   }
 
   .primary-button {
