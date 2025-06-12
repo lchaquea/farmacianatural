@@ -34,10 +34,10 @@
       "default": "Ordena ya con envío gratis"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "note",
       "label": "Payment Note",
-      "default": "Métodos de pago a cuotas"
+      "default": "<p><strong><em>Método de pago a cuotas</em></strong></p>"
     }
   ],
   "blocks": [
@@ -127,8 +127,8 @@
 
 .payment-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
   margin: 32px 0 24px 0;
   justify-items: center;
   align-items: stretch;
@@ -142,14 +142,16 @@
   background: #fff;
   border-radius: 22px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-  padding: 28px 18px 18px 18px;
-  min-height: 160px;
-  min-width: 140px;
+  padding: 18px 8px 12px 8px;
+  min-height: 120px;
+  min-width: 0;
   text-decoration: none !important;
   border: 1.5px solid #f3f3f3;
   transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
   cursor: pointer;
   position: relative;
+  width: 100%;
+  max-width: 140px;
 }
 
 .payment-card:hover, .payment-card:focus {
@@ -159,11 +161,13 @@
 }
 
 .payment-logo {
-  width: 80px;
-  height: 48px;
+  width: 100%;
+  max-width: 90px;
+  max-height: 48px;
   object-fit: contain;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   background: transparent;
+  display: block;
 }
 
 .payment-name {
@@ -176,27 +180,37 @@
 }
 
 .payment-note {
-  font-size: var(--font-size-sm);
+  font-size: 1.08rem;
   color: #666;
   margin: 0;
+  font-weight: 400;
+  text-align: center;
 }
+
+.payment-note strong { font-weight: 700; }
+.payment-note em { font-style: italic; }
 
 @media screen and (max-width: 767px) {
   .payment-cards {
-    gap: 16px;
-    margin: 18px 0 12px 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 12px 0 8px 0;
   }
   .payment-card {
-    padding: 18px 8px 12px 8px;
+    padding: 10px 2px 8px 2px;
     min-width: 0;
-    min-height: 100px;
+    min-height: 80px;
+    max-width: 80px;
   }
   .payment-logo {
-    width: 60px;
-    height: 36px;
+    max-width: 60px;
+    max-height: 32px;
   }
   .payment-name {
-    font-size: 0.98rem;
+    font-size: 0.82rem;
+  }
+  .payment-note {
+    font-size: 0.92rem;
   }
 }
 {% endstylesheet %} 
