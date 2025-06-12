@@ -10,6 +10,13 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .announcement-bar,
+  .announcement-bar-section,
+  .announcement-bar[class*="section-"] {
+    padding-bottom: 0 !important;
+    margin-bottom: 16px !important;
+  }
 {%- endstyle -%}
 
 {% liquid
