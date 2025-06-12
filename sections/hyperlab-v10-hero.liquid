@@ -174,24 +174,28 @@
       "id": "button_animation",
       "label": "Button Animation",
       "options": [
-        {
-          "value": "shake",
-          "label": "Shake"
-        },
-        {
-          "value": "pulse",
-          "label": "Pulse"
-        },
-        {
-          "value": "bounce",
-          "label": "Bounce"
-        },
-        {
-          "value": "none",
-          "label": "None"
-        }
-      ],
-      "default": "shake"
+        { "value": "shake", "label": "Shake" },
+        { "value": "pulse", "label": "Pulse" },
+        { "value": "bounce", "label": "Bounce" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button Text Size (px)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "button_subtext_size",
+      "label": "Button Subtext Size (px)",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "default": 14
     }
   ]
 }
@@ -273,7 +277,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 16px auto;
   background: #fff;
   border-radius: 32px;
   box-shadow: 0 4px 32px rgba(0,0,0,0.07);
@@ -287,12 +291,12 @@
   max-width: 1562px;
   background: #ffffff;
   border-radius: 15px;
-  padding: 20px;
+  padding: 12px;
 }
 
 .main-image {
   position: relative;
-  border: 2.5px solid #ff6b00;
+  border: 2px solid #ff6b00;
   border-radius: 10px;
   overflow: hidden;
   margin: 0 auto;
@@ -345,14 +349,14 @@
 
 .thumbnails-container {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   justify-content: center;
   flex-wrap: nowrap;
   padding: 0 8px;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .thumbnails-container::-webkit-scrollbar {
@@ -426,7 +430,7 @@
   width: 90%;
   max-width: 520px;
   padding: 22px 0 12px 0;
-  font-size: 1.35rem;
+  font-size: {{ section.settings.button_text_size | default: 22 }}px;
   font-weight: bold;
   background-color: #ff6b00;
   color: #fff;
@@ -447,7 +451,7 @@
 }
 
 .button-subtext {
-  font-size: 1rem;
+  font-size: {{ section.settings.button_subtext_size | default: 14 }}px;
   opacity: 0.85;
   margin-top: 2px;
   white-space: normal;
@@ -536,6 +540,10 @@
 .hero-header {
   padding-top: 0 !important;
   margin-top: 0 !important;
+}
+
+.hyperlab-v10-hero {
+  padding-bottom: 8px !important;
 }
 {% endstylesheet %}
 
