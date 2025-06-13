@@ -8,9 +8,8 @@
       {% for block in section.blocks %}
         <a class="payment-card" href="{{ block.settings.link }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
           {% if block.settings.logo != blank %}
-            <img src="{{ block.settings.logo | img_url: '180x' }}" alt="{{ block.settings.name }} logo" class="payment-logo" loading="lazy">
+            <img src="{{ block.settings.logo | img_url: '300x' }}" alt="{{ block.settings.name }} logo" class="payment-logo" loading="lazy">
           {% endif %}
-          <span class="payment-name">{{ block.settings.name }}</span>
         </a>
       {% endfor %}
     </div>
@@ -152,6 +151,7 @@
   position: relative;
   width: 100%;
   max-width: 140px;
+  height: 140px;
 }
 
 .payment-card:hover, .payment-card:focus {
@@ -162,10 +162,10 @@
 
 .payment-logo {
   width: 100%;
-  max-width: 90px;
-  max-height: 48px;
+  max-width: 110px;
+  max-height: 80px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin: 0 auto;
   background: transparent;
   display: block;
 }
@@ -201,10 +201,11 @@
     min-width: 0;
     min-height: 80px;
     max-width: 80px;
+    height: 80px;
   }
   .payment-logo {
     max-width: 60px;
-    max-height: 32px;
+    max-height: 48px;
   }
   .payment-name {
     font-size: 0.82rem;
