@@ -196,34 +196,34 @@
 
 {% stylesheet %}
 .hyperlab-v10-social-proof {
-  padding: 3px 0;
-  background: #fff;
+  padding: 10px 0;
+  text-align: center;
   position: relative;
-  overflow: hidden;
 }
 
 .section-title {
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  margin: 6px 0;
-  color: #333;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .reels-container {
   position: relative;
-  padding: 2px 3px;
-  overflow: hidden;
-  background: #f8f8f8;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 10px;
 }
 
 .reels-scroll-wrapper {
   display: flex;
-  gap: 4px;
-  padding: 2px 0;
+  gap: 12px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  padding: 5px 0;
+  margin: 0 -5px;
+  /* Hide scrollbar but keep functionality */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -233,10 +233,11 @@
 }
 
 .reel-bubble {
-  flex: 0 0 45px;
-  padding: 2px;
+  flex: 0 0 80px;
+  scroll-snap-align: start;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
+  padding: 5px;
 }
 
 .reel-bubble:hover {
@@ -244,13 +245,33 @@
 }
 
 .reel-thumbnail {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1.5px solid #ff6b00;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.15);
+}
+
+.reel-thumbnail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.reel-thumbnail img,
+.preview-video {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin: 2px;
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .play-button {
@@ -258,178 +279,169 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 14px;
-  height: 14px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(255, 107, 0, 0.8);
   border-radius: 50%;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reel-thumbnail:hover .play-button {
+  opacity: 1;
 }
 
 .reel-title {
-  font-size: 8px;
+  font-size: 11px;
+  margin: 0;
   color: #333;
-  margin: 2px 0 0;
-  text-align: center;
-  max-width: 45px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 80px;
 }
 
 .scroll-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  background: rgba(255,255,255,0.9);
-  border: 1px solid #ddd;
+  background: white;
+  border: none;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  color: #ff6b00;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-  font-size: 10px;
-  color: #333;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.scroll-left {
-  left: 2px;
+.scroll-button:hover {
+  background: #ff6b00;
+  color: white;
 }
 
-.scroll-right {
-  right: 2px;
+.scroll-button.prev {
+  left: 5px;
 }
 
-.reel-fullscreen-container {
+.scroll-button.next {
+  right: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .reels-container {
+    padding: 20px 40px;
+  }
+
+  .reels-scroll-wrapper {
+    gap: 15px;
+  }
+
+  .scroll-button {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+
+  .scroll-button.prev {
+    left: 10px;
+  }
+
+  .scroll-button.next {
+    right: 10px;
+  }
+}
+
+.reel-modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.9);
+  background: black;
   z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
 }
 
-.reel-fullscreen-container.active {
-  display: flex;
-}
-
-.reel-fullscreen-content {
+.modal-content {
   position: relative;
   width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.reel-fullscreen-video {
+.reel-fullscreen-container {
+  position: relative;
   width: 100%;
-  height: auto;
-  border-radius: 4px;
+  height: 100%;
+  max-width: 500px;
+}
+
+.reel-embed-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reel-embed-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .close-modal {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
   color: white;
-  font-size: 18px;
+  font-size: 32px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 2;
 }
 
 .nav-button {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  font-size: 24px;
+  padding: 20px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+  transition: background 0.3s ease;
 }
 
-.nav-prev {
-  left: 10px;
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.nav-next {
-  right: 10px;
+.nav-button.prev {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
 }
 
-@media screen and (min-width: 768px) {
-  .reels-container {
-    padding: 5px 10px;
-  }
-
-  .reels-scroll-wrapper {
-    gap: 6px;
-  }
-
-  .scroll-button {
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-  }
-
-  .reel-fullscreen-container {
-    max-width: 350px;
-  }
-
-  .close-modal {
-    font-size: 20px;
-  }
-
-  .nav-button {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .reels-container {
-    padding: 8px 15px;
-  }
-
-  .reels-scroll-wrapper {
-    gap: 8px;
-  }
-
-  .scroll-button {
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-  }
-
-  .reel-fullscreen-container {
-    max-width: 400px;
-  }
-
-  .close-modal {
-    font-size: 24px;
-  }
-
-  .nav-button {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
+.nav-button.next {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
 }
 {% endstylesheet %}
 

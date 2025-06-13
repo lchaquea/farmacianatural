@@ -97,158 +97,98 @@
 
 {% stylesheet %}
 .hyperlab-v10-trust-badges {
-  padding: 2px 0;
-  background: #fff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .trust-badges-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
-  padding: 0 4px;
-  max-width: 1200px;
+  gap: 20px;
   margin: 0 auto;
-  flex-wrap: wrap;
+  padding: 0 15px;
 }
 
 .trust-badge {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 4px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
-}
-
-.trust-badge:hover {
-  transform: translateY(-1px);
 }
 
 .badge-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  margin-bottom: 12px;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.trust-badge-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
 }
 
 .trust-badge h3 {
-  font-size: 9px;
+  font-size: 12px;
+  line-height: 1.3;
   margin: 0;
   color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-weight: 600;
-  line-height: 1.1;
 }
 
 .subtitle {
-  font-size: 8px;
+  font-size: 12px;
   color: #666;
-  margin: 1px 0 0;
-  line-height: 1.1;
-}
-
-.primary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 8px;
-  background: #ff6b00;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  margin: 4px 0;
-  max-width: 200px;
-  width: 100%;
-}
-
-.primary-button:hover {
-  background: #e05a00;
-  transform: translateY(-1px);
-}
-
-.button-subtext {
-  font-size: 8px;
-  color: #666;
-  margin-top: 2px;
-  text-align: center;
+  margin: 4px 0 0;
 }
 
 @media screen and (min-width: 768px) {
   .trust-badges-container {
-    gap: 8px;
-    padding: 0 6px;
+    gap: 30px;
   }
-
+  
   .trust-badge {
-    padding: 6px;
-  }
-
-  .badge-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
+    padding: 20px;
   }
 
   .trust-badge h3 {
-    font-size: 11px;
-  }
-
-  .subtitle {
-    font-size: 9px;
-  }
-
-  .primary-button {
-    padding: 6px 12px;
-    font-size: 12px;
-    max-width: 220px;
-  }
-
-  .button-subtext {
-    font-size: 9px;
+    font-size: 14px;
   }
 }
 
 @media screen and (min-width: 990px) {
-  .trust-badges-container {
-    gap: 10px;
-    padding: 0 8px;
-  }
-
-  .trust-badge {
-    padding: 8px;
-  }
-
-  .badge-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
-
   .trust-badge h3 {
-    font-size: 12px;
+    font-size: 16px;
   }
+}
 
-  .subtitle {
-    font-size: 10px;
-  }
+.primary-button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
 
-  .primary-button {
-    padding: 8px 15px;
-    font-size: 14px;
-    max-width: 240px;
-  }
-
-  .button-subtext {
-    font-size: 10px;
-  }
+.button-subtext {
+  font-size: 12px;
+  opacity: 0.8;
 }
 {% endstylesheet %} 

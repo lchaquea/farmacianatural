@@ -1,0 +1,53 @@
+/* V10 Template Typography Scale */
+
+/* Base Typography Scale */
+:root {
+  --text-scale: 0.75; /* 25% reduction */
+  
+  /* Font Sizes */
+  --font-size-xs: calc(12px * var(--text-scale));
+  --font-size-sm: calc(14px * var(--text-scale));
+  --font-size-base: calc(16px * var(--text-scale));
+  --font-size-md: calc(18px * var(--text-scale));
+  --font-size-lg: calc(24px * var(--text-scale));
+  --font-size-xl: calc(28px * var(--text-scale));
+  --font-size-2xl: calc(32px * var(--text-scale));
+  --font-size-3xl: calc(36px * var(--text-scale));
+}
+
+/* Section Title Scaling */
+.section-title {
+  font-size: var(--font-size-xl);
+}
+
+@media screen and (min-width: 768px) {
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Content Text Scaling */
+.submission-text {
+  font-size: var(--font-size-md);
+}
+
+.submission-subtext,
+.payment-note {
+  font-size: var(--font-size-sm);
+}
+
+/* Button and Input Text */
+.payment-button,
+.reel-input {
+  font-size: var(--font-size-sm);
+}
+
+/* Review Section Text */
+.review-submission h3 {
+  font-size: var(--font-size-lg);
+}
+
+/* Stars Size */
+.stars-container label {
+  font-size: calc(30px * var(--text-scale));
+} 
