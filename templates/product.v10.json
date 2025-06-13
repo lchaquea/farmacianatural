@@ -83,7 +83,7 @@
     "hyperlab-v10-product-info": {
       "type": "hyperlab-v10-product-info",
       "settings": {
-        "product_handle": "",
+        "product_handle": "v10",
         "ticker_message": "MÁS APETITO Y MEJORES DEFENSAS PARA TUS HIJOS. AUMENTA EL APETITO Y MEJORA EL SISTEMA INMUNOLÓGICO EVIANDO VIRUS",
         "scarcity_text": "¡Solo quedan 12 unidades en stock!",
         "scarcity_emoji": "🔥",
