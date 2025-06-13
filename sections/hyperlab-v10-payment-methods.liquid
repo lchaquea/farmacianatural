@@ -107,28 +107,34 @@
 
 {% stylesheet %}
 .hyperlab-v10-payment-methods {
-  padding: calc(var(--spacing-xl) / 8) 0;
-  text-align: center;
+  padding: 3px 0;
+  background: #fff;
+  border-top: 1px solid #eee;
 }
 
 .section-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: bold;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   text-transform: uppercase;
 }
 
 .payment-methods-container {
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .payment-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 9px;
-  margin: 8px 0 6px 0;
+  gap: 5px;
+  margin: 4px 0 3px 0;
   justify-items: center;
   align-items: stretch;
 }
@@ -139,31 +145,31 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-  padding: 18px 8px 12px 8px;
-  min-height: 120px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 10px 4px 6px 4px;
+  min-height: 80px;
   min-width: 0;
   text-decoration: none !important;
-  border: 1.5px solid #f3f3f3;
+  border: 1px solid #f3f3f3;
   transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
   cursor: pointer;
   position: relative;
   width: 100%;
-  max-width: 140px;
-  height: 140px;
+  max-width: 100px;
+  height: 100px;
 }
 
 .payment-card:hover, .payment-card:focus {
-  box-shadow: 0 8px 32px rgba(255,107,0,0.13);
-  border: 1.5px solid #ffb74d;
-  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(255,107,0,0.13);
+  border: 1px solid #ffb74d;
+  transform: translateY(-1px) scale(1.02);
 }
 
 .payment-logo {
   width: 100%;
-  max-width: 110px;
-  max-height: 80px;
+  max-width: 70px;
+  max-height: 50px;
   object-fit: contain;
   margin: 0 auto;
   background: transparent;
@@ -171,16 +177,16 @@
 }
 
 .payment-name {
-  font-size: 1.08rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #1a1a1a;
   text-align: center;
-  margin-top: 2px;
+  margin-top: 1px;
   letter-spacing: 0.01em;
 }
 
 .payment-note {
-  font-size: 1.08rem;
+  font-size: 0.9rem;
   color: #666;
   margin: 0;
   font-weight: 400;
@@ -190,28 +196,91 @@
 .payment-note strong { font-weight: 700; }
 .payment-note em { font-style: italic; }
 
-@media screen and (max-width: 767px) {
-  .payment-cards {
-    grid-template-columns: repeat(4, 1fr);
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.payment-method:hover {
+  transform: translateY(-1px);
+}
+
+.payment-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-method h3 {
+  font-size: 8px;
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 7px;
+  color: #666;
+  margin: 1px 0 0;
+  line-height: 1.1;
+}
+
+@media screen and (min-width: 768px) {
+  .payment-methods-container {
+    gap: 6px;
+    padding: 0 6px;
+  }
+
+  .payment-method {
+    padding: 4px;
+  }
+
+  .payment-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+  }
+
+  .payment-method h3 {
+    font-size: 10px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .payment-methods-container {
     gap: 8px;
-    margin: 6px 0 4px 0;
+    padding: 0 8px;
   }
-  .payment-card {
-    padding: 10px 2px 8px 2px;
-    min-width: 0;
-    min-height: 80px;
-    max-width: 80px;
-    height: 80px;
+
+  .payment-method {
+    padding: 5px;
   }
-  .payment-logo {
-    max-width: 60px;
-    max-height: 48px;
+
+  .payment-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
   }
-  .payment-name {
-    font-size: 0.82rem;
+
+  .payment-method h3 {
+    font-size: 12px;
   }
-  .payment-note {
-    font-size: 0.92rem;
+
+  .subtitle {
+    font-size: 9px;
   }
 }
 {% endstylesheet %} 
