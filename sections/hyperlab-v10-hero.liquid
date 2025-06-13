@@ -108,15 +108,148 @@
       "default": "¿TUS HIJOS NO ESTÁN COMIENDO BIEN?"
     },
     {
+      "type": "range",
+      "id": "headline_font_size",
+      "label": "Headline Font Size (px)",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "headline_font_weight",
+      "label": "Headline Font Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 800
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline Color",
+      "default": "#1a1a1a"
+    },
+    {
       "type": "text",
       "id": "subheadline",
       "label": "Subheadline",
       "default": "¡NO TE PREOCUPES MÁS!"
     },
     {
+      "type": "range",
+      "id": "subheadline_font_size",
+      "label": "Subheadline Font Size (px)",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subheadline_font_weight",
+      "label": "Subheadline Font Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "subheadline_color",
+      "label": "Subheadline Color",
+      "default": "#1a1a1a"
+    },
+    {
       "type": "image_picker",
       "id": "certification_badge",
       "label": "Certification Badge"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "logo_margin_top",
+      "label": "Logo Top Margin (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "logo_margin_bottom",
+      "label": "Logo Bottom Margin (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "hero_header_margin_bottom",
+      "label": "Hero Header Bottom Margin (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gallery_margin_bottom",
+      "label": "Gallery Bottom Margin (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "main_image_padding",
+      "label": "Main Image Padding (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "thumbnails_padding",
+      "label": "Thumbnails Padding (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumbnails_gap",
+      "label": "Thumbnails Gap (px)",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_bottom",
+      "label": "CTA Bottom Padding (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "cta_margin_top",
+      "label": "CTA Top Margin (px)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 36
     },
     {
       "type": "header",
@@ -195,6 +328,24 @@
       "max": 22,
       "step": 1,
       "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_top",
+      "label": "Button Top Padding (px)",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "button_padding_bottom",
+      "label": "Button Bottom Padding (px)",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "default": 16
     }
   ]
 }
@@ -230,7 +381,7 @@
 
 .hero-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: {{ section.settings.hero_header_margin_bottom }}px;
   padding-top: 12px;
 }
 
@@ -238,8 +389,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
-  margin-bottom: 8px;
+  margin-top: {{ section.settings.logo_margin_top }}px;
+  margin-bottom: {{ section.settings.logo_margin_bottom }}px;
 }
 
 .hero-logo {
@@ -248,12 +399,12 @@
 }
 
 .hero-title {
-  font-size: 32px;
-  font-weight: 800;
+  font-size: {{ section.settings.headline_font_size }}px;
+  font-weight: {{ section.settings.headline_font_weight }};
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.2;
-  color: #1a1a1a;
+  color: {{ section.settings.headline_color }};
   max-width: 600px;
   padding: 0 20px;
 }
@@ -269,7 +420,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: {{ section.settings.gallery_margin_bottom }}px;
 }
 
 .gallery-block {
@@ -286,7 +437,7 @@
   background: #fff;
   border-radius: 32px 32px 0 0;
   box-shadow: 0 4px 32px rgba(0,0,0,0.07);
-  padding: 32px 32px 24px 32px;
+  padding: {{ section.settings.main_image_padding }}px;
   margin-bottom: 0;
 }
 
@@ -355,8 +506,8 @@
   background: #fff;
   border-radius: 0 0 32px 32px;
   box-shadow: 0 4px 32px rgba(0,0,0,0.07);
-  padding: 12px 32px 16px 32px;
-  gap: 16px;
+  padding: {{ section.settings.thumbnails_padding }}px 32px 16px 32px;
+  gap: {{ section.settings.thumbnails_gap }}px;
   margin-top: 0;
   margin-bottom: 16px;
   width: 600px;
@@ -395,7 +546,7 @@
 
 .hero-cta {
   text-align: center;
-  padding: 0 20px 32px;
+  padding: 0 20px {{ section.settings.cta_padding_bottom }}px;
   margin-top: auto;
 }
 
@@ -408,9 +559,10 @@
 }
 
 .subheadline {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: {{ section.settings.subheadline_font_size }}px;
+  font-weight: {{ section.settings.subheadline_font_weight }};
   margin: 0;
+  color: {{ section.settings.subheadline_color }};
 }
 
 .certification-badge {
@@ -431,15 +583,15 @@
   width: 100%;
   max-width: 600px;
   min-width: 260px;
-  padding: 26px 0 16px 0;
-  font-size: {{ section.settings.button_text_size | default: 22 }}px;
+  padding: {{ section.settings.button_padding_top }}px 0 {{ section.settings.button_padding_bottom }}px 0;
+  font-size: {{ section.settings.button_text_size }}px;
   font-weight: 800;
   background: linear-gradient(90deg, #ff6b00 0%, #ff9800 100%);
   color: #fff;
   border: none;
   border-radius: 40px;
   cursor: pointer;
-  margin: 36px auto 0 auto;
+  margin: {{ section.settings.cta_margin_top }}px auto 0 auto;
   transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
   box-shadow: 0 6px 32px rgba(255,107,0,0.13);
   letter-spacing: 0.03em;
