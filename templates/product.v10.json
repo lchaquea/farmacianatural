@@ -39,28 +39,32 @@
           "type": "payment_method",
           "settings": {
             "name": "Addi",
-            "icon": "★"
+            "logo": "shopify://shop_images/addilogopng.png",
+            "link": ""
           }
         },
         "payment_method_NwWKFr": {
           "type": "payment_method",
           "settings": {
             "name": "Sistecrédito",
-            "icon": "★"
+            "logo": "shopify://shop_images/sitecreditologo.png",
+            "link": ""
           }
         },
         "payment_method_8UP9ef": {
           "type": "payment_method",
           "settings": {
             "name": "MercadoPago",
-            "icon": "★"
+            "logo": "shopify://shop_images/Boton_PSE-AYCO-final.png",
+            "link": ""
           }
         },
         "payment_method_VAiG6Y": {
           "type": "payment_method",
           "settings": {
             "name": "PSE",
-            "icon": "★"
+            "logo": "shopify://shop_images/mercado-pago-logo-png_seeklogo-198430.png",
+            "link": ""
           }
         }
       },
@@ -73,7 +77,7 @@
       "settings": {
         "product_handle": "",
         "title": "Ordena ya con envío gratis",
-        "note": "Métodos de pago a cuotas"
+        "note": "<h4>Métodos de pago a cuotas</h4>"
       }
     },
     "hyperlab-v10-product-info": {
@@ -366,28 +370,28 @@
           "type": "payment_method",
           "settings": {
             "name": "Addi",
-            "icon": "★"
+            "link": ""
           }
         },
         "payment_method_xrmBMt": {
           "type": "payment_method",
           "settings": {
             "name": "Sistecrédito",
-            "icon": "★"
+            "link": ""
           }
         },
         "payment_method_4YK9Eq": {
           "type": "payment_method",
           "settings": {
             "name": "MercadoPago",
-            "icon": "★"
+            "link": ""
           }
         },
         "payment_method_484Ae7": {
           "type": "payment_method",
           "settings": {
             "name": "PSE",
-            "icon": "★"
+            "link": ""
           }
         }
       },
@@ -400,7 +404,7 @@
       "settings": {
         "product_handle": "",
         "title": "Ordena ya con envío gratis",
-        "note": "Métodos de pago a cuotas"
+        "note": "<p>Métodos de pago a cuotas</p>"
       }
     },
     "hyperlab-v10-faq": {
